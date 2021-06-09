@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DAL.TeacherRegistrationForm;
 
 namespace WebApp.Data
 {
@@ -12,5 +13,7 @@ namespace WebApp.Data
             : base(options)
         {
         }
+
+        DbSet<TeacherRegistrationForm> TeacherRegistrationForms { get; set; }
     }
 }
