@@ -22,10 +22,7 @@ namespace DAL.TeacherRegistrationForm
 
         // Information about meetings
         public MeetingType MeetingType { get; set; }
+        public ICollection<ScheduledTimeSpan> ScheduledTimeSpans { get; set; }
 
-        [InverseProperty("Form")]
-        public ICollection<TimeSpans> AvailableTimeSpans { get; set; }
-        [InverseProperty("FormOutsideSchedule")]
-        public ICollection<TimeSpans> AvailableTimeSpansOutsideScheduledHours { get; set; }
     }
 }
