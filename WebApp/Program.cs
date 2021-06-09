@@ -1,13 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebApp.Data;
+using WebApp.Services;
 
 namespace WebApp
 {
@@ -31,9 +25,8 @@ namespace WebApp
         {
             using (var scope = host.Services.CreateScope())
             {
-                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                await context.Database.EnsureDeletedAsync();
-                await context.Database.EnsureCreatedAsync();
+                var seed = scope.ServiceProvider.GetRequiredService<ISeedService>();
+                await seed.ResetAsync();
             }
         }
     }
