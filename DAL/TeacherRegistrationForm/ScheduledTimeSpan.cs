@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.TeacherRegistrationForm
 {
@@ -10,11 +11,14 @@ namespace DAL.TeacherRegistrationForm
 
         [Display(Name = "Tid")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{hh:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{HH:mm}", ApplyFormatInEditMode = false)]
         public DateTime Time { get; set; } // Format this to hh:mm (only 30min gaps)
 
         [Display(Name = "Utanför schema")]
         public bool IsOutsideSchedule { get; set; }
         public TeacherRegistrationForm TeacherRegistrationForm { get; set; }
+
+        [NotMapped]
+        public bool IsMarked { get; set; }
     }
 }

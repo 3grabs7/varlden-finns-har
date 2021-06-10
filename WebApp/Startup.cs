@@ -25,6 +25,7 @@ namespace WebApp
         {
             services.AddScoped<ISeedService, SeedService>();
             services.AddScoped<ITeacherRegistrationFormRepository, TeacherRegistrationFormRepository>();
+            services.AddScoped<IScheduledTimeSpanRepository, ScheduledTimeSpanRepository>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
