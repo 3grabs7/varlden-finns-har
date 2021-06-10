@@ -15,6 +15,11 @@
         Digitalt, Fysiskt
     }
 
+    public enum WeeksWanted
+    {
+        One, TwoToThree, ThreePlus
+    }
+
     public enum Weekday
     {
         Måndag, Tisdag, Onsdag, Torsdag, Fredag, Lördag, Söndag

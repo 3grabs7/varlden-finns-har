@@ -1,4 +1,5 @@
 ﻿using DAL.TeacherRegistrationForm;
+using System;
 using System.Collections.Generic;
 
 namespace WebApp.Models
@@ -9,5 +10,6 @@ namespace WebApp.Models
         public IEnumerable<ScheduledTimeSpan> TimeSpans { get; set; }
         public bool SubmitSuccessfull { get; set; }
         public SchoolForm SchoolForm { get; set; }
+
     }
 }
