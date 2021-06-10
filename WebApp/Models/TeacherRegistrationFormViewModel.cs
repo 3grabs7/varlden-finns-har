@@ -8,5 +8,6 @@ namespace WebApp.Models
         public TeacherRegistrationForm Form { get; set; }
         public IEnumerable<ScheduledTimeSpan> TimeSpans { get; set; }
         public bool SubmitSuccessfull { get; set; }
+        public SchoolForm SchoolForm { get; set; }
     }
 }
