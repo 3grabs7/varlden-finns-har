@@ -1,0 +1,19 @@
+﻿@model TeacherRegistrationFormViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@if (Model?.SubmitSuccessfull ?? false)
+{
+    <partial name="_FormSubmitted" />
+}
+else
+{
+    <form method="post" asp-action="Create">
+        <label asp-for=@Model.Form.Name></label>
+        <input asp-for="@Model.Form.Name" placeholder="" />
+        <input type="submit" value="Skicka" />
+    </form>
+}
