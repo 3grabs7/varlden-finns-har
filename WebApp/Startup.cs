@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApp.Data;
+using WebApp.Repositories;
 using WebApp.Services;
 
 namespace WebApp
@@ -23,6 +24,7 @@ namespace WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ISeedService, SeedService>();
+            services.AddScoped<ITeacherRegistrationFormRepository, TeacherRegistrationFormRepository>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
