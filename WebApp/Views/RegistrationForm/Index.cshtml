@@ -115,8 +115,38 @@ else
 
         <p>Fyll i schema här</p>
 
-        <partial name="_Schedule" />
 
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" markable="false"></th>
+                    @foreach (var weekday in EnumTools.GetValues<Weekday>())
+                    {
+                        <th scope="col">@weekday</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @{ var spanIndex = 0; }
+                @for (int i = 800; i < 1700; i += 50)
+                {
+                    <tr>
+                        <th scope="row">@(ParsingTools.ToHMTimestamp(i))</th>
+                        @foreach (var weekday in EnumTools.GetValues<Weekday>())
+                        {
+                            <td>
+                                <input type="checkbox" asp-for="@Model.TimeSpans[spanIndex].IsMarked" id="@(i)" value="true" />
+                                <label for="@(i)"></label>
+                            </td>
+                            <input type="number" value="@((int)weekday)" asp-for="@Model.TimeSpans[spanIndex].Weekday" hidden />
+                            <input type="datetime" value="@(ParsingTools.ToHMDateTIme(ParsingTools.ToHMTimestamp(i)))"
+                                   asp-for="@Model.TimeSpans[spanIndex].Time" hidden />
+                            { spanIndex++; }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
 
 
         <input type="submit" value="Skicka" />
