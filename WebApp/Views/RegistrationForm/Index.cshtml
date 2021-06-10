@@ -78,6 +78,8 @@ else
             <input class="form-control" asp-for="@Model.Form.Program" placeholder="" />
         </div>
 
+        <h4 class="h4">Lite om önskade möten</h4>
+
         <div class="form-group">
             <label asp-for=@Model.Form.MeetingType></label><br />
             @foreach (var meetingType in EnumTools.GetValues<MeetingType>())
@@ -92,7 +94,29 @@ else
             }
         </div>
 
-        <h4 class="h4">Fyll i schema</h4>
+        <div class="form-group">
+            <label asp-for=@Model.Form.Weeks></label>
+            <input class="form-control" asp-for="@Model.Form.Weeks" placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.WeeksWanted></label><br />
+            @foreach (var weeksWanted in EnumTools.GetValues<WeeksWanted>())
+            {
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="@($"weekswanted-{weeksWanted}")"
+                           asp-for="@Model.Form.WeeksWanted" value=" @((int)weeksWanted)" placeholder="" />
+                    <label class="form-check-label" for="@($"weekswanted-{weeksWanted}")">
+                        @weeksWanted
+                    </label>
+                </div>
+            }
+        </div>
+
+        <p>Fyll i schema här</p>
+
+        <partial name="_Schedule" />
+
 
 
         <input type="submit" value="Skicka" />

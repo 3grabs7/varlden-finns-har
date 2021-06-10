@@ -42,7 +42,14 @@ namespace DAL.TeacherRegistrationForm
         // Information about meetings
         [Display(Name = "Mötestyp")]
         public MeetingType MeetingType { get; set; }
+
         public ICollection<ScheduledTimeSpan> ScheduledTimeSpans { get; set; }
+
+        [Display(Name = "Veckor")]
+        public int Weeks { get; set; }
+
+        [Display(Name = "Önskade Veckor")]
+        public WeeksWanted WeeksWanted { get; set; }
 
     }
 }

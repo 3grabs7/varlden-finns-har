@@ -1,0 +1,40 @@
+﻿@using WebApp.Utils
+@using DAL.TeacherRegistrationForm
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col" markable="false"></th>
+            @foreach (var weekday in EnumTools.GetValues<Weekday>())
+            {
+                <th scope="col">@weekday</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 800; i < 1700; i += 50)
+        {
+            <tr>
+                <th scope="row">@(ParsingTools.ToHMTimestamp(i))</th>
+                @foreach (var weekday in EnumTools.GetValues<Weekday>())
+                {
+                    <td weekday="@weekday" time="@(ParsingTools.ToHMTimestamp(i))"></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    .marked {
+        background-color: blue;
+    }
+</style>
+
+<script>
+    const table = document.querySelector('.table');
+    table.addEventListener('click', (e) => {
+        e.target.classList.toggle('marked')
+
+    })
+</script>
