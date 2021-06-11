@@ -1,0 +1,22 @@
+﻿@{
+    var aspAction = nameof(RegistrationOfInterestController.List);
+}
+
+
+<div>
+    <ul class="pagination">
+
+        <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
+            <a asp-action="@aspAction" asp-route-currentpage="@(Model.CurrentPage -1)" asp-route-sortby="@(Model.SortBy)" class="page-link">◀</a>
+        </li>
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a asp-action="@aspAction" asp-route-currentpage="@i" asp-route-sortby="@(Model.SortBy)" class="page-link">@i</a>
+            </li>
+        }
+        <li class="page-item  @(!Model.ShowNext? "disabled":"")">
+            <a asp-action="@aspAction" asp-route-currentpage="@(Model.CurrentPage + 1)" asp-route-sortby="@(Model.SortBy)" class="page-link">▶</a>
+        </li>
+    </ul>
+</div>

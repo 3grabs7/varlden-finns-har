@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DAL.Registration;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using WebApp.Models;
@@ -10,10 +11,11 @@ namespace WebApp.Controllers
     public class TestController : Controller
     {
         private readonly ISeedService _seed;
-        private readonly ITeacherRegistrationFormRepository _formRepo;
+        private readonly IRegistrationOfInterestRepository _formRepo;
+
 
         public TestController(ISeedService seed,
-            ITeacherRegistrationFormRepository formRepo)
+            IRegistrationOfInterestRepository formRepo)
         {
             _seed = seed;
             _formRepo = formRepo;
@@ -21,6 +23,8 @@ namespace WebApp.Controllers
 
         public async Task<IActionResult> Index(string welcomeTag)
         {
+            var data = await _formRepo.GetPaginatedResult(1, 10);
+
             if (!String.IsNullOrEmpty(welcomeTag))
             {
                 var viewModel = new TestViewModel
@@ -35,7 +39,7 @@ namespace WebApp.Controllers
         public async Task<IActionResult> Seed()
         {
             await _seed.ResetAsync();
-            await _seed.AddTeacherRegistrationForm(1);
+            await _seed.AddTeacherRegistrationForm(32);
             await _seed.AddTimeSpanToTeacherRegistrationForm(5);
             return RedirectToAction(nameof(Index), new { welcomeTag = "Loopy?" });
         }

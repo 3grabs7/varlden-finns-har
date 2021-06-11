@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DAL.TeacherRegistrationForm
+namespace DAL.Registration
 {
-    public class ScheduledTimeSpan : Entity
+    public class AvailableTimeSpan : Entity
     {
         [Display(Name = "Veckodag")]
         public Weekday Weekday { get; set; }
@@ -16,7 +16,7 @@ namespace DAL.TeacherRegistrationForm
 
         [Display(Name = "Utanför schema")]
         public bool IsOutsideSchedule { get; set; }
-        public TeacherRegistrationForm TeacherRegistrationForm { get; set; }
+        public RegistrationOfInterest TeacherRegistrationForm { get; set; }
 
         [NotMapped]
         public bool IsMarked { get; set; }

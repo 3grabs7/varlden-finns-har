@@ -1,4 +1,4 @@
-﻿using DAL.TeacherRegistrationForm;
+﻿using DAL.Registration;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
@@ -25,7 +25,7 @@ namespace WebApp.Services
         {
             for (int i = 0; i < count; i++)
             {
-                var form = new TeacherRegistrationForm
+                var form = new RegistrationOfInterest
                 {
                     Name = "Lärare Lärarsson",
                     Email = "1@2.se",
@@ -47,13 +47,13 @@ namespace WebApp.Services
 
         public async Task AddTimeSpanToTeacherRegistrationForm(int count)
         {
-            var form = await _context.TeacherRegistrationForms.FirstOrDefaultAsync();
+            var form = await _context.RegistrationOfInterests.FirstOrDefaultAsync();
             if (form == default) return;
 
             // Insert scheduled time
             for (int i = 0; i < count; i++)
             {
-                await _context.AddAsync(new ScheduledTimeSpan
+                await _context.AddAsync(new AvailableTimeSpan
                 {
                     Weekday = Weekday.Måndag,
                     Time = DateTime.Parse("06/24/2021 10:30"),
@@ -65,7 +65,7 @@ namespace WebApp.Services
             // Insert off schedule time
             for (int i = 0; i < count; i++)
             {
-                await _context.AddAsync(new ScheduledTimeSpan
+                await _context.AddAsync(new AvailableTimeSpan
                 {
                     Weekday = Weekday.Måndag,
                     Time = DateTime.Parse("06/24/2021 10:30"),

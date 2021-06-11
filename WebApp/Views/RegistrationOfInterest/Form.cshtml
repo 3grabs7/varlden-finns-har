@@ -1,6 +1,4 @@
-﻿@model TeacherRegistrationFormViewModel
-@using DAL.TeacherRegistrationForm
-@using WebApp.Utils
+﻿@model RegistrationOfInterestViewModel
 
 @if (Model?.SubmitSuccessfull ?? false)
 {
@@ -8,7 +6,7 @@
 }
 else
 {
-    <form method="post" asp-action="Create">
+    <form method="post" asp-action="@(nameof(RegistrationOfInterestController.Create))">
         <h4 class="h4">Lite om dig som lärare och din skola</h4>
 
         <div class="form-group">
@@ -135,7 +133,8 @@ else
                         @foreach (var weekday in EnumTools.GetValues<Weekday>())
                         {
                             <td onclick="mark(event)" class="border-right">
-                                <input type="checkbox" asp-for="@Model.TimeSpans[spanIndex].IsMarked" id="@(i)" value="true" style="visibility:hidden;" />
+                                <input type="checkbox" asp-for="@Model.TimeSpans[spanIndex].IsMarked"
+                                       id="@(i)" value="true" style="visibility:hidden;" />
                                 <label for="@(i)"></label>
                             </td>
                             <input type="number" value="@((int)weekday)" asp-for="@Model.TimeSpans[spanIndex].Weekday" hidden />

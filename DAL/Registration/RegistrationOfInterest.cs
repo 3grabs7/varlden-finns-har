@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DAL.TeacherRegistrationForm
+namespace DAL.Registration
 {
-    public class TeacherRegistrationForm : Entity
+    public class RegistrationOfInterest : Entity
     {
         // Teacher info
         [Display(Name = "Namn")]
@@ -43,7 +42,7 @@ namespace DAL.TeacherRegistrationForm
         [Display(Name = "Mötestyp")]
         public MeetingType MeetingType { get; set; }
 
-        public ICollection<ScheduledTimeSpan> ScheduledTimeSpans { get; set; }
+        public ICollection<AvailableTimeSpan> ScheduledTimeSpans { get; set; }
 
         [Display(Name = "Veckor")]
         public int Weeks { get; set; }

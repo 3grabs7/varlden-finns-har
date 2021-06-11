@@ -1,4 +1,4 @@
-﻿using DAL.TeacherRegistrationForm;
+﻿using DAL.Registration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +7,14 @@ using WebApp.Data;
 
 namespace WebApp.Repositories
 {
-    public class ScheduledTimeSpanRepository : IScheduledTimeSpanRepository
+    public class AvailableTimeSpanRepository : IAvailableTimeSpanRepository
     {
         private readonly ApplicationDbContext _context;
-        public ScheduledTimeSpanRepository(ApplicationDbContext context)
+        public AvailableTimeSpanRepository(ApplicationDbContext context)
         {
             _context = context;
         }
-        public async Task CreateSchedule(IEnumerable<ScheduledTimeSpan> timeSpans, TeacherRegistrationForm form)
+        public async Task CreateSchedule(IEnumerable<AvailableTimeSpan> timeSpans, RegistrationOfInterest form)
         {
             foreach (var timeSpan in timeSpans)
             {

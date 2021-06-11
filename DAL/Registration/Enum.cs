@@ -1,4 +1,4 @@
-﻿namespace DAL.TeacherRegistrationForm
+﻿namespace DAL.Registration
 {
     public enum SchoolForm
     {

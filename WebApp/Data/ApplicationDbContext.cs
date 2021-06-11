@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using DAL.TeacherRegistrationForm;
+﻿using DAL.Registration;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApp.Data
 {
@@ -15,7 +12,7 @@ namespace WebApp.Data
         {
         }
 
-        public DbSet<TeacherRegistrationForm> TeacherRegistrationForms { get; set; }
-        public DbSet<ScheduledTimeSpan> ScheduledTimeSpans { get; set; }
+        public DbSet<RegistrationOfInterest> RegistrationOfInterests { get; set; }
+        public DbSet<AvailableTimeSpan> AvailableTimeSpans { get; set; }
     }
 }

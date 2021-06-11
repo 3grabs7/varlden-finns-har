@@ -1,5 +1,4 @@
 ﻿@model TestViewModel
-@using WebApp.Controllers
 
 <h1>Testing Loaded</h1>
 <h3>Hi @(Model?.WelcomeTag ?? "nopp")</h3>
@@ -8,6 +7,9 @@
        onclick="location.href='@Url.Action(nameof(TestController.Seed), nameof(TestController).Replace("Controller", ""), new { welcomeTag = "Loopy?" })'" />
 
 <input type="button" value="Form"
-       onclick="location.href='@Url.Action(nameof(RegistrationFormController.Index), nameof(RegistrationFormController).Replace("Controller", ""))'" />
+       onclick="location.href='@Url.Action(nameof(RegistrationOfInterestController.Form), nameof(RegistrationOfInterestController).Replace("Controller", ""))'" />
 
-
+<a asp-controller="@(nameof(RegistrationOfInterestController).Replace("Controller", ""))"
+   asp-action="@(nameof(RegistrationOfInterestController.List))">
+    Alla intresseanmälningar
+</a>
