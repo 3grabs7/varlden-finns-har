@@ -17,9 +17,19 @@ namespace WebApp.Repositories
             _context = context;
         }
 
-        public string SuccessMessage(TeacherRegistrationForm form) =>
-                    $"Tack {form.Name}. Din ansökan kommer bearbetas." +
-                    $"Du kommer kontaktas via mail på {form.Email} eller via telefonnummer {form.PhoneNumber}";
+        public async Task<TeacherRegistrationForm> GetAsync(int id) => await _context.TeacherRegistrationForms.FindAsync(id);
+
+        public async Task<IEnumerable<TeacherRegistrationForm>> GetAllAsync()
+            => await _context.TeacherRegistrationForms
+            .Include(t => t.ScheduledTimeSpans)
+            .AsNoTracking()
+            .ToListAsync();
+
+        public async Task<IEnumerable<TeacherRegistrationForm>> GetRangeAsync(int count)
+        {
+            var forms = await _context.TeacherRegistrationForms.ToListAsync();
+            return forms.Take(count);
+        }
 
         public async Task<TeacherRegistrationForm> CreateAsync(TeacherRegistrationForm form)
         {
@@ -45,15 +55,9 @@ namespace WebApp.Repositories
         {
             throw new System.NotImplementedException();
         }
+        public string SuccessMessage(TeacherRegistrationForm form) =>
+                    $"Tack {form.Name}. Din ansökan kommer bearbetas." +
+                    $"Du kommer kontaktas via mail på {form.Email} eller via telefonnummer {form.PhoneNumber}";
 
-        public async Task<TeacherRegistrationForm> GetAsync(int id)
-            => await _context.TeacherRegistrationForms.FindAsync(id);
-
-        public async Task<IEnumerable<TeacherRegistrationForm>> GetRangeAsync(int count)
-        {
-            var forms = await _context.TeacherRegistrationForms.ToListAsync();
-            return forms.Take(count);
-
-        }
     }
 }

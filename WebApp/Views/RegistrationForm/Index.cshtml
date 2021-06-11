@@ -116,13 +116,13 @@ else
         <p>Fyll i schema här</p>
 
 
-        <table class="table table-striped">
+        <table class="table table-striped" onselectstart="return false">
             <thead>
                 <tr>
-                    <th scope="col" markable="false"></th>
+                    <th class="text-center" scope="col" markable="false"></th>
                     @foreach (var weekday in EnumTools.GetValues<Weekday>())
                     {
-                        <th scope="col">@weekday</th>
+                        <th class="text-center" scope="col">@weekday</th>
                     }
                 </tr>
             </thead>
@@ -134,8 +134,8 @@ else
                         <th scope="row">@(ParsingTools.ToHMTimestamp(i))</th>
                         @foreach (var weekday in EnumTools.GetValues<Weekday>())
                         {
-                            <td>
-                                <input type="checkbox" asp-for="@Model.TimeSpans[spanIndex].IsMarked" id="@(i)" value="true" />
+                            <td onclick="mark(event)" class="border-right">
+                                <input type="checkbox" asp-for="@Model.TimeSpans[spanIndex].IsMarked" id="@(i)" value="true" style="visibility:hidden;" />
                                 <label for="@(i)"></label>
                             </td>
                             <input type="number" value="@((int)weekday)" asp-for="@Model.TimeSpans[spanIndex].Weekday" hidden />
@@ -152,3 +152,4 @@ else
         <input type="submit" value="Skicka" />
     </form>
 }
+

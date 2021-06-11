@@ -7,6 +7,7 @@ namespace WebApp.Repositories
     public interface ITeacherRegistrationFormRepository
     {
         Task<TeacherRegistrationForm> GetAsync(int id);
+        Task<IEnumerable<TeacherRegistrationForm>> GetAllAsync();
         Task<IEnumerable<TeacherRegistrationForm>> GetRangeAsync(int count);
         Task<TeacherRegistrationForm> CreateAsync(TeacherRegistrationForm form);
         Task<TeacherRegistrationForm> EditAsync(TeacherRegistrationForm form);
