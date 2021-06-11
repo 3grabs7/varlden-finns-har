@@ -1,0 +1,155 @@
+﻿@model TeacherRegistrationFormViewModel
+@using DAL.TeacherRegistrationForm
+@using WebApp.Utils
+
+@if (Model?.SubmitSuccessfull ?? false)
+{
+    <partial name="_FormSubmitted" />
+}
+else
+{
+    <form method="post" asp-action="Create">
+        <h4 class="h4">Lite om dig som lärare och din skola</h4>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.Name></label>
+            <input class="form-control" asp-for="@Model.Form.Name" placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.Email></label>
+            <input class="form-control" type="email" asp-for="@Model.Form.Email" placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.PhoneNumber></label>
+            <input class="form-control" asp-for="@Model.Form.PhoneNumber" placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.School></label>
+            <input class="form-control" asp-for="@Model.Form.School" placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.Municipality></label>
+            <input class="form-control" asp-for="@Model.Form.Municipality" placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.SchoolForm></label><br />
+            @foreach (var schoolForm in EnumTools.GetValues<SchoolForm>())
+            {
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="@($"schoolform-{schoolForm}")"
+                           asp-for="@Model.Form.SchoolForm" value=" @((int)schoolForm)" placeholder="" />
+                    <label class="form-check-label" for="@($"schoolform-{schoolForm}")">
+                        @schoolForm
+                    </label>
+                </div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.TeachersSubjects></label>
+            <input class="form-control" asp-for="@Model.Form.TeachersSubjects" placeholder="" />
+        </div>
+
+        <h4 class="h4">Lite om din elevgrupp</h4>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.StudentGroupSubjects></label>
+            <input class="form-control" asp-for="@Model.Form.StudentGroupSubjects" placeholder="" />
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.Grade></label>
+            <input class="form-control" asp-for="@Model.Form.Grade" placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.AdditionalSubjectsOfInterest></label>
+            <input class="form-control" asp-for="@Model.Form.AdditionalSubjectsOfInterest" placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.Program></label>
+            <input class="form-control" asp-for="@Model.Form.Program" placeholder="" />
+        </div>
+
+        <h4 class="h4">Lite om önskade möten</h4>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.MeetingType></label><br />
+            @foreach (var meetingType in EnumTools.GetValues<MeetingType>())
+            {
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="@($"meetingtype-{meetingType}")"
+                           asp-for="@Model.Form.MeetingType" value=" @((int)meetingType)" placeholder="" />
+                    <label class="form-check-label" for="@($"meetingtype-{meetingType}")">
+                        @meetingType
+                    </label>
+                </div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.Weeks></label>
+            <input class="form-control" asp-for="@Model.Form.Weeks" placeholder="" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.WeeksWanted></label><br />
+            @foreach (var weeksWanted in EnumTools.GetValues<WeeksWanted>())
+            {
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="@($"weekswanted-{weeksWanted}")"
+                           asp-for="@Model.Form.WeeksWanted" value=" @((int)weeksWanted)" placeholder="" />
+                    <label class="form-check-label" for="@($"weekswanted-{weeksWanted}")">
+                        @weeksWanted
+                    </label>
+                </div>
+            }
+        </div>
+
+        <p>Fyll i schema här</p>
+
+
+        <table class="table table-striped" onselectstart="return false">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col" markable="false"></th>
+                    @foreach (var weekday in EnumTools.GetValues<Weekday>())
+                    {
+                        <th class="text-center" scope="col">@weekday</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @{ var spanIndex = 0; }
+                @for (int i = 800; i < 1700; i += 50)
+                {
+                    <tr>
+                        <th scope="row">@(ParsingTools.ToHMTimestamp(i))</th>
+                        @foreach (var weekday in EnumTools.GetValues<Weekday>())
+                        {
+                            <td onclick="mark(event)" class="border-right">
+                                <input type="checkbox" asp-for="@Model.TimeSpans[spanIndex].IsMarked" id="@(i)" value="true" style="visibility:hidden;" />
+                                <label for="@(i)"></label>
+                            </td>
+                            <input type="number" value="@((int)weekday)" asp-for="@Model.TimeSpans[spanIndex].Weekday" hidden />
+                            <input type="datetime" value="@(ParsingTools.ToHMDateTIme(ParsingTools.ToHMTimestamp(i)))"
+                                   asp-for="@Model.TimeSpans[spanIndex].Time" hidden />
+                            { spanIndex++; }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+        <input type="submit" value="Skicka" />
+    </form>
+}
+
