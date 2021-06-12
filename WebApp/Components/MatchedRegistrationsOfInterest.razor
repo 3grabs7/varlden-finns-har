@@ -1,0 +1,28 @@
+﻿@inject ApplicationDbContext ContextService;
+
+<a class="btn btn-primary" @onclick="Match">Match</a>
+@if (Matches != null)
+{
+    @foreach (var item in Matches)
+    {
+        <a asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+        <p>@item.School</p>
+        <p>@item.Municipality</p>
+        <p>@item.SchoolForm</p>
+        <p>@item.MeetingType</p>
+    }
+}
+
+@code {
+    private IEnumerable<RegistrationOfInterest> Matches;
+
+    [Parameter] public RegistrationOfInterest ToBeMatched { get; set; }
+
+    private async Task Match()
+    {
+        Matches = await ContextService.RegistrationOfInterests
+            .Where(r => r.Name == ToBeMatched.Name)
+            .ToListAsync();
+    }
+
+}
