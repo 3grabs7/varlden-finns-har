@@ -46,7 +46,6 @@ namespace WebApp.Controllers
             return RedirectToAction(nameof(Form));
         }
 
-
         public async Task<ActionResult> List(int currentpage = 1, string sortby = null)
         {
             var viewModel = new RegistrationOfInterestViewModel
@@ -67,16 +66,17 @@ namespace WebApp.Controllers
             return View(await _formRepo.GetAsync((int)id));
         }
 
-        public async Task<ActionResult> Match(int? id)
+        public async Task<ActionResult> Match(int? id, bool isprocessing)
         {
-            if (id == null)
+            if (id != null)
             {
-                // return not found message
-                return View();
+                // return not found osv
             }
 
 
             return View();
         }
+
+
     }
 }
