@@ -35,6 +35,7 @@ namespace WebApp
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddControllersWithViews();
+            services.AddServerSideBlazor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +66,7 @@ namespace WebApp
                     name: "default",
                     pattern: "{controller=Test}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
             });
 
             // *** KEEP ***
@@ -75,6 +77,7 @@ namespace WebApp
             //        name: "default",
             //        pattern: "{controller=Home}/{action=Index}/{id?}");
             //    endpoints.MapRazorPages();
+            //    endpoints.MapBlazorHub();
             //});
         }
     }

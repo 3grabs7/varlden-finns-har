@@ -1,4 +1,5 @@
 ﻿@model DAL.Registration.RegistrationOfInterest
+@using WebApp.Components
 
 @{
     ViewData["Title"] = "Details";
@@ -101,5 +102,11 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<div>
+    <component render-mode="ServerPrerendered"
+               type="typeof(MatchedRegistrationsOfInterest)"
+               param-TobeMatched="Model" />
+</div>
 
-<a asp-action="@(nameof(RegistrationOfInterestController.Match))" asp-route-id="@Model.Id">Hitta matchningar för denna ansökan</a>
+
+@*<a asp-action="@(nameof(RegistrationOfInterestController.Match))" asp-route-id="@Model.Id">Hitta matchningar för denna ansökan</a>*@
