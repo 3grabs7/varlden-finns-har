@@ -22,6 +22,7 @@ namespace WebApp.Repositories
         public async Task<IEnumerable<RegistrationOfInterest>> GetAllAsync()
             => await _context.RegistrationOfInterests
             .Include(t => t.ScheduledTimeSpans)
+            .Include(t => t.Municipality)
             .AsNoTracking()
             .ToListAsync();
 

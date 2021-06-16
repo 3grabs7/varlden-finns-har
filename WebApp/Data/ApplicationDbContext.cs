@@ -13,6 +13,7 @@ namespace WebApp.Data
         }
 
         public DbSet<RegistrationOfInterest> RegistrationOfInterests { get; set; }
+        public DbSet<Municipality> Municipalities { get; set; }
         public DbSet<AvailableTimeSpan> AvailableTimeSpans { get; set; }
     }
 }

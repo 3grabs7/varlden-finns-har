@@ -17,7 +17,7 @@ namespace DAL.Registration
         public string School { get; set; } // Create tables for School later
 
         [Display(Name = "Kommun")]
-        public string Municipality { get; set; } // Create tables for municipality later
+        public Municipality Municipality { get; set; } // Create tables for municipality later
 
         [Display(Name = "Skolform")]
         public SchoolForm SchoolForm { get; set; }

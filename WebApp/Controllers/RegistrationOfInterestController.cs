@@ -50,7 +50,7 @@ namespace WebApp.Controllers
         {
             var viewModel = new RegistrationOfInterestViewModel
             {
-                Registrations = await _formRepo.GetPaginatedResult(currentpage, RegistrationOfInterestViewModel.PAGE_SIZE, sortby),
+                Registrations = await _formRepo.GetPaginatedResult(currentpage, PaginationBase.PAGE_SIZE, sortby),
                 Count = await _formRepo.GetCount(),
                 CurrentPage = currentpage,
                 SortBy = sortby

@@ -16,7 +16,6 @@ namespace WebApp.Services
 
         public async Task ResetAsync()
         {
-
             await _context.Database.EnsureDeletedAsync();
             await _context.Database.EnsureCreatedAsync();
         }
@@ -31,7 +30,12 @@ namespace WebApp.Services
                     Email = "1@2.se",
                     PhoneNumber = "112",
                     School = "HeltOk-Skolan",
-                    Municipality = "Göteborg",
+                    Municipality = new Municipality
+                    {
+                        Name = "Göteborg",
+                        Latitude = 57.70079153912732,
+                        Longitude = 11.952875241955393
+                    },
                     SchoolForm = SchoolForm.Grundskola,
                     TeachersSubjects = "Matte, Svenska, Engelska",
                     Grade = 9,
