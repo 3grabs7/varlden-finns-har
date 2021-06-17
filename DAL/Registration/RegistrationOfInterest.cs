@@ -50,5 +50,8 @@ namespace DAL.Registration
         [Display(Name = "Önskade Veckor")]
         public WeeksWanted WeeksWanted { get; set; }
 
+        public MatchCard PartyA { get; set; }
+        public MatchCard PartyB { get; set; }
+
     }
 }
