@@ -6,15 +6,18 @@ namespace DAL.Registration
 {
     public class MatchCard : Entity
     {
-        [InverseProperty("PartyA")]
+        [Display(Name = "Grupp A")]
         public RegistrationOfInterest PartyA { get; set; }
 
-        [InverseProperty("PartyB")]
+
+        [Display(Name = "Grupp B")]
         public RegistrationOfInterest PartyB { get; set; }
+
+
         public ICollection<AvailableTimeSpan> TimeSpans { get; set; }
+
 
         [Range(1, 52)]
         public int StartWeek { get; set; }
-        public WeeksWanted Weeks { get; set; }
     }
 }

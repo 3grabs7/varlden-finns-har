@@ -23,6 +23,7 @@ namespace WebApp.Repositories
             => await _context.RegistrationOfInterests
             .Include(t => t.ScheduledTimeSpans)
             .Include(t => t.Municipality)
+            .Include(t => t.Subjects)
             .AsNoTracking()
             .ToListAsync();
 
@@ -58,7 +59,7 @@ namespace WebApp.Repositories
         }
 
         public string SuccessMessage(RegistrationOfInterest form) =>
-                    $"Tack {form.Name}. Din ansökan kommer bearbetas." +
+                    $"Tack {form.FirstName}. Din ansökan kommer bearbetas." +
                     $"Du kommer kontaktas via mail på {form.Email} eller via telefonnummer {form.PhoneNumber}";
 
         /*                       

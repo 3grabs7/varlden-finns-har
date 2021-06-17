@@ -7,5 +7,6 @@ namespace WebApp.Services
         Task ResetAsync();
         Task AddTeacherRegistrationForm(int count);
         Task AddTimeSpanToTeacherRegistrationForm(int count);
+        Task AddSubjects();
     }
 }

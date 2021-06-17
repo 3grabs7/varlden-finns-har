@@ -1,8 +1,10 @@
 ﻿using DAL.Registration;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApp.Data;
+using WebApp.Extensions;
 
 namespace WebApp.Services
 {
@@ -26,7 +28,7 @@ namespace WebApp.Services
             {
                 var form = new RegistrationOfInterest
                 {
-                    Name = "Lärare Lärarsson",
+                    FirstName = "Lärare Lärarsson",
                     Email = "1@2.se",
                     PhoneNumber = "112",
                     School = "HeltOk-Skolan",
@@ -37,7 +39,6 @@ namespace WebApp.Services
                         Longitude = 11.952875241955393
                     },
                     SchoolForm = SchoolForm.Grundskola,
-                    TeachersSubjects = "Matte, Svenska, Engelska",
                     Grade = 9,
                     MeetingType = MeetingType.Digitalt
                 };
@@ -75,6 +76,112 @@ namespace WebApp.Services
                     IsOutsideSchedule = true
                 });
             }
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddSubjects()
+        {
+            _context.Subjects.Clear();
+
+            List<string> elementarySubjects = new()
+            {
+                "Bild",
+                "Engelska",
+                "Hem- och Konsumentkunskap",
+                "Idrott och Hälsa",
+                "Matematik",
+                "Musik",
+                "NO",
+                "SO",
+                "Slöjd",
+                "Svenska",
+                "Svenska som Andraspråk",
+                "Teknik",
+                "Moderna Språk"
+            };
+            List<string> gymnasiumSubjects = new()
+            {
+                "Svenska",
+                "Svenska som Andraspråk",
+                "Engelska",
+                "Moderna Språk",
+                "Idrott och Hälsa",
+                "Musik",
+                "Bild",
+                "Matematik",
+                "Kemi",
+                "Biologi",
+                "Fysik",
+                "Samhällskunskap",
+                "Religionskunskap",
+                "Historia",
+                "Geografi",
+                "Psykologi",
+                "Sociologi",
+                "Pedagogik",
+                "Media",
+                "Gymnasiearbete",
+                "Ekonomi",
+                "Juridik",
+                "Entreprenörskap",
+                "SYV",
+                "Vård och Omsorg",
+                "Barn och Fritid",
+                "Handel, Restaurang och Turism",
+                "Hantverk",
+                "El, Bygg och Fordon",
+                "VVS och Industri"
+            };
+            List<string> adultEducationSubjects = new()
+            {
+                "Matematik",
+                "Svenska",
+                "Svenska som Andraspråk",
+                "Teknik",
+                "Engelska",
+                "Moderna Språk",
+                "Kemi",
+                "Biologi",
+                "Fysik",
+                "Samhällskunskap",
+                "Religionskunskap",
+                "Historia",
+                "Geografi",
+                "Psykologi",
+                "Sociologi",
+                "Pedagogik",
+                "Media",
+                "Gymnasiearbete",
+                "Ekonomi",
+                "Juridik",
+                "Entreprenörskap",
+                "SYV",
+                "Vård och Omsorg",
+                "Barn och Fritid",
+                "Handel, Restaurang och Turism",
+                "Hantverk",
+                "El, Bygg och Fordon",
+                "VVS och Industri"
+            };
+            List<string> sfiSubjects = new()
+            {
+                "B",
+                "C",
+                "D"
+            };
+
+            foreach (var s in elementarySubjects)
+                await _context.AddAsync(new Subject { Name = s, SchoolForm = SchoolForm.Grundskola });
+
+            foreach (var s in gymnasiumSubjects)
+                await _context.AddAsync(new Subject { Name = s, SchoolForm = SchoolForm.Gymnasium });
+
+            foreach (var s in adultEducationSubjects)
+                await _context.AddAsync(new Subject { Name = s, SchoolForm = SchoolForm.AnnanVuxenutbildning });
+
+            foreach (var s in sfiSubjects)
+                await _context.AddAsync(new Subject { Name = s, SchoolForm = SchoolForm.Sfi });
 
             await _context.SaveChangesAsync();
         }

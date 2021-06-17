@@ -3,19 +3,33 @@
 <button class="btn btn-primary" @onclick="Match">Match</button>
 @if (Matches != null)
 {
+    <br />
+    <br />
+    <button class="btn btn-primary" @onclick="OnlyShowNewMatches">Visa endast matchningar med säkra veckor</button>
+    <button class="btn btn-primary" @onclick="OnlyShowNewMatches">Visa endast matchningar med säkra tider</button>
+    <button class="btn btn-primary" @onclick="OnlyShowNewMatches">Visa matchningar med möjliga veckor</button>
+    <button class="btn btn-primary" @onclick="OnlyShowNewMatches">visa matchningar med möjliga tider</button>
+    <button class="btn btn-primary" @onclick="OnlyShowNewMatches">Visa endast nya registreringar</button>
+    <button class="btn btn-primary" @onclick="OnlyShowNewMatches">Visa endast etablerade registreringar</button>
+    <button class="btn btn-primary" @onclick="OnlyShowNewMatches">
+        Visa alla matchningar
+    </button>
+
+    <input type="checkbox" @onchange="() => UpdateMatches(0)" value="Show all" />
+    <input type="checkbox" @onchange="() => UpdateMatches(1)" value="Show 5" />
+    <input type="checkbox" @onchange="() => UpdateMatches(2)" value="Show 10" />
+
+
+    // Just ny visas sökningar ...
+    // foreach display current search filters
+
     @foreach (var item in Matches)
     {
-        <br />
-        <br />
-        <button class="btn btn-primary" @onclick="OnlyShowNewMatches">Visa endast nya matchningar</button>
-        <button class="btn btn-primary" @onclick="OnlyShowNewMatches">Visa endast etablerade matchningar</button>
-        <button class="btn btn-primary" @onclick="OnlyShowNewMatches">Visa alla matchningar</button>
-
         //To create anchor we need to get the url passed down as paramater to catch asp action
-        <a asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+        <a asp-action="Details" asp-route-id="@item.Id">@item.FirstName</a>
         <ul class="list-group">
             <li class="list-group-item">
-                @item.Name
+                @item.FirstName
             </li>
             <li class="list-group-item">
                 <p>@item.School</p>
@@ -39,27 +53,47 @@
 
     [Parameter] public RegistrationOfInterest ToBeMatched { get; set; }
 
-    private bool[] checkBoxes = { false, false, false };
-
     private async Task Match()
     {
         Matches = await ContextService.RegistrationOfInterests
             .Include(r => r.ScheduledTimeSpans)
             .Include(r => r.Municipality)
-            .Where(r => r.Name == ToBeMatched.Name)
+            .Where(r => r.FirstName == ToBeMatched.FirstName)
             .ToListAsync();
 
-        // 
     }
 
     private void OnlyShowNewMatches()
     {
-        Matches = Matches.Take(2);
+        Matches = Matches.Take(1);
 
     }
-    private void OnlyShowEstablishedMatches(bool value)
+    private void OnlyShowEstablishedMatches()
     {
 
+    }
+
+    private async Task UpdateMatches(int index)
+    {
+        if (index == 0)
+        {
+            Matches = await ContextService.RegistrationOfInterests
+                .Include(r => r.ScheduledTimeSpans)
+                .Include(r => r.Municipality)
+                .Where(r => r.FirstName == ToBeMatched.FirstName)
+                .ToListAsync();
+            return;
+        }
+        if (index == 1)
+        {
+            Matches = await ContextService.RegistrationOfInterests
+                .Include(r => r.ScheduledTimeSpans)
+                .Include(r => r.Municipality)
+                .Where(r => r.FirstName == ToBeMatched.FirstName)
+                .Take(5)
+                .ToListAsync();
+            return;
+        }
     }
 
 }

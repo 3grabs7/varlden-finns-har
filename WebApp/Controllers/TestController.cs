@@ -26,6 +26,7 @@ namespace WebApp.Controllers
             await _seed.ResetAsync();
             await _seed.AddTeacherRegistrationForm(40);
             await _seed.AddTimeSpanToTeacherRegistrationForm(20);
+            await _seed.AddSubjects();
 
             var data = await _formRepo.GetPaginatedResult(1, 10);
 

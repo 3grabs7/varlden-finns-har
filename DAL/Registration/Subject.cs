@@ -1,20 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Registration
 {
-    public class Municipality : Entity
+    public class Subject : Entity
     {
-        [Display(Name = "Namn")]
+        [Display(Name = "Ämne")]
         public string Name { get; set; }
 
 
-        [Display(Name = "Latitud")]
-        public double Latitude { get; set; }
-
-
-        [Display(Name = "Longitud")]
-        public double Longitude { get; set; }
+        [Display(Name = "Skolform")]
+        [Column(TypeName = "nvarchar(24)")]
+        public SchoolForm SchoolForm { get; set; }
 
 
         public ICollection<RegistrationOfInterest> RegistrationOfInterests { get; set; }
