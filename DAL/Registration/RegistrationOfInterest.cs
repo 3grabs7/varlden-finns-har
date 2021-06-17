@@ -60,5 +60,8 @@ namespace DAL.Registration
 
 
 
+        public MatchCard PartyA { get; set; }
+        public MatchCard PartyB { get; set; }
+
     }
 }

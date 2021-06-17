@@ -1,15 +1,36 @@
 ﻿@inject ApplicationDbContext ContextService;
 
-<a class="btn btn-primary" @onclick="Match">Match</a>
+<button class="btn btn-primary" @onclick="Match">Match</button>
 @if (Matches != null)
 {
     @foreach (var item in Matches)
     {
+        <br />
+        <br />
+        <button class="btn btn-primary" @onclick="OnlyShowNewMatches">Visa endast nya matchningar</button>
+        <button class="btn btn-primary" @onclick="OnlyShowNewMatches">Visa endast etablerade matchningar</button>
+        <button class="btn btn-primary" @onclick="OnlyShowNewMatches">Visa alla matchningar</button>
+
+        //To create anchor we need to get the url passed down as paramater to catch asp action
         <a asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
-        <p>@item.School</p>
-        <p>@item.Municipality</p>
-        <p>@item.SchoolForm</p>
-        <p>@item.MeetingType</p>
+        <ul class="list-group">
+            <li class="list-group-item">
+                @item.Name
+            </li>
+            <li class="list-group-item">
+                <p>@item.School</p>
+            </li>
+            <li class="list-group-item">
+                <p>@item.Municipality.Name</p>
+            </li>
+            <li class="list-group-item">
+                <p>@item.SchoolForm</p>
+            </li>
+            <li class="list-group-item">
+                <p>@item.MeetingType</p>
+            </li>
+        </ul>
+        <br />
     }
 }
 
@@ -18,13 +39,27 @@
 
     [Parameter] public RegistrationOfInterest ToBeMatched { get; set; }
 
+    private bool[] checkBoxes = { false, false, false };
+
     private async Task Match()
     {
         Matches = await ContextService.RegistrationOfInterests
+            .Include(r => r.ScheduledTimeSpans)
+            .Include(r => r.Municipality)
             .Where(r => r.Name == ToBeMatched.Name)
             .ToListAsync();
 
         // 
+    }
+
+    private void OnlyShowNewMatches()
+    {
+        Matches = Matches.Take(2);
+
+    }
+    private void OnlyShowEstablishedMatches(bool value)
+    {
+
     }
 
 }
