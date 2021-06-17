@@ -99,7 +99,7 @@ else
 
         <div class="form-group">
             <label asp-for=@Model.Form.WeeksWanted></label><br />
-            @foreach (var weeksWanted in EnumTools.GetValues<WeeksWanted>())
+            @foreach (var weeksWanted in EnumTools.GetValues<OccassionCount>())
             {
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" id="@($"weekswanted-{weeksWanted}")"

@@ -39,8 +39,6 @@ namespace WebApp.Services
                     SchoolForm = SchoolForm.Grundskola,
                     TeachersSubjects = "Matte, Svenska, Engelska",
                     Grade = 9,
-                    StudentGroupSubjects = "Matte",
-                    AdditionalSubjectsOfInterest = "Matte, Historia",
                     MeetingType = MeetingType.Digitalt
                 };
                 await _context.AddAsync(form);

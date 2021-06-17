@@ -18,6 +18,7 @@ namespace DAL.Registration
 
         [Display(Name = "Kommun")]
         public Municipality Municipality { get; set; } // Create tables for municipality later
+        // as for now hard code municipality
 
         [Display(Name = "Skolform")]
         public SchoolForm SchoolForm { get; set; }
@@ -29,12 +30,7 @@ namespace DAL.Registration
         [Display(Name = "Årskurs")]
         public int Grade { get; set; }
 
-        [Display(Name = "Elevernas ämnen")]
-        public string StudentGroupSubjects { get; set; } // Enum or subject class, keep as csv formatted now
-
-        [Display(Name = "Andra ämnen av intresse")]
-        public string AdditionalSubjectsOfInterest { get; set; }
-
+        // Only for gymnasie
         [Display(Name = "Program")]
         public string Program { get; set; }
 
@@ -47,8 +43,22 @@ namespace DAL.Registration
         [Display(Name = "Veckor")]
         public int Weeks { get; set; }
 
-        [Display(Name = "Önskade Veckor")]
-        public WeeksWanted WeeksWanted { get; set; }
+        [Display(Name = "Önskat Antal Tillfällen")]
+        public OccassionCount OccassionCount { get; set; }
+
+        public bool MyProperty { get; set; }
+
+        // Tema
+        // Fri text
+        // öppen för förslag
+        // Länk till hemsida för inspiration angående teman
+        // öppen för långsiktigt / flera teman
+
+        // Om fysiskt,
+        // kan elevgruppen göra besök (transport)
+        // Ta emot elevgrupp
+
+
 
     }
 }

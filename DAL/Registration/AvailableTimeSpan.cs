@@ -18,6 +18,10 @@ namespace DAL.Registration
         public bool IsOutsideSchedule { get; set; }
         public RegistrationOfInterest TeacherRegistrationForm { get; set; }
 
+        public bool IsCertain { get; set; }
+        public bool IsPossibility { get; set; }
+
+
         [NotMapped]
         public bool IsMarked { get; set; }
     }
