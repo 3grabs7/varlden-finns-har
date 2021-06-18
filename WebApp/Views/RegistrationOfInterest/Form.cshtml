@@ -1,4 +1,4 @@
-﻿@model RegistrationOfInterestViewModel
+﻿@model RegistrationFormViewModel
 
 @if (Model?.SubmitSuccessfull ?? false)
 {
@@ -7,27 +7,44 @@
 else
 {
     <form method="post" asp-action="@(nameof(RegistrationOfInterestController.Create))">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <h4 class="h4">Lite om dig som lärare och din skola</h4>
 
         <div class="form-group">
             <label asp-for=@Model.Form.FirstName></label>
             <input class="form-control" asp-for="@Model.Form.FirstName" placeholder="" />
+            <span asp-validation-for="@Model.Form.FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for=@Model.Form.LastName></label>
+            <input class="form-control" asp-for="@Model.Form.LastName" placeholder="" />
+            <span asp-validation-for="@Model.Form.LastName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for=@Model.Form.Email></label>
             <input class="form-control" type="email" asp-for="@Model.Form.Email" placeholder="" />
+            <span asp-validation-for="@Model.Form.Email" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for=@Model.Form.PhoneNumber></label>
             <input class="form-control" asp-for="@Model.Form.PhoneNumber" placeholder="" />
+            <span asp-validation-for="@Model.Form.PhoneNumber" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for=@Model.Form.School></label>
             <input class="form-control" asp-for="@Model.Form.School" placeholder="" />
+            <span asp-validation-for="@Model.Form.School" class="text-danger"></span>
         </div>
+
+
+
+
+
+
 
 
 
@@ -137,8 +154,10 @@ else
             </tbody>
         </table>
 
-
         <input type="submit" value="Skicka" />
     </form>
 }
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

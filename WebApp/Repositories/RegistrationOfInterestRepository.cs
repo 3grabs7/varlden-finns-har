@@ -40,6 +40,18 @@ namespace WebApp.Repositories
             return tracking.Entity;
         }
 
+        public async Task AddSubjects(IEnumerable<Subject> subjects, RegistrationOfInterest form)
+        {
+            form.Subjects = subjects.Where(s => s.IsMarked).ToList();
+            await _context.SaveChangesAsync();
+        }
+        public async Task AddAdress(Adress adress, RegistrationOfInterest form)
+        {
+            var entity = await _context.AddAsync(adress);
+            form.SchoolAdress = entity.Entity;
+            await _context.SaveChangesAsync();
+        }
+
         public async Task DeleteAsync(RegistrationOfInterest form)
         {
             _context.Remove(form);
@@ -87,6 +99,7 @@ namespace WebApp.Repositories
 
         public async Task<IEnumerable<RegistrationOfInterest>> GetData()
             => await _context.Set<RegistrationOfInterest>().ToListAsync();
+
 
     }
 }

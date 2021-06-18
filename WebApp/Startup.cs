@@ -26,6 +26,8 @@ namespace WebApp
             services.AddScoped<IRegistrationOfInterestRepository, RegistrationOfInterestRepository>();
             services.AddScoped<IAvailableTimeSpanRepository, AvailableTimeSpanRepository>();
 
+            services.AddScoped<StaticEntitiesService>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

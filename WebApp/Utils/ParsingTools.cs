@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace WebApp.Utils
 {
@@ -21,6 +23,17 @@ namespace WebApp.Utils
                 timeStamp = $"0{timeStamp}";
             }
             return DateTime.ParseExact(timeStamp, "HH:mm", null);
+        }
+
+        public static List<string> ReadExcelFile(string filepath)
+        {
+            List<string> result = new();
+
+            using var reader = new StreamReader(filepath, System.Text.Encoding.Latin1);
+            while (!reader.EndOfStream)
+                result.Add(reader.ReadLine());
+
+            return result;
         }
     }
 }

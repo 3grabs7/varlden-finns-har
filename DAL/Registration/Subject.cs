@@ -16,5 +16,9 @@ namespace DAL.Registration
 
 
         public ICollection<RegistrationOfInterest> RegistrationOfInterests { get; set; }
+
+
+        [NotMapped]
+        public bool IsMarked { get; set; }
     }
 }

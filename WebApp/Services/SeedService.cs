@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Data;
 using WebApp.Extensions;
@@ -32,12 +33,6 @@ namespace WebApp.Services
                     Email = "1@2.se",
                     PhoneNumber = "112",
                     School = "HeltOk-Skolan",
-                    Municipality = new Municipality
-                    {
-                        Name = "Göteborg",
-                        Latitude = 57.70079153912732,
-                        Longitude = 11.952875241955393
-                    },
                     SchoolForm = SchoolForm.Grundskola,
                     Grade = 9,
                     MeetingType = MeetingType.Digitalt
@@ -182,6 +177,26 @@ namespace WebApp.Services
 
             foreach (var s in sfiSubjects)
                 await _context.AddAsync(new Subject { Name = s, SchoolForm = SchoolForm.Sfi });
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddMunicipality()
+        {
+            _context.Municipalities.Clear();
+
+            var municipalities = Utils.ParsingTools.ReadExcelFile("./Files/sveriges-kommuner.csv");
+            // remove postfix - kommun
+            municipalities = municipalities.Select(s => s.Replace("kommun", "")).ToList();
+            foreach (var m in municipalities)
+            {
+                if (m.Last() != 's')
+                {
+                    await _context.AddAsync(new Municipality { Name = m.Remove(m.Length - 1) });
+                    continue;
+                }
+                await _context.AddAsync(new Municipality { Name = m });
+            }
 
             await _context.SaveChangesAsync();
         }

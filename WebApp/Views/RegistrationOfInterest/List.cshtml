@@ -21,55 +21,55 @@
             </th>
             <th>
                 <a action="@aspAction" class="sort-link"
-                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.FirstName)">
+                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.Email)">
                     @Html.DisplayNameFor(model => model.Form.Email)
                 </a>
             </th>
             <th>
                 <a action="@aspAction" class="sort-link"
-                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.FirstName)">
+                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.PhoneNumber)">
                     @Html.DisplayNameFor(model => model.Form.PhoneNumber)
                 </a>
             </th>
             <th>
                 <a action="@aspAction" class="sort-link"
-                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.FirstName)">
+                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.School)">
                     @Html.DisplayNameFor(model => model.Form.School)
                 </a>
             </th>
             <th>
                 <a action="@aspAction" class="sort-link"
-                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.FirstName)">
-                    @Html.DisplayNameFor(model => model.Form.Municipality)
+                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.Municipality.Name)">
+                    @Html.DisplayNameFor(model => model.Form.Municipality.Name)
                 </a>
             </th>
             <th>
                 <a action="@aspAction" class="sort-link"
-                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.FirstName)">
+                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.SchoolForm)">
                     @Html.DisplayNameFor(model => model.Form.SchoolForm)
                 </a>
             </th>
             <th>
                 <a action="@aspAction" class="sort-link"
-                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.FirstName)">
+                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.Grade)">
                     @Html.DisplayNameFor(model => model.Form.Grade)
                 </a>
             </th>
             <th>
                 <a action="@aspAction" class="sort-link"
-                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.FirstName)">
+                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.Program)">
                     @Html.DisplayNameFor(model => model.Form.Program)
                 </a>
             </th>
             <th>
                 <a action="@aspAction" class="sort-link"
-                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.FirstName)">
+                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.MeetingType)">
                     @Html.DisplayNameFor(model => model.Form.MeetingType)
                 </a>
             </th>
             <th>
                 <a action="@aspAction" class="sort-link"
-                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.FirstName)">
+                   asp-route-currentpage="@(Model.CurrentPage)" asp-route-sortby="@nameof(Model.Form.Weeks)">
                     @Html.DisplayNameFor(model => model.Form.Weeks)
                 </a>
             </th>
@@ -94,7 +94,7 @@
                     @Html.DisplayFor(modelItem => item.School)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Municipality)
+                    @Html.DisplayFor(modelItem => item.Municipality.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SchoolForm)

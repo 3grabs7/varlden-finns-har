@@ -63,6 +63,7 @@ namespace DAL.Registration
         public MeetingType MeetingType { get; set; }
 
 
+        [Display(Name = "Schema")]
         public ICollection<AvailableTimeSpan> ScheduledTimeSpans { get; set; }
 
 

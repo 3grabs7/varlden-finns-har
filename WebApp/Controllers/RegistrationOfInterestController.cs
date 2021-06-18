@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Models;
 using WebApp.Repositories;
+using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -12,35 +13,46 @@ namespace WebApp.Controllers
     {
         private readonly IRegistrationOfInterestRepository _formRepo;
         private readonly IAvailableTimeSpanRepository _scheduleRepo;
+        private readonly StaticEntitiesService _staticEntitiesService;
 
         public RegistrationOfInterestController(IRegistrationOfInterestRepository formRepo,
-            IAvailableTimeSpanRepository scheduleRepo)
+            IAvailableTimeSpanRepository scheduleRepo,
+            StaticEntitiesService staticEntitiesService)
         {
             _formRepo = formRepo;
             _scheduleRepo = scheduleRepo;
+            _staticEntitiesService = staticEntitiesService;
         }
 
         private const int TIME_BLOCKS = 140;
-        public ActionResult Form()
+        public async Task<ActionResult> Form()
         {
-            var viewModel = new RegistrationOfInterestViewModel
+            var viewModel = new RegistrationFormViewModel
             {
                 Form = new RegistrationOfInterest(),
-                TimeSpans = Enumerable.Range(0, TIME_BLOCKS).Select(i => new AvailableTimeSpan()).ToList()
+                TimeSpans = Enumerable.Range(0, TIME_BLOCKS).Select(i => new AvailableTimeSpan()).ToList(),
+                Municipalities = await _staticEntitiesService.GetMunicipalitiesAsync(),
+                Subjects = await _staticEntitiesService.GetSubjectsAsync()
+
             };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(RegistrationOfInterest form, IList<AvailableTimeSpan> timeSpans)
+        public async Task<ActionResult> Create(RegistrationOfInterest form,
+            IList<AvailableTimeSpan> timeSpans,
+            IList<Subject> subjects,
+            Adress adress)
         {
             if (ModelState.IsValid)
             {
                 await _formRepo.CreateAsync(form);
                 await _scheduleRepo.CreateSchedule(timeSpans, form);
+                await _formRepo.AddSubjects(subjects, form);
+                await _formRepo.AddAdress(adress, form);
                 ViewBag.SuccessMessage = _formRepo.SuccessMessage(form);
-                return View(nameof(Form), new RegistrationOfInterestViewModel { SubmitSuccessfull = true });
+                return View(nameof(Form), new RegistrationFormViewModel { SubmitSuccessfull = true });
             }
 
             return RedirectToAction(nameof(Form));
