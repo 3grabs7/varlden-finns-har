@@ -21,6 +21,7 @@ namespace WebApp.Extensions
 
         public static RegistrationOfInterest AppendSubjects(this RegistrationOfInterest form, IEnumerable<Subject> subjects)
         {
+            form.Subjects = new List<Subject>();
             foreach (var s in subjects)
                 form.Subjects.Add(s);
             return form;

@@ -19,7 +19,10 @@ namespace WebApp.Services
         public async Task CreateRegistrationFormAsync(RegistrationOfInterest form)
         {
             var municipality = await _context.Municipalities.FindAsync(form.MunicipalityRefId);
+            var subjects = _context.Subjects.Where(s => form.Subjects.Contains(s)).ToList();
+
             form.Municipality = municipality;
+            form.Subjects = subjects;
 
             await _context.AddAsync(form);
             await _context.SaveChangesAsync();
