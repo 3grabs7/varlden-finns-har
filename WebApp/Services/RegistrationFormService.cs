@@ -25,6 +25,10 @@ namespace WebApp.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task AppendAdressAsync(RegistrationOfInterest form, Adress adress)
+        {
+
+        }
 
         // Get all municipalities from database
         public async Task<IEnumerable<Municipality>> GetMunicipalitiesAsync()

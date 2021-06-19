@@ -63,6 +63,19 @@
 
             <h4 class="h4">Lite om din elevgrupp</h4>
             <hr />
+
+            <div class="form-check">
+                <InputRadioGroup @bind-Value="_form.SchoolForm">
+                    <label>Skolform</label><br />
+                    @foreach (var sf in EnumTools.GetValues<SchoolForm>())
+                            {
+                        <InputRadio Value="sf" id="@((int)sf)" class="form-check-input" />
+                        <label for="@((int)sf)" class="form-check-label">@sf</label>
+                            }
+                </InputRadioGroup>
+            </div>
+
+
             @{
                 // Skolform
                 // om sfi/gymnasium/grundskola/yh -> visa ämnen baserat på val
@@ -80,19 +93,7 @@
                 <input class="form-control" asp-for="@Model.Form.Program" placeholder="" />
                 </div>
 
-                <div class="form-group">
-                <label asp-for=@Model.Form.SchoolForm></label><br />
-                @foreach (var schoolForm in EnumTools.GetValues<SchoolForm>())
-                {
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="@($"schoolform-{schoolForm}")"
-                               asp-for="@Model.Form.SchoolForm" value=" @((int)schoolForm)" placeholder="" />
-                        <label class="form-check-label" for="@($"schoolform-{schoolForm}")">
-                            @schoolForm
-                        </label>
-                    </div>
-                }
-                </div>
+
                 */
 
             }
@@ -110,8 +111,12 @@ else
     private RegistrationOfInterest _form = new();
     private Adress _adress = new();
 
-    public IEnumerable<Municipality> Municipalities { get; set; }
+    private IEnumerable<Municipality> Municipalities { get; set; }
+
     public IEnumerable<IGrouping<SchoolForm, Subject>> Subjects { get; set; }
+
+    public IEnumerable<Subject> _selectedSubjects { get; set; }
+
     public List<AvailableTimeSpan> TimeSpans { get; set; }
 
 
@@ -128,8 +133,10 @@ else
 
     public async Task SubmitForm()
     {
+        _form.AppendAdress(_adress).AppendSubjects(_selectedSubjects);
 
         await FormService.CreateRegistrationFormAsync(_form);
+
         SuccessMessage = $"Välkommen {_form.FirstName}! Tack för ditt visade intresse, vi kommer höra av oss med mer information.";
         SubmitSuccessfull = true;
     }
