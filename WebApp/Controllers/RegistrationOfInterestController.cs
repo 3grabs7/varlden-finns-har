@@ -27,15 +27,7 @@ namespace WebApp.Controllers
         private const int TIME_BLOCKS = 140;
         public async Task<ActionResult> Form()
         {
-            var viewModel = new RegistrationFormViewModel
-            {
-                Form = new RegistrationOfInterest(),
-                TimeSpans = Enumerable.Range(0, TIME_BLOCKS).Select(i => new AvailableTimeSpan()).ToList(),
-                Municipalities = await _staticEntitiesService.GetMunicipalitiesAsync(),
-                Subjects = await _staticEntitiesService.GetSubjectsAsync()
-
-            };
-            return View(viewModel);
+            return View();
         }
 
         [HttpPost]

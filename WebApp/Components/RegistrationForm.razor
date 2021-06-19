@@ -1,0 +1,136 @@
+﻿@inject RegistrationFormService FormService
+@inject IJSRuntime JsRunTime
+
+
+@if (!SubmitSuccessfull)
+{
+    if (_form == null || Municipalities == null || Subjects == null)
+    {
+        <h5>Loading...</h5>
+    }
+    else
+    {
+        <EditForm Model="@_form" OnValidSubmit="@SubmitForm">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <h4 class="h4">Lite om dig som lärare och din skola</h4>
+            <hr />
+            <div class="form-group">
+                <label for="firstName">Förnamn</label>
+                <InputText id="firstName" class="form-control" @bind-Value="_form.FirstName" />
+            </div>
+            <div class="form-group">
+                <label for="lastName">Efternamn</label>
+                <InputText id="lastName" class="form-control" @bind-Value="_form.LastName" />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <InputText id="email" class="form-control" @bind-Value="_form.Email" />
+            </div>
+            <div class="form-group">
+                <label for="phonenumber">Telefonnummer</label>
+                <InputText id="phonenumber" class="form-control" @bind-Value="_form.PhoneNumber" />
+            </div>
+            <div class="form-group">
+                <label for="school">Skolans namn</label>
+                <InputText id="school" class="form-control" @bind-Value="_form.School" />
+            </div>
+            @{ /* Adress Box */}
+            <div class="border-top m-4">
+                <div class="form-group">
+                    <label for="street">Gatuadress</label>
+                    <InputText id="street" class="form-control" @bind-Value="_adress.Street" />
+                </div>
+                <div class="form-group">
+                    <label for="streetnumber">Gatunummer</label>
+                    <InputText id="streetnumber" class="form-control" @bind-Value="_adress.StreetNumber" />
+                </div>
+                <div class="form-group">
+                    <label for="postalcode">Postnummer</label>
+                    <InputText id="postalcode" class="form-control" @bind-Value="_adress.PostalCode" />
+                </div>
+                <div class="form-group">
+                    <label for="municipality">Kommun</label>
+                    <select @bind="_form.MunicipalityRefId" id="municipality" class="form-control">
+                        @foreach (var m in Municipalities)
+                        {
+                            <option value="@m.Id">@m.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <h4 class="h4">Lite om din elevgrupp</h4>
+            <hr />
+            @{
+                // Skolform
+                // om sfi/gymnasium/grundskola/yh -> visa ämnen baserat på val
+                // om gymnasium/grundskola -> visa årskurs
+                // om gymnasium/yh -> visa program
+
+                /*
+                <div class="form-group">
+                <label asp-for=@Model.Form.Grade></label>
+                <input class="form-control" asp-for="@Model.Form.Grade" placeholder="" />
+                </div>
+
+                <div class="form-group">
+                <label asp-for=@Model.Form.Program></label>
+                <input class="form-control" asp-for="@Model.Form.Program" placeholder="" />
+                </div>
+
+                <div class="form-group">
+                <label asp-for=@Model.Form.SchoolForm></label><br />
+                @foreach (var schoolForm in EnumTools.GetValues<SchoolForm>())
+                {
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="@($"schoolform-{schoolForm}")"
+                               asp-for="@Model.Form.SchoolForm" value=" @((int)schoolForm)" placeholder="" />
+                        <label class="form-check-label" for="@($"schoolform-{schoolForm}")">
+                            @schoolForm
+                        </label>
+                    </div>
+                }
+                </div>
+                */
+
+            }
+
+            <button type="submit" class="btn btn-primary">Skicka</button>
+        </EditForm>
+    }
+}
+else
+{
+    <p>@SuccessMessage</p>
+}
+
+@code {
+    private RegistrationOfInterest _form = new();
+    private Adress _adress = new();
+
+    public IEnumerable<Municipality> Municipalities { get; set; }
+    public IEnumerable<IGrouping<SchoolForm, Subject>> Subjects { get; set; }
+    public List<AvailableTimeSpan> TimeSpans { get; set; }
+
+
+    private bool SubmitSuccessfull { get; set; }
+    private string SuccessMessage { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        Municipalities = await FormService.GetMunicipalitiesAsync();
+        Subjects = await FormService.GetSubjectsAsync();
+    }
+
+
+    public async Task SubmitForm()
+    {
+
+        await FormService.CreateRegistrationFormAsync(_form);
+        SuccessMessage = $"Välkommen {_form.FirstName}! Tack för ditt visade intresse, vi kommer höra av oss med mer information.";
+        SubmitSuccessfull = true;
+    }
+}

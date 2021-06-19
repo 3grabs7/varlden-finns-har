@@ -9,7 +9,7 @@ namespace DAL.Registration
 
 
         [Display(Name = "Gatunummer")]
-        public int StreetNumber { get; set; }
+        public string StreetNumber { get; set; }
 
 
         [Display(Name = "Postnummer")]

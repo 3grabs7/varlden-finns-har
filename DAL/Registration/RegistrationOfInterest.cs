@@ -9,11 +9,13 @@ namespace DAL.Registration
         // Teacher info
         [Display(Name = "Förnamn")]
         [RegularExpression("[a-öA-Ö-]*")]
+        [MinLength(1)]
         public string FirstName { get; set; }
 
 
-        [Display(Name = "Förnamn")]
+        [Display(Name = "Efternamn")]
         [RegularExpression("[a-öA-Ö-]*")]
+        [MinLength(1)]
         public string LastName { get; set; }
 
 
@@ -29,6 +31,9 @@ namespace DAL.Registration
         [Display(Name = "Skola")]
         public string School { get; set; } // Create tables for School later
 
+
+        [NotMapped] // prop for select in form
+        public int MunicipalityRefId { get; set; }
 
         [Display(Name = "Kommun")]
         public Municipality Municipality { get; set; }

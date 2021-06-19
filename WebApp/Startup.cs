@@ -27,6 +27,7 @@ namespace WebApp
             services.AddScoped<IAvailableTimeSpanRepository, AvailableTimeSpanRepository>();
 
             services.AddScoped<StaticEntitiesService>();
+            services.AddScoped<RegistrationFormService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
