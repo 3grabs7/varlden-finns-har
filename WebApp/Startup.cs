@@ -28,6 +28,7 @@ namespace WebApp
 
             services.AddScoped<StaticEntitiesService>();
             services.AddScoped<RegistrationFormService>();
+            services.AddScoped<GeocodingService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

@@ -11,9 +11,13 @@ namespace WebApp.Services
     public class RegistrationFormService
     {
         private readonly ApplicationDbContext _context;
-        public RegistrationFormService(ApplicationDbContext context)
+        private readonly GeocodingService _geocodeService;
+
+        public RegistrationFormService(ApplicationDbContext context,
+            GeocodingService geocodeService)
         {
             _context = context;
+            _geocodeService = geocodeService;
         }
 
         public async Task CreateRegistrationFormAsync(RegistrationOfInterest form)
@@ -23,6 +27,10 @@ namespace WebApp.Services
 
             form.Municipality = municipality;
             form.Subjects = subjects;
+
+            var coordinates = await _geocodeService.GetCoordinatesAsync(form.SchoolAdress, form.Municipality);
+            form.SchoolAdress.Longitude = (decimal)coordinates[0];
+            form.SchoolAdress.Latitude = (decimal)coordinates[1];
 
             await _context.AddAsync(form);
             await _context.SaveChangesAsync();

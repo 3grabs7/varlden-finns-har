@@ -8,15 +8,6 @@ namespace DAL.Registration
         [Display(Name = "Namn")]
         public string Name { get; set; }
 
-
-        [Display(Name = "Latitud")]
-        public double Latitude { get; set; }
-
-
-        [Display(Name = "Longitud")]
-        public double Longitude { get; set; }
-
-
         public ICollection<RegistrationOfInterest> RegistrationOfInterests { get; set; }
     }
 }
