@@ -6,6 +6,10 @@
 
 WebApp/Properties/launchSettings.json
 WebApp/appsettings.json
+/WebApp/Properties/launchSettings.json
+/WebApp/appsettings.json
+./WebApp/Properties/launchSettings.json
+./WebApp/appsettings.json
 
 # User-specific files
 *.rsuser
