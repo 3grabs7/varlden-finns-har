@@ -1,18 +1,10 @@
 ﻿using DAL.Registration;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace WebApp.Extensions
 {
-    public static class Extensions
+    public static class RegistrationFormExtensions
     {
-        // Extension for Ef core to clear all entries of a certain type
-        public static void Clear<T>(this DbSet<T> dbSet) where T : class
-        {
-            dbSet.RemoveRange(dbSet);
-        }
-
-        // Extensions for form
         public static RegistrationOfInterest AppendAdress(this RegistrationOfInterest form, Adress adress)
         {
             form.SchoolAdress = adress;

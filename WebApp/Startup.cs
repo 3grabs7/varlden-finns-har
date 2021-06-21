@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApp.Data;
-using WebApp.Repositories;
+using WebApp.Extensions;
 using WebApp.Services;
 
 namespace WebApp
@@ -22,13 +22,7 @@ namespace WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ISeedService, SeedService>();
-            services.AddScoped<IRegistrationOfInterestRepository, RegistrationOfInterestRepository>();
-            services.AddScoped<IAvailableTimeSpanRepository, AvailableTimeSpanRepository>();
-
-            services.AddScoped<StaticEntitiesService>();
-            services.AddScoped<RegistrationFormService>();
-            services.AddScoped<GeocodingService>();
+            services.AddApplicationServices();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

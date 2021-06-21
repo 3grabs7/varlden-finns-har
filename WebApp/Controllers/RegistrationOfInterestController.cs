@@ -1,22 +1,20 @@
 ﻿using DAL.Registration;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Models;
-using WebApp.Repositories;
 using WebApp.Services;
 
 namespace WebApp.Controllers
 {
     public class RegistrationOfInterestController : Controller
     {
-        private readonly IRegistrationOfInterestRepository _formRepo;
-        private readonly IAvailableTimeSpanRepository _scheduleRepo;
+        private readonly IRegistrationOfInterestService _formRepo;
+        private readonly IScheduleService _scheduleRepo;
         private readonly StaticEntitiesService _staticEntitiesService;
 
-        public RegistrationOfInterestController(IRegistrationOfInterestRepository formRepo,
-            IAvailableTimeSpanRepository scheduleRepo,
+        public RegistrationOfInterestController(IRegistrationOfInterestService formRepo,
+            IScheduleService scheduleRepo,
             StaticEntitiesService staticEntitiesService)
         {
             _formRepo = formRepo;

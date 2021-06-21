@@ -1,12 +1,10 @@
 ﻿using DAL.Registration;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApp.Repositories
+namespace WebApp.Services
 {
-    public interface IAvailableTimeSpanRepository
+    public interface IScheduleService
     {
         Task CreateSchedule(IEnumerable<AvailableTimeSpan> timeSpans, RegistrationOfInterest form);
     }

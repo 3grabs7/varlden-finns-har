@@ -187,10 +187,12 @@ namespace WebApp.Services
 
             var municipalities = Utils.ParsingTools.ReadExcelFile("./Files/sveriges-kommuner.csv");
             // remove postfix - kommun
-            municipalities = municipalities.Select(s => s.Replace("kommun", "")).ToList();
+            municipalities = municipalities
+                .Select(s => s.Replace(" kommun", "").Replace(" stad", ""))
+                .ToList();
             foreach (var m in municipalities)
             {
-                if (m.Last() != 's')
+                if (m.Last() == 's')
                 {
                     await _context.AddAsync(new Municipality { Name = m.Remove(m.Length - 1) });
                     continue;

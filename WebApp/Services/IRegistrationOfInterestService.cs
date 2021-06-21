@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApp.Services;
 
-namespace WebApp.Repositories
+namespace WebApp.Services
 {
-    public interface IRegistrationOfInterestRepository : IPaginationService<RegistrationOfInterest>
+    public interface IRegistrationOfInterestService : IPaginationService<RegistrationOfInterest>
     {
         Task<RegistrationOfInterest> GetAsync(int id);
         Task<IEnumerable<RegistrationOfInterest>> GetAllAsync();

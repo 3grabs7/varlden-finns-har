@@ -1,9 +1,7 @@
-﻿using DAL.Registration;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using WebApp.Models;
-using WebApp.Repositories;
 using WebApp.Services;
 
 namespace WebApp.Controllers
@@ -11,11 +9,11 @@ namespace WebApp.Controllers
     public class TestController : Controller
     {
         private readonly ISeedService _seed;
-        private readonly IRegistrationOfInterestRepository _formRepo;
+        private readonly IRegistrationOfInterestService _formRepo;
 
 
         public TestController(ISeedService seed,
-            IRegistrationOfInterestRepository formRepo)
+            IRegistrationOfInterestService formRepo)
         {
             _seed = seed;
             _formRepo = formRepo;

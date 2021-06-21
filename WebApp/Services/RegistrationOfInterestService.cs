@@ -6,13 +6,13 @@ using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using WebApp.Data;
 
-namespace WebApp.Repositories
+namespace WebApp.Services
 {
-    public class RegistrationOfInterestRepository : IRegistrationOfInterestRepository
+    public class RegistrationOfInterestService : IRegistrationOfInterestService
     {
         private readonly ApplicationDbContext _context;
 
-        public RegistrationOfInterestRepository(ApplicationDbContext context)
+        public RegistrationOfInterestService(ApplicationDbContext context)
         {
             _context = context;
         }

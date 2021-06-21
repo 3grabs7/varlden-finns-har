@@ -19,7 +19,7 @@ namespace WebApp.Services
 
         public async Task<List<double>> GetCoordinatesAsync(Adress adress, Municipality municipality)
         {
-            var adressQuery = $"{adress.Street} {adress.StreetNumber} {municipality.Name} Sweden";
+            var adressQuery = $"{adress.StreetAdress} {municipality.Name} Sweden";
             var fullUrl = $"{BASE_URL}{adressQuery}.json?access_token={_apiKey}";
 
             var response = await client.GetStringAsync(fullUrl);
@@ -27,7 +27,7 @@ namespace WebApp.Services
             dynamic json = JObject.Parse(response);
             var result = json.features[0].geometry.coordinates;
 
-            return new List<double> { result[0].Value, result[1].Value };
+            return new List<double> { result[0]?.Value, result[1]?.Value } ?? null;
         }
     }
 }

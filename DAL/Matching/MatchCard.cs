@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using DAL.Registration;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DAL.Registration
+namespace DAL.Matching
 {
     public class MatchCard : Entity
     {

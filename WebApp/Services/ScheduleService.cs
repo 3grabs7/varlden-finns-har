@@ -5,12 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Data;
 
-namespace WebApp.Repositories
+namespace WebApp.Services
 {
-    public class AvailableTimeSpanRepository : IAvailableTimeSpanRepository
+    public class ScheduleService : IScheduleService
     {
         private readonly ApplicationDbContext _context;
-        public AvailableTimeSpanRepository(ApplicationDbContext context)
+        public ScheduleService(ApplicationDbContext context)
         {
             _context = context;
         }

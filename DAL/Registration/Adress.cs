@@ -4,12 +4,8 @@ namespace DAL.Registration
 {
     public class Adress : Entity
     {
-        [Display(Name = "Gatunamn")]
-        public string Street { get; set; }
-
-
-        [Display(Name = "Gatunummer")]
-        public string StreetNumber { get; set; }
+        [Display(Name = "Gatuadress")]
+        public string StreetAdress { get; set; }
 
 
         [Display(Name = "Postnummer")]
