@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebApp.Services
 {
-    public class GeocodingService
+    public class GeocodingService : IGeocodingService
     {
         private static readonly HttpClient client = new();
         private const string BASE_URL = "https://api.mapbox.com/geocoding/v5/mapbox.places/";

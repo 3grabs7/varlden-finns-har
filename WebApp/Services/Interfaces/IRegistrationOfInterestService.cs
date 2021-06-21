@@ -1,7 +1,6 @@
 ﻿using DAL.Registration;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WebApp.Services;
 
 namespace WebApp.Services
 {

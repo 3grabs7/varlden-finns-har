@@ -7,15 +7,12 @@ namespace WebApp.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            // Interfaces implementet
             services.AddScoped<ISeedService, SeedService>();
             services.AddScoped<IRegistrationOfInterestService, RegistrationOfInterestService>();
             services.AddScoped<IScheduleService, ScheduleService>();
-
-            // * TODO * Implement interfaces 
-            services.AddScoped<StaticEntitiesService>();
-            services.AddScoped<RegistrationFormService>();
-            services.AddScoped<GeocodingService>();
+            services.AddScoped<IStaticEntitiesService, StaticEntitiesService>();
+            services.AddScoped<IGeocodingService, GeocodingService>();
+            services.AddScoped<IRegistrationFormService, RegistrationFormService>();
 
             return services;
         }

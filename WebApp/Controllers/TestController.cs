@@ -11,7 +11,6 @@ namespace WebApp.Controllers
         private readonly ISeedService _seed;
         private readonly IRegistrationOfInterestService _formRepo;
 
-
         public TestController(ISeedService seed,
             IRegistrationOfInterestService formRepo)
         {
@@ -21,15 +20,6 @@ namespace WebApp.Controllers
 
         public async Task<IActionResult> Index(string welcomeTag)
         {
-
-            await _seed.ResetAsync();
-            await _seed.AddTeacherRegistrationForm(40);
-            await _seed.AddTimeSpanToTeacherRegistrationForm(20);
-            await _seed.AddSubjects();
-            await _seed.AddMunicipality();
-
-            var data = await _formRepo.GetPaginatedResult(1, 10);
-
             if (!String.IsNullOrEmpty(welcomeTag))
             {
                 var viewModel = new TestViewModel
@@ -46,6 +36,8 @@ namespace WebApp.Controllers
             await _seed.ResetAsync();
             await _seed.AddTeacherRegistrationForm(32);
             await _seed.AddTimeSpanToTeacherRegistrationForm(5);
+            await _seed.AddSubjects();
+            await _seed.AddMunicipality();
             return RedirectToAction(nameof(Index), new { welcomeTag = "Loopy?" });
         }
 

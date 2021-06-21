@@ -7,7 +7,7 @@ using WebApp.Data;
 
 namespace WebApp.Services
 {
-    public class StaticEntitiesService
+    public class StaticEntitiesService : IStaticEntitiesService
     {
         private readonly ApplicationDbContext _context;
 

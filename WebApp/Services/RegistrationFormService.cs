@@ -1,6 +1,5 @@
 ﻿using DAL.Registration;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,13 +7,13 @@ using WebApp.Data;
 
 namespace WebApp.Services
 {
-    public class RegistrationFormService
+    public class RegistrationFormService : IRegistrationFormService
     {
         private readonly ApplicationDbContext _context;
-        private readonly GeocodingService _geocodeService;
+        private readonly IGeocodingService _geocodeService;
 
         public RegistrationFormService(ApplicationDbContext context,
-            GeocodingService geocodeService)
+            IGeocodingService geocodeService)
         {
             _context = context;
             _geocodeService = geocodeService;
