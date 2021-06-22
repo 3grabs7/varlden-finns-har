@@ -63,6 +63,9 @@ namespace DAL.Registration
         public string Program { get; set; }
 
 
+        public string OtherSchoolFormTextArea { get; set; }
+
+
         // Information about meetings
         [Display(Name = "Mötestyp")]
         [Column(TypeName = "nvarchar(24)")]

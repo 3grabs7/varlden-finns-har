@@ -18,5 +18,13 @@ namespace WebApp.Extensions
                 form.Subjects.Add(s);
             return form;
         }
+
+        public static RegistrationOfInterest AppendWeeks(this RegistrationOfInterest form, IEnumerable<Week> weeks)
+        {
+            form.Weeks = new List<Week>();
+            foreach (var w in weeks)
+                form.Weeks.Add(w);
+            return form;
+        }
     }
 }

@@ -38,6 +38,7 @@ namespace WebApp.Controllers
             await _seed.AddTimeSpanToTeacherRegistrationForm(5);
             await _seed.AddSubjects();
             await _seed.AddMunicipality();
+            await _seed.AddWeeks(2021);
             return RedirectToAction(nameof(Index), new { welcomeTag = "Loopy?" });
         }
 

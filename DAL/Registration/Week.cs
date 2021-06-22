@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Registration
 {
@@ -13,6 +14,10 @@ namespace DAL.Registration
         public int Year { get; set; }
 
 
-        public ICollection<RegistrationOfInterest> Weeks { get; set; }
+        public ICollection<RegistrationOfInterest> RegistrationOfInterests { get; set; }
+
+
+        [NotMapped]
+        public bool IsMarked { get; set; }
     }
 }

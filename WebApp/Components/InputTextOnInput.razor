@@ -1,0 +1,7 @@
+﻿@* Custom component that binds oninput instead of onchange for text input *@
+@inherits InputText
+
+<input @attributes="AdditionalAttributes"
+       class="@CssClass"
+       value="@CurrentValue"
+       @oninput="EventCallback.Factory.CreateBinder<string>(this, __value => CurrentValueAsString = __value, CurrentValueAsString)" />

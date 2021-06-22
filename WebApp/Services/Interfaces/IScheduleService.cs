@@ -6,6 +6,8 @@ namespace WebApp.Services
 {
     public interface IScheduleService
     {
-        Task CreateSchedule(IEnumerable<AvailableTimeSpan> timeSpans, RegistrationOfInterest form);
+        Task CreateScheduleAsync(IEnumerable<AvailableTimeSpan> timeSpans, RegistrationOfInterest form);
+        Task<IEnumerable<AvailableTimeSpan>> LoadScheduleAsync();
+
     }
 }

@@ -24,6 +24,8 @@ namespace WebApp.Services
             .Include(t => t.ScheduledTimeSpans)
             .Include(t => t.Municipality)
             .Include(t => t.Subjects)
+            .Include(t => t.Weeks)
+            .Include(t => t.ScheduledTimeSpans)
             .AsNoTracking()
             .ToListAsync();
 
