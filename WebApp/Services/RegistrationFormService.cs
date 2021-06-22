@@ -1,5 +1,6 @@
 ﻿using DAL.Registration;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -51,6 +52,12 @@ namespace WebApp.Services
         {
             var result = await _context.Subjects.AsNoTracking().ToListAsync();
             return result.GroupBy(s => s.SchoolForm);
+        }
+
+        public async Task<IEnumerable<Week>> GetWeeksAsync()
+        {
+            var year = DateTime.Now.Year;
+            return await _context.Weeks.ToListAsync();
         }
     }
 }

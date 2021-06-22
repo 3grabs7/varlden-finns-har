@@ -9,5 +9,6 @@ namespace WebApp.Services
         Task AddTimeSpanToTeacherRegistrationForm(int count);
         Task AddSubjects();
         Task AddMunicipality();
+        Task AddWeeks(int? year);
     }
 }
