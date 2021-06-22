@@ -74,7 +74,7 @@ namespace DAL.Registration
 
 
         [Display(Name = "Antal Veckor")]
-        public int Weeks { get; set; }
+        public ICollection<Week> Weeks { get; set; }
 
 
         [Display(Name = "Önskat Antal Tillfällen")]

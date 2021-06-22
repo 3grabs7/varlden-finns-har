@@ -18,5 +18,6 @@ namespace WebApp.Data
         public DbSet<AvailableTimeSpan> AvailableTimeSpans { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<MatchCard> MatchCards { get; set; }
+        public DbSet<Week> Weeks { get; set; }
     }
 }

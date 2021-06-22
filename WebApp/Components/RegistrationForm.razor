@@ -9,182 +9,194 @@
     }
     else
     {
-        <EditForm Model="@_form" OnValidSubmit="@SubmitForm">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
+<EditForm Model="@_form" OnValidSubmit="@SubmitForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
-            <h4 class="h3">Lite om dig som lärare och din skola</h4>
-            <hr />
-            <div class="container w-75">
-                <div class="mb-3">
-                    <label for="firstName" class="form-label">Förnamn</label>
-                    <InputText id="firstName" class="form-control" @bind-Value="_form.FirstName" />
-                </div>
-                <div class="mb-3">
-                    <label for="lastName" class="form-label">Efternamn</label>
-                    <InputText id="lastName" class="form-control" @bind-Value="_form.LastName" />
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <InputText id="email" class="form-control" @bind-Value="_form.Email" />
-                    <div class="form-text">Om extra info behövs, släng in här.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="phonenumber" class="form-label">Telefonnummer</label>
-                    <InputText id="phonenumber" class="form-control" @bind-Value="_form.PhoneNumber" />
-                </div>
-                <div class="mb-3">
-                    <label for="school" class="form-label">Skolans namn</label>
-                    <InputText id="school" class="form-control" @bind-Value="_form.School" />
-                </div>
-                @{ /* Adress Box */}
-                <div class="mb-3">
-                    <div class="mb-3">
-                        <label for="street" class="form-label">Gatuadress</label>
-                        <InputText id="street" class="form-control" @bind-Value="_adress.StreetAdress" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="postalcode" class="form-label">Postnummer</label>
-                        <InputText id="postalcode" class="form-control" @bind-Value="_form.LastName" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="municipality" class="form-label">Kommun</label>
-                        <select @bind="_form.MunicipalityRefId" id="municipality" class="form-select">
-                            @foreach (var m in Municipalities)
-                            {
-                                <option value="@m.Id">@m.Name</option>
-                            }
-                        </select>
-                    </div>
-                </div>
+    <h4 class="h3">Lite om dig som lärare och din skola</h4>
+    <hr />
+    <div class="container w-75">
+        <div class="mb-3">
+            <label for="firstName" class="form-label">Förnamn</label>
+            <InputText id="firstName" class="form-control" @bind-Value="_form.FirstName" />
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Efternamn</label>
+            <InputText id="lastName" class="form-control" @bind-Value="_form.LastName" />
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <InputText id="email" class="form-control" @bind-Value="_form.Email" />
+            <div class="form-text">Om extra info behövs, släng in här.</div>
+        </div>
+        <div class="mb-3">
+            <label for="phonenumber" class="form-label">Telefonnummer</label>
+            <InputText id="phonenumber" class="form-control" @bind-Value="_form.PhoneNumber" />
+        </div>
+        <div class="mb-3">
+            <label for="school" class="form-label">Skolans namn</label>
+            <InputText id="school" class="form-control" @bind-Value="_form.School" />
+        </div>
+        @{ /* Adress Box */}
+        <div class="mb-3">
+            <div class="mb-3">
+                <label for="street" class="form-label">Gatuadress</label>
+                <InputText id="street" class="form-control" @bind-Value="_adress.StreetAdress" />
             </div>
+            <div class="mb-3">
+                <label for="postalcode" class="form-label">Postnummer</label>
+                <InputText id="postalcode" class="form-control" @bind-Value="_form.LastName" />
+            </div>
+            <div class="mb-3">
+                <label for="municipality" class="form-label">Kommun</label>
+                <select @bind="_form.MunicipalityRefId" id="municipality" class="form-select">
+                    @foreach (var m in Municipalities)
+                    {
+                        <option value="@m.Id">@m.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
 
-            <h4 class="h3">Lite om din elevgrupp</h4>
-            <hr />
-            <div class="container w-75">
-                <InputRadioGroup @bind-Value="_form.SchoolForm" class="form-check">
-                    <label class="form-label">Skolform</label><br />
-                    <div class=" d-flex justify-content-center">
-                        @foreach (var sf in EnumTools.GetValues<SchoolForm>())
+    <h4 class="h3">Lite om din elevgrupp</h4>
+    <hr />
+    <div class="container w-75">
+        <InputRadioGroup @bind-Value="_form.SchoolForm" class="form-check">
+            <label class="form-label">Skolform</label><br />
+            <div class=" d-flex justify-content-center">
+                @foreach (var sf in EnumTools.GetValues<SchoolForm>())
+                        {
+                    <div class="form-check-inline">
+                        <InputRadio Value="sf" id="schoolform" class="form-check-input" />
+                        <label for="schoolform" class="form-check-label">@sf</label>
+                    </div>
+                        }
+            </div>
+        </InputRadioGroup> <br />
+        @if (_form.SchoolForm == SchoolForm.Grundskola || _form.SchoolForm == SchoolForm.Gymnasium)
+        {
+            <InputRadioGroup @bind-Value="_form.Grade" class="form-check">
+                <label class="form-label">Årskurs</label><br />
+                <div class=" d-flex justify-content-center">
+                    @for (int i = 1; i < 9; i++)
                                 {
-                            <div class="form-check-inline">
-                                <InputRadio Value="sf" id="schoolform" class="form-check-input" />
-                                <label for="schoolform" class="form-check-label">@sf</label>
-                            </div>
+                        <div class="form-check-inline">
+                            <InputRadio Value="i" id="grade" class="form-check-input" />
+                            <label for="grade" class="form-check-label">@i</label>
+                        </div>
+                        @if (_form.SchoolForm == SchoolForm.Gymnasium && i >= 3) break;
                                 }
-                    </div>
-                </InputRadioGroup> <br />
-                @if (_form.SchoolForm == SchoolForm.Grundskola || _form.SchoolForm == SchoolForm.Gymnasium)
-                {
-                    <InputRadioGroup @bind-Value="_form.Grade" class="form-check">
-                        <label class="form-label">Årskurs</label><br />
-                        <div class=" d-flex justify-content-center">
-                            @for (int i = 1; i < 9; i++)
-                                        {
-                                <div class="form-check-inline">
-                                    <InputRadio Value="i" id="grade" class="form-check-input" />
-                                    <label for="grade" class="form-check-label">@i</label>
-                                </div>
-                                @if (_form.SchoolForm == SchoolForm.Gymnasium && i >= 3) break;
-                                        }
-                        </div>
-
-                    </InputRadioGroup> <br />
-                }
-                <div class="container w-75">
-                    @if (_form.SchoolForm == SchoolForm.Grundskola)
-                    {
-                        <div class="row d-flex justify-content-center">
-                            @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Grundskola))
-                            {
-                                <div class="form-check col-md-auto m-2">
-                                    <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="checksubject">
-                                    <label class="form-check-label" for="checksubject">@s.Name</label>
-                                </div>
-                            }
-                        </div>
-                    }
-                    else if (_form.SchoolForm == SchoolForm.Gymnasium)
-                    {
-                        <div class="mb-3">
-                            <label for="program" class="form-label">Program</label>
-                            <InputText id="program" class="form-control" @bind-Value="_form.Program" />
-                        </div>
-                        <div class="row d-flex justify-content-center">
-                            @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Gymnasium))
-                            {
-                                <div class="form-check col-md-auto m-2">
-                                    <input class="form-check-input" type="checkbox" value="@s.Id" id="checksubject">
-                                    <label class="form-check-label" for="checksubject">@s.Name</label>
-                                </div>
-                            }
-                        </div>
-                    }
-                    else if (_form.SchoolForm == SchoolForm.Sfi)
-                    {
-                        <div class="row d-flex justify-content-center">
-                            @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Sfi))
-                            {
-                                <div class="form-check col-md-auto m-2">
-                                    <input class="form-check-input" type="checkbox" value="@s.Id" id="checksubject">
-                                    <label class="form-check-label" for="checksubject">@s.Name</label>
-                                </div>
-                            }
-                        </div>
-                    }
-                    else if (_form.SchoolForm == SchoolForm.AnnanVuxenutbildning)
-                    {
-                        <div class="row d-flex justify-content-center">
-                            @foreach (var s in Subjects.First(g => g.Key == SchoolForm.AnnanVuxenutbildning))
-                            {
-                                <div class="form-check col-md-auto m-2">
-                                    <input class="form-check-input" type="checkbox" value="@s.Id" id="checksubject">
-                                    <label class="form-check-label" for="checksubject">@s.Name</label>
-                                </div>
-                            }
-                        </div>
-                    }
-                    else if (_form.SchoolForm == SchoolForm.Övrig)
-                    {
-                        <p>Förklara om vad för utbildning, vad för inriktning, kurser i fritext</p>
-                    }
                 </div>
-            </div>
 
-            <h4 class="h3">Lite om hur ni önskar mötet</h4>
-            <hr />
-            <div class="container w-75">
-                <InputRadioGroup @bind-Value="_form.MeetingType" class="form-check">
-                    <label class="form-label">Mötestyp</label><br />
-                    <div class="row d-flex justify-content-center">
-                        @foreach (var mt in EnumTools.GetValues<MeetingType>())
-                                {
-                            <div class="form-check col-md-auto m-2">
-                                <InputRadio Value="mt" id="meetingtype" class="form-check-input" />
-                                <label for="meetingtype" class="form-check-label">@mt</label>
-                            </div>
-                                }
-                    </div>
-                </InputRadioGroup>
-            </div>
-            @{ /* If physical, check if they can host/travel */}
-
-            <div class="container w-75">
-                <label class="form-label">Veckor</label><br />
-                <div class="row">
-                    @for (int i = 1; i <= 52; i++)
+            </InputRadioGroup> <br />
+        }
+        <div class="container w-75">
+            @if (_form.SchoolForm == SchoolForm.Grundskola)
+            {
+                <div class="row d-flex justify-content-center">
+                    @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Grundskola))
                     {
-                        <div class="form-check col-md-auto">
-                            <input class="btn-check" type="checkbox" value="@i" id="checkweek">
-                            <label class="btn btn-outline-primary" for="checkweek">@($"v.{i}")</label><br />
+                        <div class="form-check col-md-auto m-2">
+                            <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="@s.Id">
+                            <label class="form-check-label" for="@s.Id">@s.Name</label>
                         </div>
                     }
                 </div>
+            }
+            else if (_form.SchoolForm == SchoolForm.Gymnasium)
+            {
+                <div class="mb-3">
+                    <label for="program" class="form-label">Program</label>
+                    <InputText id="program" class="form-control" @bind-Value="_form.Program" />
+                </div>
+                <div class="row d-flex justify-content-center">
+                    @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Gymnasium))
+                    {
+                        <div class="form-check col-md-auto m-2">
+                            <input class="form-check-input" type="checkbox" value="@s.Id" id="@s.Id">
+                            <label class="form-check-label" for="@s.Id">@s.Name</label>
+                        </div>
+                    }
+                </div>
+            }
+            else if (_form.SchoolForm == SchoolForm.Sfi)
+            {
+                <div class="row d-flex justify-content-center">
+                    @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Sfi))
+                    {
+                        <div class="form-check col-md-auto m-2">
+                            <input class="form-check-input" type="checkbox" value="@s.Id" id="@s.Id">
+                            <label class="form-check-label" for="@s.Id">@s.Name</label>
+                        </div>
+                    }
+                </div>
+            }
+            else if (_form.SchoolForm == SchoolForm.AnnanVuxenutbildning)
+            {
+                <div class="row d-flex justify-content-center">
+                    @foreach (var s in Subjects.First(g => g.Key == SchoolForm.AnnanVuxenutbildning))
+                    {
+                        <div class="form-check col-md-auto m-2">
+                            <input class="form-check-input" type="checkbox" value="@s.Id" id="@s.Id">
+                            <label class="form-check-label" for="@s.Id">@s.Name</label>
+                        </div>
+                    }
+                </div>
+            }
+            else if (_form.SchoolForm == SchoolForm.Övrig)
+            {
+                <p>Förklara om vad för utbildning, vad för inriktning, kurser i fritext</p>
+            }
+        </div>
+    </div>
+
+    <h4 class="h3">Lite om hur ni önskar mötet</h4>
+    <hr />
+    <div class="container w-75">
+        <InputRadioGroup @bind-Value="_form.MeetingType" class="form-check">
+            <label class="form-label">Mötestyp</label><br />
+            <div class="row d-flex justify-content-center">
+                @foreach (var mt in EnumTools.GetValues<MeetingType>())
+                        {
+                    <div class="form-check col-md-auto m-2">
+                        <InputRadio Value="mt" id="meetingtype" class="form-check-input" />
+                        <label for="meetingtype" class="form-check-label">@mt</label>
+                    </div>
+                        }
             </div>
+        </InputRadioGroup>
+    </div>
+    @{ /* If physical, check if they can host/travel */}
+    @if (_form.MeetingType == MeetingType.Fysiskt)
+    {
+        <div class="row d-flex justify-content-center">
+            <div class="form-check col-md-auto">
+                <input class="btn-check" type="checkbox" @bind="_form.CanHostMatch" id="checkhost">
+                <label class="btn btn-outline-primary" for="checkhost">Vi kan hosta potentiella möten</label><br />
+            </div>
+            <div class="form-check col-md-auto">
+                <input class="btn-check" type="checkbox" @bind="_form.CanVisitMatch" id="checkvisit">
+                <label class="btn btn-outline-primary" for="checkvisit">Vi har transport till potentiella möten</label><br />
+            </div>
+        </div>
+    }
+    <div class="container w-75">
+        <label class="form-label">Veckor</label><br />
+        <div class="row">
+            @for (int i = 1; i <= 52; i++)
+            {
+                <div class="form-check col-md-auto">
+                    <input class="btn-check" type="checkbox" value="@i" id="checkweek">
+                    <label class="btn btn-outline-primary" for="checkweek">@($"v.{i}")</label><br />
+                </div>
+            }
+        </div>
+    </div>
 
 
-            <button type="submit" class="btn btn-primary">Skicka</button>
-        </EditForm>
+    <button type="submit" class="btn btn-primary">Skicka</button>
+</EditForm>
         <div style="height:400px;"><br /></div>
     }
 }

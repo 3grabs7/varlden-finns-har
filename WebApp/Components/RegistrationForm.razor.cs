@@ -11,10 +11,14 @@ namespace WebApp.Components
     {
         private RegistrationOfInterest _form = new();
         private Adress _adress = new();
+
         private IEnumerable<Municipality> Municipalities { get; set; }
+        private IEnumerable<Week> Weeks { get; set; }
         private IEnumerable<IGrouping<SchoolForm, Subject>> Subjects { get; set; }
+
         public IEnumerable<Subject> _selectedSubjects { get; set; }
         public List<AvailableTimeSpan> TimeSpans { get; set; }
+
         private bool SubmitSuccessfull { get; set; }
         private string SuccessMessage { get; set; }
 
@@ -22,6 +26,7 @@ namespace WebApp.Components
         {
             Municipalities = await FormService.GetMunicipalitiesAsync();
             Subjects = await FormService.GetSubjectsAsync();
+            Weeks = await FormService.GetWeeksAsync();
         }
 
         public async Task SubmitForm()
@@ -36,10 +41,5 @@ namespace WebApp.Components
             SubmitSuccessfull = true;
         }
 
-        private void UpdateSubjectList(int id, SchoolForm schoolForm)
-        {
-            var subject = Subjects.First(g => g.Key == schoolForm).First(s => s.Id == id);
-            subject.IsMarked = !subject.IsMarked;
-        }
     }
 }

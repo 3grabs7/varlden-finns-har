@@ -19,6 +19,7 @@ namespace WebApp.Services
 
         public async Task<List<double>> GetCoordinatesAsync(Adress adress, Municipality municipality)
         {
+            if (adress is null || municipality is null) return new List<double> { 0, 0 };
             var adressQuery = $"{adress.StreetAdress} {municipality.Name} Sweden";
             var fullUrl = $"{BASE_URL}{adressQuery}.json?access_token={_apiKey}";
 

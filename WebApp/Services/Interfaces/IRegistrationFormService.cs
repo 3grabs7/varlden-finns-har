@@ -10,5 +10,6 @@ namespace WebApp.Services
         Task CreateRegistrationFormAsync(RegistrationOfInterest form);
         Task<IEnumerable<Municipality>> GetMunicipalitiesAsync();
         Task<IEnumerable<IGrouping<SchoolForm, Subject>>> GetSubjectsAsync();
+        Task<IEnumerable<Week>> GetWeeksAsync();
     }
 }
