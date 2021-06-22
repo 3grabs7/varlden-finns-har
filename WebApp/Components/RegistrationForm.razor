@@ -160,8 +160,8 @@
                         @foreach (var mt in EnumTools.GetValues<MeetingType>())
                                 {
                             <div class="form-check col-md-auto m-2">
-                                <InputRadio Value="mt" id="meetingtype" class="form-check-input" />
-                                <label for="meetingtype" class="form-check-label">@mt</label>
+                                <InputRadio Value="mt" id="@mt" class="form-check-input" />
+                                <label for="@mt" class="form-check-label">@mt</label>
                             </div>
                                 }
                     </div>
