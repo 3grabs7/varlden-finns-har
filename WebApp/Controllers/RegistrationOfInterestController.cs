@@ -16,7 +16,6 @@ namespace WebApp.Controllers
             _formRepo = formRepo;
         }
 
-        private const int TIME_BLOCKS = 140;
         public async Task<ActionResult> Form()
         {
             return View();

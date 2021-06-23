@@ -20,6 +20,11 @@ namespace DAL.Registration
         public string LastName { get; set; }
 
 
+        [Display(Name = "Namn")]
+        [NotMapped]
+        public string FullName => $"{FirstName} {LastName}";
+
+
         [EmailAddress]
         public string Email { get; set; }
 

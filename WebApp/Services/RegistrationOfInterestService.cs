@@ -83,7 +83,7 @@ namespace WebApp.Services
         public async Task<IEnumerable<RegistrationOfInterest>> GetPaginatedResult(int currentPage, int pageSize)
         {
             var data = await GetData();
-            return data.OrderBy(d => d.Id).Skip((currentPage - 1) * pageSize).Take(pageSize);
+            return data.OrderByDescending(d => d.Id).Skip((currentPage - 1) * pageSize).Take(pageSize);
         }
 
         public async Task<IEnumerable<RegistrationOfInterest>> GetPaginatedResult(int currentPage, int pageSize, string sortBy)

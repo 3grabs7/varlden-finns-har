@@ -34,11 +34,11 @@ namespace WebApp.Controllers
         public async Task<IActionResult> Seed()
         {
             await _seed.ResetAsync();
-            await _seed.AddTeacherRegistrationForm(32);
-            await _seed.AddTimeSpanToTeacherRegistrationForm(5);
-            await _seed.AddSubjects();
             await _seed.AddMunicipality();
             await _seed.AddWeeks(2021);
+            await _seed.AddSubjects();
+            await _seed.AddTeacherRegistrationForm(32);
+            await _seed.AddTimeSpanToTeacherRegistrationForm(5);
             return RedirectToAction(nameof(Index), new { welcomeTag = "Loopy?" });
         }
 

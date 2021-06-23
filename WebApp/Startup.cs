@@ -1,3 +1,6 @@
+using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -7,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApp.Data;
 using WebApp.Extensions;
-using WebApp.Services;
 
 namespace WebApp
 {
@@ -34,6 +36,13 @@ namespace WebApp
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
             services.AddServerSideBlazor();
+
+            services.AddBlazorise(options =>
+            {
+                options.ChangeTextOnKeyPress = true;
+            })
+                .AddBootstrapProviders()
+                .AddFontAwesomeIcons();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

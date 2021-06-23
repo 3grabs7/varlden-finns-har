@@ -34,6 +34,7 @@ namespace WebApp.Services
                     PhoneNumber = "112",
                     School = "HeltOk-Skolan",
                     SchoolForm = SchoolForm.Grundskola,
+                    Municipality = _context.Municipalities.Find(1),
                     Grade = 9,
                     MeetingType = MeetingType.Digitalt
                 };

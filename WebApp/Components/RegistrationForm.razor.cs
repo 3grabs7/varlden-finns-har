@@ -49,6 +49,7 @@ namespace WebApp.Components
             // Service Approach
             await ScheduleService.CreateScheduleAsync(_timeSpans, _form);
 
+            // Submit registration
             await FormService.CreateRegistrationFormAsync(_form);
 
             SuccessMessage = $"Välkommen {_form.FirstName}! Tack för ditt visade intresse, vi kommer höra av oss med mer information.";
