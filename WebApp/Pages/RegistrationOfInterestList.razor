@@ -1,0 +1,66 @@
+﻿@page "/registrationofinterests"
+@inject IRegistrationOfInterestService RegistrationsService
+
+@if (_registrations is null)
+{
+    <h4>Loading...</h4>
+}
+else
+{
+    <DataGrid TItem="RegistrationOfInterest" Data="@_registrations" @bind-SelectedRow="selectedRegistration"
+              Sortable="true" Editable="true" EditMode="DataGridEditMode.Popup" Filterable="true" ShowPager="true" PageSize="14">
+        <ButtonRowTemplate>
+            <Button Color="Color.Primary" Disabled="@(selectedRegistration is null)" Clicked="Match">Matcha</Button>
+            <Button Color="Color.Primary" Disabled="@(selectedRegistration is null)" Clicked="context.EditCommand.Clicked">Redigera</Button>
+            <Button Color="Color.Danger" Disabled="@(selectedRegistration is null)" Clicked="context.DeleteCommand.Clicked">Ta bort</Button>
+            <Button Color="Color.Link" Clicked="@context.ClearFilterCommand.Clicked">Rensa filter</Button>
+        </ButtonRowTemplate>
+        <ChildContent>
+            <DataGridColumn TItem="RegistrationOfInterest" Field="@nameof(RegistrationOfInterest.FullName)"
+                            Sortable="true" Caption="Namn" Editable="true" />
+
+            <DataGridColumn TItem="RegistrationOfInterest" Field="@nameof(RegistrationOfInterest.School)"
+                            Sortable="true" Caption="Skola" Editable="true" />
+
+            <DataGridColumn TItem="RegistrationOfInterest" Field="Municipality.Name"
+                            Sortable="true" Caption="Kommun" Editable="true" />
+
+            <DataGridColumn TItem="RegistrationOfInterest" Field="@nameof(RegistrationOfInterest.SchoolForm)"
+                            Sortable="true" Caption="Skolform" Editable="true" />
+
+            <DataGridColumn TItem="RegistrationOfInterest" Field="@nameof(RegistrationOfInterest.MeetingType)"
+                            Sortable="true" Caption="Mötestyp" Editable="true" />
+        </ChildContent>
+
+        <EmptyTemplate>
+            <div class="box">
+                Inga resultat att visa
+            </div>
+        </EmptyTemplate>
+        <LoadingTemplate>
+            <div class="box">
+                <progress class="progress is-small is-primary" max="100" />
+            </div>
+        </LoadingTemplate>
+    </DataGrid>
+}
+
+
+
+
+
+
+@code {
+    private IEnumerable<RegistrationOfInterest> _registrations { get; set; }
+    private RegistrationOfInterest selectedRegistration { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _registrations = await RegistrationsService.GetAllAsync();
+    }
+
+    private async Task Match()
+    {
+
+    }
+}
