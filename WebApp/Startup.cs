@@ -33,7 +33,7 @@ namespace WebApp
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddControllersWithViews()
+            services.AddRazorPages()
                 .AddRazorRuntimeCompilation();
             services.AddServerSideBlazor();
 
@@ -68,23 +68,11 @@ namespace WebApp
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Test}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_Host");
+                endpoints.MapRazorPages();
             });
 
-            // *** KEEP ***
-            // Production default route
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Home}/{action=Index}/{id?}");
-            //    endpoints.MapRazorPages();
-            //    endpoints.MapBlazorHub();
-            //});
 
         }
     }

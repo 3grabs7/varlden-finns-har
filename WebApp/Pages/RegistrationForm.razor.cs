@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Extensions;
 
-namespace WebApp.Components
+namespace WebApp.Pages
 {
     public partial class RegistrationForm : ComponentBase
     {
