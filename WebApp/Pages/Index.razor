@@ -1,19 +1,33 @@
 ﻿@page "/"
 @inject ISeedService _seedService
 
-<Button Clicked="@Seed">
-    Reset And Seed Db
-</Button>
+@if (loading is null)
+{<p>Database seeded and ready</p> }
+else
+{
+    <div class="@(loading == true ? "loader" : "")"></div>
+    if (loading == false)
+    {
+        <Button Clicked="@Seed" Color="Color.Primary">
+            Reset And Seed Db
+        </Button>
+    }
+}
 
 @code {
+    private bool? loading { get; set; } = false;
+
     private async Task Seed()
     {
+        loading = true;
         await _seedService.ResetAsync();
-        await _seedService.AddMunicipality();
-        await _seedService.AddSubjects();
-        await _seedService.AddWeeks(2021);
         await _seedService.AddTeacherRegistrationForm(10);
         await _seedService.AddTimeSpanToTeacherRegistrationForm(10);
+        await _seedService.AddSubjects();
+        await _seedService.AddMunicipality();
+        await _seedService.AddWeeks(2021);
+        await Task.Delay(1000);
+        loading = null;
     }
 
 }
