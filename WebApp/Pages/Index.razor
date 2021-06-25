@@ -1,1 +1,19 @@
 ﻿@page "/"
+@inject ISeedService _seedService
+
+<Button Clicked="@Seed">
+    Reset And Seed Db
+</Button>
+
+@code {
+    private async Task Seed()
+    {
+        await _seedService.ResetAsync();
+        await _seedService.AddMunicipality();
+        await _seedService.AddSubjects();
+        await _seedService.AddWeeks(2021);
+        await _seedService.AddTeacherRegistrationForm(10);
+        await _seedService.AddTimeSpanToTeacherRegistrationForm(10);
+    }
+
+}
