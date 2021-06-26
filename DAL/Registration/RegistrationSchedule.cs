@@ -17,9 +17,6 @@ namespace DAL.Registration
         public DateTime Time { get; set; } // Format this to hh:mm (only 30min gaps)
 
 
-        [Display(Name = "Utanför schema")]
-        public bool IsOutsideSchedule { get; set; }
-
         public RegistrationOfInterest TeacherRegistrationForm { get; set; }
 
         public bool IsCertain { get; set; }
