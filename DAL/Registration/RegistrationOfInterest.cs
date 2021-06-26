@@ -29,7 +29,9 @@ namespace DAL.Registration
         public string Email { get; set; }
 
 
-        [RegularExpression(@"^07\d{8}")]
+        [RegularExpression(@"\d+")]
+        [MinLength(6)]
+        [MaxLength(12)]
         [Display(Name = "Telefonnummer")]
         public string PhoneNumber { get; set; }
 
@@ -77,8 +79,13 @@ namespace DAL.Registration
         public MeetingType MeetingType { get; set; }
 
 
+
+
+
+
         [Display(Name = "Schema")]
-        public ICollection<AvailableTimeSpan> ScheduledTimeSpans { get; set; }
+        public ICollection<RegistrationSchedule> ScheduledTimeSpans { get; set; }
+
 
 
         [Display(Name = "Antal Veckor")]

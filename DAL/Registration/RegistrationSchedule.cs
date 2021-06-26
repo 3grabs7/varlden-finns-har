@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Registration
 {
-    public class AvailableTimeSpan : Entity
+    public class RegistrationSchedule : Entity
     {
         [Display(Name = "Veckodag")]
         [Column(TypeName = "nvarchar(24)")]
@@ -20,12 +20,9 @@ namespace DAL.Registration
         [Display(Name = "Utanför schema")]
         public bool IsOutsideSchedule { get; set; }
 
-
         public RegistrationOfInterest TeacherRegistrationForm { get; set; }
 
-
         public bool IsCertain { get; set; }
-
 
         public bool IsPossibility { get; set; }
 

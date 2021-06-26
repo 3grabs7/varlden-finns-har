@@ -52,7 +52,7 @@ namespace WebApp.Services
             // Insert scheduled time
             for (int i = 0; i < count; i++)
             {
-                await _context.AddAsync(new AvailableTimeSpan
+                await _context.AddAsync(new RegistrationSchedule
                 {
                     Weekday = Weekday.Måndag,
                     Time = DateTime.Parse("06/24/2021 10:30"),
@@ -64,7 +64,7 @@ namespace WebApp.Services
             // Insert off schedule time
             for (int i = 0; i < count; i++)
             {
-                await _context.AddAsync(new AvailableTimeSpan
+                await _context.AddAsync(new RegistrationSchedule
                 {
                     Weekday = Weekday.Måndag,
                     Time = DateTime.Parse("06/24/2021 10:30"),

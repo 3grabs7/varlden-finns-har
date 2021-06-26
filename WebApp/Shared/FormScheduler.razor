@@ -1,0 +1,94 @@
+﻿@inject IScheduleService ScheduleService
+
+@if (Schedule is null)
+{
+    <h4>Loading...</h4>
+}
+else
+{
+
+}
+
+<Table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            @foreach (var w in EnumTools.GetValues<Weekday>().Take(5))
+            {
+                <th scope="col">@w</th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var time in Schedule)
+        {
+            <tr>
+                <th>@time.Key.ToShortTimeString()</th>
+                @foreach (var w in time)
+                {
+                    <td class="@(w.IsCertain ? "certain" : w.IsPossibility ? "maybe" : "")" @onclick="() => MarkSchedule(w)">
+                        click
+                    </td>
+                }
+            </tr>
+        }
+
+    </tbody>
+</Table>
+
+
+
+@code {
+    [Parameter] public RegistrationOfInterest Form { get; set; }
+
+    private IEnumerable<IGrouping<DateTime, RegistrationSchedule>> Schedule;
+
+    private IEnumerable<RegistrationSchedule> SelectedSchedule;
+
+    protected async override Task OnInitializedAsync()
+    {
+        var rawSchedule = await ScheduleService.LoadScheduleAsync();
+        Schedule = rawSchedule.GroupBy(g => g.Time);
+    }
+
+    private void MarkSchedule(RegistrationSchedule reg)
+    {
+        if (!reg.IsMarked)
+        {
+            reg.IsMarked = true;
+            reg.IsCertain = true;
+            reg.IsPossibility = false;
+            UpdateSchedule();
+            return;
+        }
+        if (reg.IsCertain)
+        {
+            reg.IsCertain = false;
+            reg.IsPossibility = true;
+            UpdateSchedule();
+            return;
+        }
+        if (reg.IsPossibility)
+        {
+            reg.IsPossibility = false;
+            reg.IsMarked = false;
+            UpdateSchedule();
+        }
+
+    }
+
+    private void UpdateSchedule()
+    {
+        SelectedSchedule = Schedule.SelectMany(x => x).Where(s => s.IsMarked);
+        foreach (var s in SelectedSchedule) s.TeacherRegistrationForm = Form;
+        Form.ScheduledTimeSpans = SelectedSchedule.ToList();
+    }
+
+
+
+
+}
+
+<style>
+</style>

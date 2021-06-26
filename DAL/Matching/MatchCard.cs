@@ -14,7 +14,7 @@ namespace DAL.Matching
         public RegistrationOfInterest PartyB { get; set; }
 
 
-        public ICollection<AvailableTimeSpan> TimeSpans { get; set; }
+        public ICollection<RegistrationSchedule> TimeSpans { get; set; }
 
 
         [Range(1, 52)]

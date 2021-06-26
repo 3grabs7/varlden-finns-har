@@ -35,6 +35,7 @@ namespace WebApp
 
             services.AddRazorPages()
                 .AddRazorRuntimeCompilation();
+
             services.AddServerSideBlazor();
 
             services.AddBlazorise(options =>

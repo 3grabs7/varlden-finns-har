@@ -15,12 +15,12 @@ namespace WebApp.Pages
         private IEnumerable<Municipality> Municipalities { get; set; }
         private IEnumerable<IGrouping<SchoolForm, Subject>> Subjects { get; set; }
         private IEnumerable<Week> Weeks { get; set; }
-        private IEnumerable<AvailableTimeSpan> TimeSpans { get; set; }
+        private IEnumerable<RegistrationSchedule> TimeSpans { get; set; }
 
 
         public IEnumerable<Subject> _selectedSubjects { get; set; }
         public IEnumerable<Week> _selectedWeeks { get; set; }
-        public IEnumerable<AvailableTimeSpan> _timeSpans { get; set; }
+        public IEnumerable<RegistrationSchedule> _timeSpans { get; set; }
 
         private bool SubmitSuccessfull { get; set; }
         private string SuccessMessage { get; set; }
@@ -48,6 +48,9 @@ namespace WebApp.Pages
 
             // Service Approach
             await ScheduleService.CreateScheduleAsync(_timeSpans, _form);
+
+            // Format before adding to database
+            _form.PhoneNumber = $"0{_form.PhoneNumber}";
 
             // Submit registration
             await FormService.CreateRegistrationFormAsync(_form);

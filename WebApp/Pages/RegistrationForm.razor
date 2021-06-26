@@ -6,6 +6,7 @@
 
 @if (!SubmitSuccessfull)
 {
+
     if (_form == null || Municipalities == null || Subjects == null)
     {
         <h5>Loading...</h5>
@@ -36,8 +37,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="phonenumber" class="form-label">Telefonnummer</label>
-                    <InputTextOnInput id="phonenumber" class="form-control" @bind-Value="_form.PhoneNumber" />
-                    <ValidationMessage For="() => _form.PhoneNumber" />
+                    <div class="input-group">
+                        <div class="input-group-text">+46</div>
+                        <InputTextOnInput id="phonenumber" class="form-control" @bind-Value="_form.PhoneNumber" />
+                        <ValidationMessage For="() => _form.PhoneNumber" />
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="school" class="form-label">Skolans namn</label>
@@ -77,8 +81,8 @@
                         @foreach (var sf in EnumTools.GetValues<SchoolForm>())
                                 {
                             <div class="form-check-inline">
-                                <InputRadio Value="sf" id="schoolform" class="form-check-input" />
-                                <label for="schoolform" class="form-check-label">@sf</label>
+                                <InputRadio Value="sf" id="@sf" class="form-check-input" />
+                                <label for="@sf" class="form-check-label">@sf</label>
                             </div>
                                 }
                     </div>
@@ -91,8 +95,8 @@
                             @for (int i = 1; i < 9; i++)
                                         {
                                 <div class="form-check-inline">
-                                    <InputRadio Value="i" id="grade" class="form-check-input" />
-                                    <label for="grade" class="form-check-label">@i</label>
+                                    <InputRadio Value="i" id="@i" class="form-check-input" />
+                                    <label for="@i" class="form-check-label">@i</label>
                                 </div>
                                 @if (_form.SchoolForm == SchoolForm.Gymnasium && i >= 3) break;
                                         }
@@ -203,6 +207,12 @@
                     }
                 </div>
             </div>
+
+            <h4 class="h3">Fyll i vilka tider som passar</h4>
+            <hr />
+            <FormScheduler Form="_form"></FormScheduler>
+
+
 
             <button type="submit" class="btn btn-primary">Skicka</button>
         </EditForm>
