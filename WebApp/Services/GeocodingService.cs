@@ -23,12 +23,19 @@ namespace WebApp.Services
             var adressQuery = $"{adress.StreetAdress} {municipality.Name} Sweden";
             var fullUrl = $"{BASE_URL}{adressQuery}.json?access_token={_apiKey}";
 
-            var response = await client.GetStringAsync(fullUrl);
+            try
+            {
+                var response = await client.GetStringAsync(fullUrl);
 
-            dynamic json = JObject.Parse(response);
-            var result = json.features[0].geometry.coordinates;
+                dynamic json = JObject.Parse(response);
+                var result = json.features[0].geometry.coordinates;
 
-            return new List<double> { result[0]?.Value, result[1]?.Value } ?? null;
+                return new List<double> { result[0]?.Value, result[1]?.Value } ?? null;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

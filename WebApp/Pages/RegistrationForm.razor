@@ -13,332 +13,316 @@
     }
     else
     {
-        <div class="accordion" id="accordionExample">
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <h4 class="h3">Lite om dig som lärare och din skola</h4>
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Accordion Item #2
-                    </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Accordion Item #3
-                    </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-
-
-
 
         <EditForm Model="@_form" OnValidSubmit="@SubmitForm">
             <DataAnnotationsValidator />
 
-            <h4 class="h3">Lite om dig som lärare och din skola</h4>
-            <hr />
-            <div class="container w-75">
-                <div class="mb-3">
-                    <label for="firstName" class="form-label">Förnamn</label>
-                    <InputTextOnInput id="firstName" class="form-control" @bind-Value="@_form.FirstName" />
-                    <ValidationMessage For="() => _form.FirstName" />
-                </div>
-                <div class="mb-3">
-                    <label for="lastName" class="form-label">Efternamn</label>
-                    <InputTextOnInput id="lastName" class="form-control" @bind-Value="_form.LastName" />
-                    <ValidationMessage For="() => _form.LastName" />
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <InputTextOnInput id="email" class="form-control" @bind-Value="_form.Email" />
-                    <ValidationMessage For="() => _form.Email" />
-                    <div class="form-text">Om extra info behövs, släng in här.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="phonenumber" class="form-label">Telefonnummer</label>
-                    <div class="input-group">
-                        <div class="input-group-text">+46</div>
-                        <InputTextOnInput id="phonenumber" class="form-control" @bind-Value="_form.PhoneNumber" />
-                        <ValidationMessage For="() => _form.PhoneNumber" />
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="school" class="form-label">Skolans namn</label>
-                    <InputTextOnInput id="school" class="form-control" @bind-Value="_form.School" />
-                    <ValidationMessage For="() => _form.School" />
-                </div>
-                @{ /* Adress Box */}
-                <div class="mb-3">
-                    <div class="mb-3">
-                        <label for="street" class="form-label">Gatuadress</label>
-                        <InputTextOnInput id="street" class="form-control" @bind-Value="_adress.StreetAdress" />
-                        <ValidationMessage For="() => _adress.StreetAdress" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="postalcode" class="form-label">Postnummer</label>
-                        <InputTextOnInput id="postalcode" class="form-control" @bind-Value="_adress.PostalCode" />
-                        <ValidationMessage For="() => _adress.PostalCode" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="municipality" class="form-label">Kommun</label>
-                        <select @bind="_form.MunicipalityRefId" id="municipality" class="form-select">
-                            @foreach (var m in Municipalities)
-                            {
-                                <option value="@m.Id">@m.Name</option>
-                            }
-                        </select>
-                    </div>
-                </div>
-            </div>
+            <div class="accordion" id="accordionExample">
 
-            <h4 class="h3">Lite om din elevgrupp</h4>
-            <hr />
-            <div class="container w-75">
-                <InputRadioGroup @bind-Value="_form.SchoolForm" class="form-check">
-                    <label class="form-label">Skolform</label><br />
-                    <div class=" d-flex justify-content-center">
-                        @foreach (var sf in EnumTools.GetValues<SchoolForm>())
-                                {
-                            <div class="form-check-inline">
-                                <InputRadio Value="sf" id="@sf" class="form-check-input" />
-                                <label for="@sf" class="form-check-label">@sf</label>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <h4 class="h3">Lite om dig som lärare och din skola</h4>
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+
+                            <div class="container w-75">
+                                <div class="mb-3">
+                                    <label for="firstName" class="form-label">Förnamn</label>
+                                    <InputTextOnInput id="firstName" class="form-control" @bind-Value="@_form.FirstName" />
+                                    <ValidationMessage For="() => _form.FirstName" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lastName" class="form-label">Efternamn</label>
+                                    <InputTextOnInput id="lastName" class="form-control" @bind-Value="_form.LastName" />
+                                    <ValidationMessage For="() => _form.LastName" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <InputTextOnInput id="email" class="form-control" @bind-Value="_form.Email" />
+                                    <ValidationMessage For="() => _form.Email" />
+                                    <div class="form-text">Om extra info behövs, släng in här.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phonenumber" class="form-label">Telefonnummer</label>
+                                    <div class="input-group">
+                                        <div class="input-group-text">+46</div>
+                                        <InputTextOnInput id="phonenumber" class="form-control" @bind-Value="_form.PhoneNumber" />
+                                        <ValidationMessage For="() => _form.PhoneNumber" />
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="school" class="form-label">Skolans namn</label>
+                                    <InputTextOnInput id="school" class="form-control" @bind-Value="_form.School" />
+                                    <ValidationMessage For="() => _form.School" />
+                                </div>
+                                @{ /* Adress Box */}
+                                <div class="mb-3">
+                                    <div class="mb-3">
+                                        <label for="street" class="form-label">Gatuadress</label>
+                                        <InputTextOnInput id="street" class="form-control" @bind-Value="_adress.StreetAdress" />
+                                        <ValidationMessage For="() => _adress.StreetAdress" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="postalcode" class="form-label">Postnummer</label>
+                                        <InputTextOnInput id="postalcode" class="form-control" @bind-Value="_adress.PostalCode" />
+                                        <ValidationMessage For="() => _adress.PostalCode" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="municipality" class="form-label">Kommun</label>
+                                        <select @bind="_form.MunicipalityRefId" id="municipality" class="form-select">
+                                            @foreach (var m in Municipalities)
+                                            {
+                                                <option value="@m.Id">@m.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                                }
+                        </div>
                     </div>
-                </InputRadioGroup> <br />
-                @if (_form.SchoolForm == SchoolForm.Grundskola || _form.SchoolForm == SchoolForm.Gymnasium)
-                {
-                    <InputRadioGroup @bind-Value="_form.Grade" class="form-check">
-                        <label class="form-label">Årskurs</label><br />
-                        <div class=" d-flex justify-content-center">
-                            @for (int i = 1; i < 9; i++)
-                                        {
-                                <div class="form-check-inline">
-                                    <InputRadio Value="i" id="@i" class="form-check-input" />
-                                    <label for="@i" class="form-check-label">@i</label>
-                                </div>
-                                @if (_form.SchoolForm == SchoolForm.Gymnasium && i >= 3) break;
-                                        }
-                        </div>
-
-                    </InputRadioGroup> <br />
-                }
-                <div class="container w-75">
-                    @if (_form.SchoolForm == SchoolForm.Grundskola)
-                    {
-                        <div class="row d-flex justify-content-center">
-                            @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Grundskola))
-                            {
-                                <div class="form-check col-md-auto m-2">
-                                    <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="@s.Id">
-                                    <label class="form-check-label" for="@s.Id">@s.Name</label>
-                                </div>
-                            }
-                        </div>
-                    }
-                    else if (_form.SchoolForm == SchoolForm.Gymnasium)
-                    {
-                        <div class="mb-3">
-                            <label for="program" class="form-label">Program</label>
-                            <InputTextOnInput id="program" class="form-control" @bind-Value="_form.Program" />
-                        </div>
-                        <div class="row d-flex justify-content-center">
-                            @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Gymnasium))
-                            {
-                                <div class="form-check col-md-auto m-2">
-                                    <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="@s.Id">
-                                    <label class="form-check-label" for="@s.Id">@s.Name</label>
-                                </div>
-                            }
-                        </div>
-                    }
-                    else if (_form.SchoolForm == SchoolForm.Sfi)
-                    {
-                        <div class="row d-flex justify-content-center">
-                            @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Sfi))
-                            {
-                                <div class="form-check col-md-auto m-2">
-                                    <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="@s.Id">
-                                    <label class="form-check-label" for="@s.Id">@s.Name</label>
-                                </div>
-                            }
-                        </div>
-                    }
-                    else if (_form.SchoolForm == SchoolForm.AnnanVuxenutbildning)
-                    {
-                        <div class="row d-flex justify-content-center">
-                            @foreach (var s in Subjects.First(g => g.Key == SchoolForm.AnnanVuxenutbildning))
-                            {
-                                <div class="form-check col-md-auto m-2">
-                                    <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="@s.Id">
-                                    <label class="form-check-label" for="@s.Id">@s.Name</label>
-                                </div>
-                            }
-                        </div>
-                    }
-                    else if (_form.SchoolForm == SchoolForm.Övrig)
-                    {
-                        <label for="otherschoolform" class="form-label">Förklara om vad för utbildning, vad för inriktning, kurser i fritext</label>
-                        <InputTextArea id="otherschoolform" class="form-control" @bind-Value="_form.OtherSchoolFormTextArea" />
-                    }
                 </div>
-            </div>
 
-            <h4 class="h3">Lite om hur ni önskar mötet</h4>
-            <hr />
-            <div class="container w-75">
-                <InputRadioGroup @bind-Value="_form.MeetingType" class="form-check">
-                    <label class="form-label">Mötestyp</label><br />
-                    <div class="row d-flex justify-content-center">
-                        @foreach (var mt in EnumTools.GetValues<MeetingType>())
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h4 class="h3">Lite om din elevgrupp</h4>
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="container w-75">
+                                <InputRadioGroup @bind-Value="_form.SchoolForm" class="form-check">
+                                    <label class="form-label">Skolform</label><br />
+                                    <div class=" d-flex justify-content-center">
+                                        @foreach (var sf in EnumTools.GetValues<SchoolForm>())
+                                                {
+                                            <div class="form-check-inline">
+                                                <InputRadio Value="sf" id="@sf" class="form-check-input" />
+                                                <label for="@sf" class="form-check-label">@sf</label>
+                                            </div>
+                                                }
+                                    </div>
+                                </InputRadioGroup> <br />
+                                @if (_form.SchoolForm == SchoolForm.Grundskola || _form.SchoolForm == SchoolForm.Gymnasium)
                                 {
-                            <div class="form-check col-md-auto m-2">
-                                <InputRadio Value="mt" id="@mt" class="form-check-input" />
-                                <label for="@mt" class="form-check-label">@mt</label>
-                            </div>
+                                    <InputRadioGroup @bind-Value="_form.Grade" class="form-check">
+                                        <label class="form-label">Årskurs</label><br />
+                                        <div class=" d-flex justify-content-center">
+                                            @for (int i = 1; i < 9; i++)
+                                                        {
+                                                <div class="form-check-inline">
+                                                    <InputRadio Value="i" id="@i" class="form-check-input" />
+                                                    <label for="@i" class="form-check-label">@i</label>
+                                                </div>
+                                                @if (_form.SchoolForm == SchoolForm.Gymnasium && i >= 3) break;
+                                                        }
+                                        </div>
+
+                                    </InputRadioGroup> <br />
                                 }
+                                <div class="container w-75">
+                                    @if (_form.SchoolForm == SchoolForm.Grundskola)
+                                    {
+                                        <div class="row d-flex justify-content-center">
+                                            @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Grundskola))
+                                            {
+                                                <div class="form-check col-md-auto m-2">
+                                                    <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="@s.Id">
+                                                    <label class="form-check-label" for="@s.Id">@s.Name</label>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                    else if (_form.SchoolForm == SchoolForm.Gymnasium)
+                                    {
+                                        <div class="mb-3">
+                                            <label for="program" class="form-label">Program</label>
+                                            <InputTextOnInput id="program" class="form-control" @bind-Value="_form.Program" />
+                                        </div>
+                                        <div class="row d-flex justify-content-center">
+                                            @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Gymnasium))
+                                            {
+                                                <div class="form-check col-md-auto m-2">
+                                                    <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="@s.Id">
+                                                    <label class="form-check-label" for="@s.Id">@s.Name</label>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                    else if (_form.SchoolForm == SchoolForm.Sfi)
+                                    {
+                                        <div class="row d-flex justify-content-center">
+                                            @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Sfi))
+                                            {
+                                                <div class="form-check col-md-auto m-2">
+                                                    <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="@s.Id">
+                                                    <label class="form-check-label" for="@s.Id">@s.Name</label>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                    else if (_form.SchoolForm == SchoolForm.AnnanVuxenutbildning)
+                                    {
+                                        <div class="row d-flex justify-content-center">
+                                            @foreach (var s in Subjects.First(g => g.Key == SchoolForm.AnnanVuxenutbildning))
+                                            {
+                                                <div class="form-check col-md-auto m-2">
+                                                    <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="@s.Id">
+                                                    <label class="form-check-label" for="@s.Id">@s.Name</label>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                    else if (_form.SchoolForm == SchoolForm.Övrig)
+                                    {
+                                        <label for="otherschoolform" class="form-label">Förklara om vad för utbildning, vad för inriktning, kurser i fritext</label>
+                                        <InputTextArea id="otherschoolform" class="form-control" @bind-Value="_form.OtherSchoolFormTextArea" />
+                                    }
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </InputRadioGroup>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <h4 class="h3">Lite om hur ni önskar mötet</h4>
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="container w-75">
+                                <InputRadioGroup @bind-Value="_form.MeetingType" class="form-check">
+                                    <label class="form-label">Mötestyp</label><br />
+                                    <div class="row d-flex justify-content-center">
+                                        @foreach (var mt in EnumTools.GetValues<MeetingType>())
+                                                {
+                                            <div class="form-check col-md-auto m-2">
+                                                <InputRadio Value="mt" id="@mt" class="form-check-input" />
+                                                <label for="@mt" class="form-check-label">@mt</label>
+                                            </div>
+                                                }
+                                    </div>
+                                </InputRadioGroup>
+                            </div>
+                            @{ /* If physical, check if they can host/travel */}
+                            @if (_form.MeetingType == MeetingType.Fysiskt)
+                            {
+                                <div class="row d-flex justify-content-center">
+                                    <div class="form-check col-md-auto">
+                                        <input class="form-check-input" type="checkbox" @bind="_form.CanHostMatch" id="checkhost">
+                                        <label class="form-check-label" for="checkhost">Vi kan hosta potentiella möten</label><br />
+                                    </div>
+                                    <div class="form-check col-md-auto">
+                                        <input class="form-check-input" type="checkbox" @bind="_form.CanVisitMatch" id="checkvisit">
+                                        <label class="form-check-label" for="checkvisit">Vi har transport till potentiella möten</label><br />
+                                    </div>
+                                </div>
+                            }
+                            <div class="container w-75">
+                                <label class="form-label">Veckor</label><br />
+                                <div class="row">
+                                    @foreach (var w in Weeks)
+                                    {
+                                        <div class="form-check col-md-auto">
+                                            <input class="form-check-input" type="checkbox" @bind-value="w.IsMarked" id="@w.WeekNumber">
+                                            <label class="form-check-label" for="@w.WeekNumber">@($"v.{w.WeekNumber}")</label><br />
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="container w-75">
+                                <label class="form-label">Teman</label><br />
+                                <div class="row">
+                                    <label for="otherschoolform" class="form-label">Förklara om vad för utbildning, vad för inriktning, kurser i fritext</label>
+                                    <InputTextArea id="otherschoolform" class="form-control" @bind-Value="_form.OtherSchoolFormTextArea" />
+                                    <div class="form-text">
+                                        Vill du läsa mer om teman?
+                                        <a class="link-info" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                            Klicka här.
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                                <div class="offcanvas-header">
+                                    <h5 id="offcanvasRightLabel">Teman</h5>
+                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <div class="card" style="width: 18rem;">
+                                        <img src="https://varldenfinnshar.se/wp-content/uploads/2020/10/IMG_5318redliten-640x480.jpg?x58328" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Jag, familjen och samhället</h5>
+                                            <p class="card-text">Hur kan familjer se ut och fungera? Hur får vi stöd när vi behöver det? Samtal om familj och samhälle.</p>
+                                            <a href="https://varldenfinnshar.se/lektioner/jag-familjen-och-samhallet/" class="btn btn-primary">Läs Mer</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="card" style="width: 18rem;">
+                                        <img src="https://varldenfinnshar.se/wp-content/uploads/2020/10/girl-495923-640x480.jpg?x58328" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Barndom och identitet</h5>
+                                            <p class="card-text">Hur blir vi de vi är? Vilken betydelse har uppväxt och livsvillkor för vilka vägar vi tar i livet?</p>
+                                            <a href="https://varldenfinnshar.se/lektioner/barndom-och-identitet/" class="btn btn-primary">Läs Mer</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="card" style="width: 18rem;">
+                                        <img src="https://varldenfinnshar.se/wp-content/uploads/2020/08/Mediaonyheter-ny-laddaupp-e1598430185305-640x480.jpg?x58328" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Media och nyheter</h5>
+                                            <p class="card-text">Vilka nyheter uppmärksammas i världen och varför? Vad är trovärdigt och hur påverkas vi?</p>
+                                            <a href="https://varldenfinnshar.se/lektioner/media-och-nyheter/" class="btn btn-primary">Läs Mer</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="card" style="width: 18rem;">
+                                        <img src="https://varldenfinnshar.se/wp-content/uploads/2020/08/Att-flyttta-och-fly-att-ladda-upp-scaled-e1598340779765-640x480.jpg?x58328" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Att flytta och fly</h5>
+                                            <p class="card-text">Hur kan det vara att flytta inom eller mellan länder? Har du eller dina föräldrar flyttat?</p>
+                                            <a href="https://varldenfinnshar.se/lektioner/att-flytta-och-fly/" class="btn btn-primary">Läs Mer</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="card" style="width: 18rem;">
+                                        <img src="https://varldenfinnshar.se/wp-content/uploads/2020/08/Typiskt-svenskt-att-ladda-upp-2-scaled-e1598340850796-640x480.jpg?x58328" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Typiskt svenskt?</h5>
+                                            <p class="card-text">Hur ser de sociala och kulturella normerna ut i Sverige och i andra delar av världen? Hur påverkar de oss?</p>
+                                            <a href="https://varldenfinnshar.se/lektioner/typiskt-svenskt/" class="btn btn-primary">Läs Mer</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="loadmore-wrapper">
+                                    <a class="link-info" href="https://varldenfinnshar.se/lektioner/">
+                                        Besök vår hemsida för alla teman.
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <h4 class="h3">Fyll i vilka tider som passar</h4>
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <FormScheduler Form="_form"></FormScheduler>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            @{ /* If physical, check if they can host/travel */}
-            @if (_form.MeetingType == MeetingType.Fysiskt)
-            {
-                <div class="row d-flex justify-content-center">
-                    <div class="form-check col-md-auto">
-                        <input class="form-check-input" type="checkbox" @bind="_form.CanHostMatch" id="checkhost">
-                        <label class="form-check-label" for="checkhost">Vi kan hosta potentiella möten</label><br />
-                    </div>
-                    <div class="form-check col-md-auto">
-                        <input class="form-check-input" type="checkbox" @bind="_form.CanVisitMatch" id="checkvisit">
-                        <label class="form-check-label" for="checkvisit">Vi har transport till potentiella möten</label><br />
-                    </div>
-                </div>
-            }
-            <div class="container w-75">
-                <label class="form-label">Veckor</label><br />
-                <div class="row">
-                    @foreach (var w in Weeks)
-                    {
-                        <div class="form-check col-md-auto">
-                            <input class="form-check-input" type="checkbox" @bind-value="w.IsMarked" id="@w.WeekNumber">
-                            <label class="form-check-label" for="@w.WeekNumber">@($"v.{w.WeekNumber}")</label><br />
-                        </div>
-                    }
-                </div>
-            </div>
-
-
-            <div class="container w-75">
-                <label class="form-label">Teman</label><br />
-                <div class="row">
-                    <label for="otherschoolform" class="form-label">Förklara om vad för utbildning, vad för inriktning, kurser i fritext</label>
-                    <InputTextArea id="otherschoolform" class="form-control" @bind-Value="_form.OtherSchoolFormTextArea" />
-                    <div class="form-text">
-                        Vill du läsa mer om teman?
-                        <a class="link-info" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                            Klicka här.
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <h5 id="offcanvasRightLabel">Teman</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://varldenfinnshar.se/wp-content/uploads/2020/10/IMG_5318redliten-640x480.jpg?x58328" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Jag, familjen och samhället</h5>
-                            <p class="card-text">Hur kan familjer se ut och fungera? Hur får vi stöd när vi behöver det? Samtal om familj och samhälle.</p>
-                            <a href="https://varldenfinnshar.se/lektioner/jag-familjen-och-samhallet/" class="btn btn-primary">Läs Mer</a>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://varldenfinnshar.se/wp-content/uploads/2020/10/girl-495923-640x480.jpg?x58328" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Barndom och identitet</h5>
-                            <p class="card-text">Hur blir vi de vi är? Vilken betydelse har uppväxt och livsvillkor för vilka vägar vi tar i livet?</p>
-                            <a href="https://varldenfinnshar.se/lektioner/barndom-och-identitet/" class="btn btn-primary">Läs Mer</a>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://varldenfinnshar.se/wp-content/uploads/2020/08/Mediaonyheter-ny-laddaupp-e1598430185305-640x480.jpg?x58328" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Media och nyheter</h5>
-                            <p class="card-text">Vilka nyheter uppmärksammas i världen och varför? Vad är trovärdigt och hur påverkas vi?</p>
-                            <a href="https://varldenfinnshar.se/lektioner/media-och-nyheter/" class="btn btn-primary">Läs Mer</a>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://varldenfinnshar.se/wp-content/uploads/2020/08/Att-flyttta-och-fly-att-ladda-upp-scaled-e1598340779765-640x480.jpg?x58328" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Att flytta och fly</h5>
-                            <p class="card-text">Hur kan det vara att flytta inom eller mellan länder? Har du eller dina föräldrar flyttat?</p>
-                            <a href="https://varldenfinnshar.se/lektioner/att-flytta-och-fly/" class="btn btn-primary">Läs Mer</a>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://varldenfinnshar.se/wp-content/uploads/2020/08/Typiskt-svenskt-att-ladda-upp-2-scaled-e1598340850796-640x480.jpg?x58328" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Typiskt svenskt?</h5>
-                            <p class="card-text">Hur ser de sociala och kulturella normerna ut i Sverige och i andra delar av världen? Hur påverkar de oss?</p>
-                            <a href="https://varldenfinnshar.se/lektioner/typiskt-svenskt/" class="btn btn-primary">Läs Mer</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="loadmore-wrapper">
-                    <a class="link-info" href="https://varldenfinnshar.se/lektioner/">
-                        Besök vår hemsida för alla teman.
-                    </a>
-                </div>
-            </div>
-
-
-
-            <h4 class="h3">Fyll i vilka tider som passar</h4>
-            <hr />
-            <FormScheduler Form="_form"></FormScheduler>
-
-
 
             <button type="submit" class="btn btn-primary">Skicka</button>
         </EditForm>
