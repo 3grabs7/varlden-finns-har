@@ -13,6 +13,7 @@ namespace WebApp.Extensions
             services.AddScoped<IStaticEntitiesService, StaticEntitiesService>();
             services.AddScoped<IGeocodingService, GeocodingService>();
             services.AddScoped<IRegistrationFormService, RegistrationFormService>();
+            services.AddScoped<IMatchService, MatchService>();
 
             return services;
         }

@@ -1,5 +1,6 @@
 ﻿@page "/registrationofinterests"
 @inject IRegistrationOfInterestService RegistrationsService
+@inject IMatchService MatchService
 
 @if (_registrations is null)
 {
@@ -7,12 +8,12 @@
 }
 else
 {
-    <DataGrid TItem="RegistrationOfInterest" Data="@_registrations" @bind-SelectedRow="selectedRegistration"
+    <DataGrid TItem="RegistrationOfInterest" Data="@_registrations" @bind-SelectedRow="_selectedRegistration"
               Sortable="true" Editable="true" EditMode="DataGridEditMode.Popup" Filterable="true" ShowPager="true" PageSize="14">
         <ButtonRowTemplate>
-            <Button Color="Color.Primary" Disabled="@(selectedRegistration is null)" Clicked="Match">Matcha</Button>
-            <Button Color="Color.Primary" Disabled="@(selectedRegistration is null)" Clicked="context.EditCommand.Clicked">Redigera</Button>
-            <Button Color="Color.Danger" Disabled="@(selectedRegistration is null)" Clicked="context.DeleteCommand.Clicked">Ta bort</Button>
+            <Button Color="Color.Primary" Disabled="@(_selectedRegistration is null)" Clicked="Match">Matcha</Button>
+            <Button Color="Color.Primary" Disabled="@(_selectedRegistration is null)" Clicked="context.EditCommand.Clicked">Redigera</Button>
+            <Button Color="Color.Danger" Disabled="@(_selectedRegistration is null)" Clicked="context.DeleteCommand.Clicked">Ta bort</Button>
             <Button Color="Color.Link" Clicked="@context.ClearFilterCommand.Clicked">Rensa filter</Button>
         </ButtonRowTemplate>
         <ChildContent>
@@ -45,22 +46,17 @@ else
     </DataGrid>
 }
 
-
-
-
-
-
-@code {
-    private IEnumerable<RegistrationOfInterest> _registrations { get; set; }
-    private RegistrationOfInterest selectedRegistration { get; set; }
-
-    protected override async Task OnInitializedAsync()
+@if (_isMatchLoaded)
+{
+    <h3>Matchningar</h3>
+    foreach (var m in _matches)
     {
-        _registrations = await RegistrationsService.GetAllAsync();
-    }
-
-    private async Task Match()
-    {
-
+        <div>
+            <p>@m.FirstName</p>
+            <p>@(m.Municipality?.Name ?? "Ingen info om kommun")</p>
+        </div>
     }
 }
+
+
+
