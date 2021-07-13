@@ -1,14 +1,15 @@
 ﻿@page "/registrationofinterests"
 @inject IRegistrationOfInterestService RegistrationsService
 @inject IMatchService MatchService
+@inject NavigationManager NavigationManager
 
 
-<DataGrid TItem="RegistrationOfInterest" Data="@_registrations" @bind-SelectedRow="_selectedRegistration"
+<DataGrid TItem="RegistrationOfInterest" Data="@_registrations" @bind-SelectedRow="SelectedRegistration"
           Sortable="true" Editable="true" EditMode="DataGridEditMode.Popup" Filterable="true" ShowPager="true" PageSize="14">
     <ButtonRowTemplate>
-        <Button Color="Color.Primary" Disabled="@(_selectedRegistration is null)" Clicked="Match">Matcha</Button>
-        <Button Color="Color.Primary" Disabled="@(_selectedRegistration is null)" Clicked="context.EditCommand.Clicked">Redigera</Button>
-        <Button Color="Color.Danger" Disabled="@(_selectedRegistration is null)" Clicked="context.DeleteCommand.Clicked">Ta bort</Button>
+        <Button Color="Color.Primary" Disabled="@(SelectedRegistration is null)" Clicked="Match">Matcha</Button>
+        <Button Color="Color.Primary" Disabled="@(SelectedRegistration is null)" Clicked="context.EditCommand.Clicked">Redigera</Button>
+        <Button Color="Color.Danger" Disabled="@(SelectedRegistration is null)" Clicked="context.DeleteCommand.Clicked">Ta bort</Button>
         <Button Color="Color.Link" Clicked="@context.ClearFilterCommand.Clicked">Rensa filter</Button>
     </ButtonRowTemplate>
     <ChildContent>
@@ -46,10 +47,14 @@
     <h3>Matchningar</h3>
     foreach (var m in _matches)
     {
+        <hr />
         <div>
-            <p>@m.FirstName</p>
+            <p>@m.School</p>
+            <p>@($"{m.FirstName} {m.LastName}")</p>
             <p>@(m.Municipality?.Name ?? "Ingen info om kommun")</p>
+            <a @onclick="(() => GoToDetails(m.Id))">More info</a>
         </div>
+        <hr />
     }
 }
 

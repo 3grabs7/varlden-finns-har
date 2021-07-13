@@ -14,29 +14,60 @@ namespace WebApp.Services
             RegistrationOfInterest selectedRegistration)
         {
             // Filter meetingtype
-            // if meetingtype is digital skip filtering municapality
             registrations = registrations.Where(r => r.MeetingType == selectedRegistration.MeetingType);
 
+            // if meetingtype is physical
             if (selectedRegistration.MeetingType == MeetingType.Fysiskt)
+            {
+                // filter municapality
                 registrations = registrations.Where(r => r.Municipality == selectedRegistration.Municipality);
+
+                // make sure there are no matches between immobile groups
+                if (!selectedRegistration.CanVisitMatch)
+                    registrations = registrations.Where(r => r.CanVisitMatch);
+
+                if (!selectedRegistration.CanHostMatch)
+                    registrations = registrations.Where(r => r.CanHostMatch);
+            }
 
             // filtering of school form
             registrations = selectedRegistration.SchoolForm == SchoolForm.Sfi ?
                 registrations.Where(r => r.SchoolForm != SchoolForm.Sfi) :
                 registrations.Where(r => r.SchoolForm == SchoolForm.Sfi);
 
-            // group by most time matches
-            // as for now return all that have atleast 2 match in time spans
-            registrations = registrations.GroupBy(r =>
-                r.ScheduledTimeSpans.Count(t => selectedRegistration.ScheduledTimeSpans.Contains(t)))
-                .Where(g => g.Key > 1)
-                .SelectMany(x => x);
+            // filter matching time spans
+            registrations = FilterTimeSpans(registrations, selectedRegistration);
 
             // filter selected weeks
-            // as for now returns all that have atleast 1 match in weeks
-            registrations = registrations.Where(r => r.Weeks.Count(w => selectedRegistration.Weeks.Contains(w)) > 0);
+            registrations = FilterSelectedWeeks(registrations, selectedRegistration);
 
             return registrations;
+        }
+
+        private IEnumerable<RegistrationOfInterest> FilterTimeSpans(IEnumerable<RegistrationOfInterest> registrations,
+            RegistrationOfInterest selectedRegistration)
+        {
+            foreach (var r in registrations)
+            {
+                foreach (var t in r.ScheduledTimeSpans)
+                {
+                    if (selectedRegistration.ScheduledTimeSpans.Any(ts => ts.Time == t.Time))
+                        yield return r;
+                }
+            }
+        }
+
+        private IEnumerable<RegistrationOfInterest> FilterSelectedWeeks(IEnumerable<RegistrationOfInterest> registrations,
+    RegistrationOfInterest selectedRegistration)
+        {
+            foreach (var r in registrations)
+            {
+                foreach (var w in r.Weeks)
+                {
+                    if (selectedRegistration.Weeks.Any(ts => ts.WeekNumber == w.WeekNumber))
+                        yield return r;
+                }
+            }
         }
     }
 
