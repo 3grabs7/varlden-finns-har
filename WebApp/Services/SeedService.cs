@@ -193,6 +193,7 @@ namespace WebApp.Services
 
         public async Task AddWeeks(int? year)
         {
+            _context.Weeks.Clear();
             if (year is null) year = DateTime.Now.Year;
             for (int i = 1; i <= 52; i++)
                 await _context.AddAsync(new Week { WeekNumber = i, Year = (int)year });
