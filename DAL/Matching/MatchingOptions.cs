@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DAL.Matching
+﻿namespace DAL.Matching
 {
     public class MatchingOptions
     {
+        public bool MatchOnlyOnWeeks { get; set; } = false;
+        public bool MatchOnlyOnSchedule { get; set; } = false;
 
     }
 }

@@ -2,6 +2,20 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+/*
+ * TODO
+ * - what type of digital tools / expertise
+ * - public transport
+ * - särskiljda behov, funktionsvariationer
+ * 
+ * 
+ * 
+ * 
+ */
+
+
+
+
 namespace DAL.Matching
 {
     public class MatchCard : Entity

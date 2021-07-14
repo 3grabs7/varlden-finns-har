@@ -2,7 +2,6 @@
 using DAL.Registration;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace WebApp.Pages

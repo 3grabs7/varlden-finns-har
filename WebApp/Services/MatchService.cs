@@ -1,6 +1,5 @@
 ﻿using DAL.Matching;
 using DAL.Registration;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,10 +35,12 @@ namespace WebApp.Services
                 registrations.Where(r => r.SchoolForm == SchoolForm.Sfi);
 
             // filter matching time spans
-            registrations = FilterTimeSpans(registrations, selectedRegistration);
+            if (!options.MatchOnlyOnWeeks)
+                registrations = FilterTimeSpans(registrations, selectedRegistration);
 
             // filter selected weeks
-            registrations = FilterSelectedWeeks(registrations, selectedRegistration);
+            if (!options.MatchOnlyOnSchedule)
+                registrations = FilterSelectedWeeks(registrations, selectedRegistration);
 
             return registrations;
         }
@@ -48,26 +49,18 @@ namespace WebApp.Services
             RegistrationOfInterest selectedRegistration)
         {
             foreach (var r in registrations)
-            {
                 foreach (var t in r.ScheduledTimeSpans)
-                {
                     if (selectedRegistration.ScheduledTimeSpans.Any(ts => ts.Time == t.Time))
                         yield return r;
-                }
-            }
         }
 
         private IEnumerable<RegistrationOfInterest> FilterSelectedWeeks(IEnumerable<RegistrationOfInterest> registrations,
-    RegistrationOfInterest selectedRegistration)
+            RegistrationOfInterest selectedRegistration)
         {
             foreach (var r in registrations)
-            {
                 foreach (var w in r.Weeks)
-                {
                     if (selectedRegistration.Weeks.Any(ts => ts.WeekNumber == w.WeekNumber))
                         yield return r;
-                }
-            }
         }
     }
 

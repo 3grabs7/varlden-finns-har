@@ -31,7 +31,7 @@
 
     <EmptyTemplate>
         <div class="box">
-            Inga resultat att visa
+            Laddar...
         </div>
     </EmptyTemplate>
     <LoadingTemplate>
@@ -42,6 +42,22 @@
 </DataGrid>
 
 
+@*
+        * MATCHING SECTION *
+
+    @*MATCHING OPTIONS*@
+@if (_matchOptions != null)
+{
+    <EditForm Model="@_matchOptions">
+        <Label>Endast på schema</Label>
+        <InputCheckbox @bind-Value="@_matchOptions.MatchOnlyOnSchedule" />
+        <Label>Endast på vekor</Label>
+        <InputCheckbox @bind-Value="@_matchOptions.MatchOnlyOnWeeks" />
+    </EditForm>
+}
+
+
+@*MATCHING RESULTS*@
 @if (_isMatchLoaded)
 {
     <h3>Matchningar</h3>
