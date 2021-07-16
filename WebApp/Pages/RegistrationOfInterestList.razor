@@ -48,12 +48,14 @@
     @*MATCHING OPTIONS*@
 @if (_matchOptions != null)
 {
-    <EditForm Model="@_matchOptions">
-        <Label>Endast på schema</Label>
-        <InputCheckbox @bind-Value="@_matchOptions.MatchOnlyOnSchedule" />
-        <Label>Endast på vekor</Label>
-        <InputCheckbox @bind-Value="@_matchOptions.MatchOnlyOnWeeks" />
-    </EditForm>
+<EditForm Model="@_matchOptions">
+    <Label>Endast på schema</Label>
+    <InputCheckbox @bind-Value="@_matchOptions.MatchOnlyOnSchedule" />
+    <Label>Endast på vekor</Label>
+    <InputCheckbox @bind-Value="@_matchOptions.MatchOnlyOnWeeks" />
+    <Label>Inkludera osäkra schematider</Label>
+    <InputCheckbox @bind-Value="@_matchOptions.MatchUncertainSchedule" />
+</EditForm>
 }
 
 
@@ -61,16 +63,16 @@
 @if (_isMatchLoaded)
 {
     <h3>Matchningar</h3>
+    <Divider/>
     foreach (var m in _matches)
     {
-        <hr />
         <div>
             <p>@m.School</p>
             <p>@($"{m.FirstName} {m.LastName}")</p>
             <p>@(m.Municipality?.Name ?? "Ingen info om kommun")</p>
-            <a @onclick="(() => GoToDetails(m.Id))">More info</a>
+            <Blazorise.Link @onclick="(() => GoToDetails(m.Id))">More info</Blazorise.Link>
         </div>
-        <hr />
+        <Divider />
     }
 }
 

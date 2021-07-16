@@ -17,6 +17,21 @@ namespace WebApp.Pages
         private IEnumerable<Week> Weeks { get; set; }
         private IEnumerable<RegistrationSchedule> TimeSpans { get; set; }
 
+        private List<string> steps = new()
+        {
+            "Lärare/Skola",
+            "Elevgrupp",
+            "Mötesval",
+            "Tider",
+            "Verifiering"
+        };
+        private string selectedStep = "Om läraren/skolan";
+
+        private Task OnSelectedStepChanged(string name)
+        {
+            selectedStep = name;
+            return Task.CompletedTask;
+        }
 
         public IEnumerable<Subject> _selectedSubjects { get; set; }
         public IEnumerable<Week> _selectedWeeks { get; set; }

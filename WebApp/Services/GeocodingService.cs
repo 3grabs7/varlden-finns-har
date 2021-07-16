@@ -34,7 +34,7 @@ namespace WebApp.Services
             }
             catch
             {
-                return null;
+                return new List<double> { 0, 0 };
             }
         }
     }

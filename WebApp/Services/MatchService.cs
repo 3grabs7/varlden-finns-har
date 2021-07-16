@@ -34,6 +34,13 @@ namespace WebApp.Services
                 registrations.Where(r => r.SchoolForm != SchoolForm.Sfi) :
                 registrations.Where(r => r.SchoolForm == SchoolForm.Sfi);
 
+            IEnumerable<RegistrationOfInterest> uncertainScheduleRegistrations = null;
+            if(options.MatchUncertainSchedule)
+            {
+                // Save uncertain schedule registrations
+                // How wide should margin for scheduled time be?
+            }
+
             // filter matching time spans
             if (!options.MatchOnlyOnWeeks)
                 registrations = FilterTimeSpans(registrations, selectedRegistration);
@@ -41,6 +48,9 @@ namespace WebApp.Services
             // filter selected weeks
             if (!options.MatchOnlyOnSchedule)
                 registrations = FilterSelectedWeeks(registrations, selectedRegistration);
+
+            if(uncertainScheduleRegistrations != null)
+                registrations.Concat(uncertainScheduleRegistrations);
 
             return registrations;
         }
@@ -62,6 +72,7 @@ namespace WebApp.Services
                     if (selectedRegistration.Weeks.Any(ts => ts.WeekNumber == w.WeekNumber))
                         yield return r;
         }
+
     }
 
 

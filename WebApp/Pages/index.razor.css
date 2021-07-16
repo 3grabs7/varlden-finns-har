@@ -17,3 +17,17 @@
         transform: rotate(360deg);
     }
 }
+
+
+
+
+
+/*För visning nav matches template*/
+
+.match-container {
+
+}
+
+.match-link:hover {
+    cursor:pointer;
+}
