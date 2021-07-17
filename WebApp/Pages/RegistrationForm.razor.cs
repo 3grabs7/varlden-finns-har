@@ -1,5 +1,6 @@
 ﻿using DAL.Registration;
 using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,11 +26,66 @@ namespace WebApp.Pages
             "Tider",
             "Verifiering"
         };
-        private string selectedStep = "Om läraren/skolan";
+        private string selectedStep = "Lärare/Skola";
+        private int selectedStepIndex = 0;
+        public int SelectedStepIndex
+        {
+            get { return selectedStepIndex; }
+            set
+            {
+                if (selectedStepIndex < 1) 
+                    selectedStepIndex = 0;
+                else 
+                    selectedStepIndex = value;
+                OnSelectedStepChanged(selectedStepIndex);
+            }
+        }
 
+        // Step Validation
+        private bool isStepOneValidated { get; set; } = false;
+        private bool isStepTwoValidated { get; set; } = false;
+        private bool isStepThreeValidated { get; set; } = false;
+        private bool isStepFourValidated { get; set; } = false;
+
+        // Hard coded validation
+        // !!! TODO !!!
+        // how do you get the validation attributes from model
+        // to run and validate outside form?? 
+        // !!! TODO !!!
+        // Make this a method/fields in registration form service
+        private void ValidateSteps()
+        {
+            isStepOneValidated = _form.FirstName != default &&
+                _form.LastName != default &&
+                _form.Email != default &&
+                _form.PhoneNumber != default &&
+                _form.School != default &&
+                _adress.StreetAdress != default &&
+                _adress.PostalCode != default &&
+                _form.MunicipalityRefId != default;
+
+            isStepTwoValidated = _form.Grade != default &&
+                Subjects.SelectMany(x => x)
+                    .Any(s => s.IsMarked);
+
+            isStepThreeValidated = Weeks.Any(w => w.IsMarked) &&
+                _form.Theme != default;
+
+            isStepFourValidated = TimeSpans.Any(ts => ts.IsMarked);
+        }
+
+        // Change steps with steps component
         private Task OnSelectedStepChanged(string name)
         {
+            ValidateSteps();
             selectedStep = name;
+            return Task.CompletedTask;
+        }
+
+        // Change steps with prev/next buttons
+        private Task OnSelectedStepChanged(int index)
+        {
+            selectedStep = steps[index];
             return Task.CompletedTask;
         }
 
@@ -54,7 +110,8 @@ namespace WebApp.Pages
         public async Task SubmitForm()
         {
             // Extension Approach
-            _selectedSubjects = Subjects.First(g => g.Key == _form.SchoolForm).Where(s => s.IsMarked);
+            _selectedSubjects = Subjects.First(g => g.Key == _form.SchoolForm)
+                .Where(s => s.IsMarked);
             _selectedWeeks = Weeks.Where(w => w.IsMarked);
             _form
                 .AppendAdress(_adress)
