@@ -70,7 +70,9 @@
         <ModalBody>
             @if (_isMatchLoaded)
             {
-                <p>Matchar mot @_selectedRegistration.FullName på @_selectedRegistration.School.</p>
+                <p class="head">
+                    Matchar mot <span>@_selectedRegistration.FullName</span> på <span>@_selectedRegistration.School</span>.
+                </p>
 
                 <h4>Ämnen</h4>
                 <div class="tags">
@@ -92,16 +94,16 @@
                 </div>
 
                 <Divider />
-                @*foreach (var m in _matches)
-                    {
-                        <div>
-                            <p>@m.School</p>
-                            <p>@($"{m.FirstName} {m.LastName}")</p>
-                            <p>@(m.Municipality?.Name ?? "Ingen info om kommun")</p>
-                            <Blazorise.Link @onclick="(() => GoToDetails(m.Id))">Läs mer</Blazorise.Link>
-                        </div>
-                        <Divider />
-                    }*@
+                foreach (var m in _matches)
+                {
+                    <div>
+                        <p>@m.School</p>
+                        <p>@($"{m.FirstName} {m.LastName}")</p>
+                        <p>@(m.Municipality?.Name ?? "Ingen info om kommun")</p>
+                        <a @onclick="(() => GoToDetails(m.Id))" style="cursor:pointer;">Läs mer</a>
+                    </div>
+                    <Divider />
+                }
             }
         </ModalBody>
         <ModalFooter>

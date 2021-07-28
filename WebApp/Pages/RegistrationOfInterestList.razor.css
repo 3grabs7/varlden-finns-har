@@ -1,4 +1,15 @@
-﻿.tags {
+﻿.head {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    gap: 0.5rem;
+}
+
+.head span {
+    font-size: 30px;
+}
+
+.tags {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;

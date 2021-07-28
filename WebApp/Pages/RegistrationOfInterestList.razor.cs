@@ -37,9 +37,9 @@ namespace WebApp.Pages
 
             // show modal during testing
             // vvvvvvvvvvvvvvvvvvvvvvvvv
-            _selectedRegistration = _registrations.Last();
-            matchesModal.Show();
-            _isMatchLoaded = true;
+            //_selectedRegistration = _registrations.Last();
+            //matchesModal.Show();
+            //_isMatchLoaded = true;
         }
 
         private async Task Match()
