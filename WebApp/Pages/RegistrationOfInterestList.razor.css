@@ -1,0 +1,28 @@
+﻿.tags {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.tag {
+    background-color: darkslateblue;
+    border-radius: 10%;
+    padding: 0.5rem;
+    color: white;
+}
+
+.matchfooter {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
+
+.matchfooter-row {
+    display: flex;
+    gap: 0.5rem;
+    align-content: center;
+}
+
+.matchfooter-row i {
+    font-size: 2rem;
+}

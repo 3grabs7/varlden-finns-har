@@ -48,33 +48,72 @@
     @*MATCHING OPTIONS*@
 @if (_matchOptions != null)
 {
-<EditForm Model="@_matchOptions">
-    <Label>Endast på schema</Label>
-    <InputCheckbox @bind-Value="@_matchOptions.MatchOnlyOnSchedule" />
-    <Label>Endast på vekor</Label>
-    <InputCheckbox @bind-Value="@_matchOptions.MatchOnlyOnWeeks" />
-    <Label>Inkludera osäkra schematider</Label>
-    <InputCheckbox @bind-Value="@_matchOptions.MatchUncertainSchedule" />
-</EditForm>
+    <EditForm Model="@_matchOptions">
+        <Label>Endast på schema</Label>
+        <InputCheckbox @bind-Value="@_matchOptions.MatchOnlyOnSchedule" />
+        <Label>Endast på vekor</Label>
+        <InputCheckbox @bind-Value="@_matchOptions.MatchOnlyOnWeeks" />
+        <Label>Inkludera osäkra schematider</Label>
+        <InputCheckbox @bind-Value="@_matchOptions.MatchUncertainSchedule" />
+    </EditForm>
 }
 
 
 @*MATCHING RESULTS*@
-@if (_isMatchLoaded)
-{
-    <h3>Matchningar</h3>
-    <Divider/>
-    foreach (var m in _matches)
-    {
-        <div>
-            <p>@m.School</p>
-            <p>@($"{m.FirstName} {m.LastName}")</p>
-            <p>@(m.Municipality?.Name ?? "Ingen info om kommun")</p>
-            <Blazorise.Link @onclick="(() => GoToDetails(m.Id))">More info</Blazorise.Link>
-        </div>
-        <Divider />
-    }
-}
+
+<Modal @ref="matchesModal">
+    <ModalContent Centered="true" Size="ModalSize.ExtraLarge">
+        <ModalHeader>
+            <ModalTitle>Matchningar</ModalTitle>
+            <CloseButton />
+        </ModalHeader>
+        <ModalBody>
+            @if (_isMatchLoaded)
+            {
+                <p>Matchar mot @_selectedRegistration.FullName på @_selectedRegistration.School.</p>
+
+                <h4>Ämnen</h4>
+                <div class="tags">
+                    @foreach (var s in _selectedRegistration.Subjects)
+                    {
+                        <p class="tag">@s.Name</p>
+                    }
+                </div>
+
+                <div class="matchfooter">
+                    <div class="matchfooter-row">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>@_selectedRegistration.PhoneNumber</p>
+                    </div>
+                    <div class="matchfooter-row">
+                        <i class="fas fa-envelope-open"></i>
+                        <p>@_selectedRegistration.Email</p>
+                    </div>
+                </div>
+
+                <Divider />
+                @*foreach (var m in _matches)
+                    {
+                        <div>
+                            <p>@m.School</p>
+                            <p>@($"{m.FirstName} {m.LastName}")</p>
+                            <p>@(m.Municipality?.Name ?? "Ingen info om kommun")</p>
+                            <Blazorise.Link @onclick="(() => GoToDetails(m.Id))">Läs mer</Blazorise.Link>
+                        </div>
+                        <Divider />
+                    }*@
+            }
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Secondary" Clicked="@HideModal">Stäng</Button>
+            <Button Color="Color.Primary" Clicked="@HideModal">Save Changes</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+
+
+
 
 
 
