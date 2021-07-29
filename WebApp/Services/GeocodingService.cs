@@ -17,7 +17,7 @@ namespace WebApp.Services
             _apiKey = Environment.GetEnvironmentVariable("GeocodingApiKey");
         }
 
-        public async Task<List<double>> GetCoordinatesAsync(Adress adress, Municipality municipality)
+        public async Task<List<double>> GetCoordinatesAsync(Address adress, Municipality municipality)
         {
             if (adress is null || municipality is null) return new List<double> { 0, 0 };
             var adressQuery = $"{adress.StreetAdress} {municipality.Name} Sweden";

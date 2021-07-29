@@ -27,7 +27,7 @@ namespace WebApp.Pages
         private bool _isMatchLoaded { get; set; } = false;
         private MatchingOptions _matchOptions { get; set; }
         private IEnumerable<RegistrationOfInterest> _matches { get; set; }
-        private Modal matchesModal;
+        private Modal _matchesModal;
 
         protected override async Task OnInitializedAsync()
         {
@@ -46,12 +46,12 @@ namespace WebApp.Pages
         {
             _isMatchLoaded = true;
             _matches = await MatchService.MatchRegistrationAsync(_matchOptions, _registrations, _selectedRegistration);
-            matchesModal.Show();
+            _matchesModal.Show();
         }
 
         private void HideModal()
         {
-            matchesModal.Hide();
+            _matchesModal.Hide();
         }
 
         private void GoToDetails(int id)

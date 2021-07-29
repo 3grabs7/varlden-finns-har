@@ -47,7 +47,7 @@ namespace WebApp.Services
             form.Subjects = subjects.Where(s => s.IsMarked).ToList();
             await _context.SaveChangesAsync();
         }
-        public async Task AddAdress(Adress adress, RegistrationOfInterest form)
+        public async Task AddAdress(Address adress, RegistrationOfInterest form)
         {
             var entity = await _context.AddAsync(adress);
             form.SchoolAdress = entity.Entity;

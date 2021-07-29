@@ -11,14 +11,14 @@ namespace WebApp.Pages
     public partial class RegistrationForm : ComponentBase
     {
         private RegistrationOfInterest _form = new();
-        private Adress _adress = new();
+        private Address _adress = new();
 
-        private IEnumerable<Municipality> Municipalities { get; set; }
-        private IEnumerable<IGrouping<SchoolForm, Subject>> Subjects { get; set; }
-        private IEnumerable<Week> Weeks { get; set; }
-        private IEnumerable<RegistrationSchedule> TimeSpans { get; set; }
+        private IEnumerable<Municipality> _municipalities { get; set; }
+        private IEnumerable<IGrouping<SchoolForm, Subject>> _subjects { get; set; }
+        private IEnumerable<Week> _weeks { get; set; }
+        private IEnumerable<RegistrationSchedule> _timeSpans { get; set; }
 
-        private List<string> steps = new()
+        private List<string> _steps = new()
         {
             "Lärare/Skola",
             "Elevgrupp",
@@ -26,26 +26,26 @@ namespace WebApp.Pages
             "Tider",
             "Verifiering"
         };
-        private string selectedStep = "Lärare/Skola";
-        private int selectedStepIndex = 0;
+        private string _selectedStep = "Lärare/Skola";
+        private int _selectedStepIndex = 0;
         public int SelectedStepIndex
         {
-            get { return selectedStepIndex; }
+            get { return _selectedStepIndex; }
             set
             {
-                if (selectedStepIndex < 1) 
-                    selectedStepIndex = 0;
-                else 
-                    selectedStepIndex = value;
-                OnSelectedStepChanged(selectedStepIndex);
+                if (_selectedStepIndex < 1)
+                    _selectedStepIndex = 0;
+                else
+                    _selectedStepIndex = value;
+                OnSelectedStepChanged(_selectedStepIndex);
             }
         }
 
         // Step Validation
-        private bool isStepOneValidated { get; set; } = false;
-        private bool isStepTwoValidated { get; set; } = false;
-        private bool isStepThreeValidated { get; set; } = false;
-        private bool isStepFourValidated { get; set; } = false;
+        private bool _isStepOneValidated { get; set; } = false;
+        private bool _isStepTwoValidated { get; set; } = false;
+        private bool _isStepThreeValidated { get; set; } = false;
+        private bool _isStepFourValidated { get; set; } = false;
 
         // Hard coded validation
         // !!! TODO !!!
@@ -55,7 +55,7 @@ namespace WebApp.Pages
         // Make this a method/fields in registration form service
         private void ValidateSteps()
         {
-            isStepOneValidated = _form.FirstName != default &&
+            _isStepOneValidated = _form.FirstName != default &&
                 _form.LastName != default &&
                 _form.Email != default &&
                 _form.PhoneNumber != default &&
@@ -64,34 +64,33 @@ namespace WebApp.Pages
                 _adress.PostalCode != default &&
                 _form.MunicipalityRefId != default;
 
-            isStepTwoValidated = _form.Grade != default &&
-                Subjects.SelectMany(x => x)
+            _isStepTwoValidated = _form.Grade != default &&
+                _subjects.SelectMany(x => x)
                     .Any(s => s.IsMarked);
 
-            isStepThreeValidated = Weeks.Any(w => w.IsMarked) &&
+            _isStepThreeValidated = _weeks.Any(w => w.IsMarked) &&
                 _form.Theme != default;
 
-            isStepFourValidated = TimeSpans.Any(ts => ts.IsMarked);
+            _isStepFourValidated = _timeSpans.Any(ts => ts.IsMarked);
         }
 
         // Change steps with steps component
         private Task OnSelectedStepChanged(string name)
         {
             ValidateSteps();
-            selectedStep = name;
+            _selectedStep = name;
             return Task.CompletedTask;
         }
 
         // Change steps with prev/next buttons
         private Task OnSelectedStepChanged(int index)
         {
-            selectedStep = steps[index];
+            _selectedStep = _steps[index];
             return Task.CompletedTask;
         }
 
         public IEnumerable<Subject> _selectedSubjects { get; set; }
         public IEnumerable<Week> _selectedWeeks { get; set; }
-        public IEnumerable<RegistrationSchedule> _timeSpans { get; set; }
 
         private bool SubmitSuccessfull { get; set; }
         private string SuccessMessage { get; set; }
@@ -99,20 +98,20 @@ namespace WebApp.Pages
         protected override async Task OnInitializedAsync()
         {
             // Extension Approach
-            Municipalities = await FormService.GetMunicipalitiesAsync();
-            Subjects = await FormService.GetSubjectsAsync();
-            Weeks = await FormService.GetWeeksAsync();
+            _municipalities = await FormService.GetMunicipalitiesAsync();
+            _subjects = await FormService.GetSubjectsAsync();
+            _weeks = await FormService.GetWeeksAsync();
 
             // Service Approach
-            TimeSpans = await ScheduleService.LoadScheduleAsync();
+            _timeSpans = await ScheduleService.LoadScheduleAsync();
         }
 
         public async Task SubmitForm()
         {
             // Extension Approach
-            _selectedSubjects = Subjects.First(g => g.Key == _form.SchoolForm)
+            _selectedSubjects = _subjects.First(g => g.Key == _form.SchoolForm)
                 .Where(s => s.IsMarked);
-            _selectedWeeks = Weeks.Where(w => w.IsMarked);
+            _selectedWeeks = _weeks.Where(w => w.IsMarked);
             _form
                 .AppendAdress(_adress)
                 .AppendSubjects(_selectedSubjects)

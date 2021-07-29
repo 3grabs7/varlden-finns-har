@@ -6,6 +6,6 @@ namespace WebApp.Services
 {
     public interface IGeocodingService
     {
-        Task<List<double>> GetCoordinatesAsync(Adress adress, Municipality municipality);
+        Task<List<double>> GetCoordinatesAsync(Address adress, Municipality municipality);
     }
 }

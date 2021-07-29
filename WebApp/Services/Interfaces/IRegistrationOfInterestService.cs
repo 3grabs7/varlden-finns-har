@@ -11,7 +11,7 @@ namespace WebApp.Services
         Task<IEnumerable<RegistrationOfInterest>> GetRangeAsync(int count);
         Task<RegistrationOfInterest> CreateAsync(RegistrationOfInterest form);
         Task AddSubjects(IEnumerable<Subject> subjects, RegistrationOfInterest form);
-        Task AddAdress(Adress adress, RegistrationOfInterest form);
+        Task AddAdress(Address adress, RegistrationOfInterest form);
         Task<RegistrationOfInterest> EditAsync(RegistrationOfInterest form);
         Task DeleteAsync(RegistrationOfInterest form);
         Task DeleteAsync(int id);

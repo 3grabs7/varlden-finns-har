@@ -2,7 +2,7 @@
 
 namespace DAL.Registration
 {
-    public class Adress : Entity
+    public class Address : Entity
     {
         [Display(Name = "Gatuadress")]
         public string StreetAdress { get; set; }

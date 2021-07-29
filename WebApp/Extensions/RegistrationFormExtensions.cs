@@ -5,7 +5,7 @@ namespace WebApp.Extensions
 {
     public static class RegistrationFormExtensions
     {
-        public static RegistrationOfInterest AppendAdress(this RegistrationOfInterest form, Adress adress)
+        public static RegistrationOfInterest AppendAdress(this RegistrationOfInterest form, Address adress)
         {
             form.SchoolAdress = adress;
             return form;

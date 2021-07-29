@@ -48,7 +48,7 @@ namespace DAL.Registration
 
 
         [Display(Name = "Adress")]
-        public Adress SchoolAdress { get; set; }
+        public Address SchoolAdress { get; set; }
 
 
         [Display(Name = "Skolform")]

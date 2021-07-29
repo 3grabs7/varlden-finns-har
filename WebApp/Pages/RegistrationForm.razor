@@ -7,7 +7,7 @@
 @if (!SubmitSuccessfull)
 {
 
-    if (_form == null || Municipalities == null || Subjects == null)
+    if (_form == null || _municipalities == null || _subjects == null)
     {
         <h5>Loading...</h5>
     }
@@ -15,25 +15,25 @@
     {
         <EditForm Model="@_form" OnValidSubmit="@SubmitForm">
             <DataAnnotationsValidator />
-            <Steps SelectedStep="@selectedStep" SelectedStepChanged="@OnSelectedStepChanged">
+            <Steps SelectedStep="@_selectedStep" SelectedStepChanged="@OnSelectedStepChanged">
                 <Items>
                     <div class="cursor">
-                        <Step Name="@steps[0]" Completed="@(isStepOneValidated ? true : false)">@steps[0]</Step>
-                        <Step Name="@steps[1]" Completed="@(isStepTwoValidated ? true : false)">@steps[1]</Step>
-                        <Step Name="@steps[2]" Completed="@(isStepThreeValidated ? true : false)">@steps[2]</Step>
-                        <Step Name="@steps[3]" Completed="@(isStepFourValidated ? true : false)">@steps[3]</Step>
-                        <Step Name="@steps[4]">
+                        <Step Name="@_steps[0]" Completed="@(_isStepOneValidated ? true : false)">@_steps[0]</Step>
+                        <Step Name="@_steps[1]" Completed="@(_isStepTwoValidated ? true : false)">@_steps[1]</Step>
+                        <Step Name="@_steps[2]" Completed="@(_isStepThreeValidated ? true : false)">@_steps[2]</Step>
+                        <Step Name="@_steps[3]" Completed="@(_isStepFourValidated ? true : false)">@_steps[3]</Step>
+                        <Step Name="@_steps[4]">
                             <Marker>
                                 <Icon Name="IconName.Flag" />
                             </Marker>
                             <Caption>
-                                @steps[4]
+                                @_steps[4]
                             </Caption>
                         </Step>
                     </div>
                 </Items>
                 <Content>
-                    <StepPanel Name="@steps[0]">
+                    <StepPanel Name="@_steps[0]">
                         <h4 class="h3">Lite om dig som lärare och din skola</h4>
                         <div class="container w-75">
                             <div class="mb-3">
@@ -79,7 +79,7 @@
                                 <div class="mb-3">
                                     <label for="municipality" class="form-label">Kommun</label>
                                     <select @bind="_form.MunicipalityRefId" id="municipality" class="form-select">
-                                        @foreach (var m in Municipalities)
+                                        @foreach (var m in _municipalities)
                                         {
                                             <option value="@m.Id">@m.Name</option>
                                         }
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                     </StepPanel>
-                    <StepPanel Name="@steps[1]">
+                    <StepPanel Name="@_steps[1]">
                         <h4 class="h3">Lite om din elevgrupp</h4>
                         <div class="container w-75">
                             <InputRadioGroup @bind-Value="_form.SchoolForm" class="form-check">
@@ -124,7 +124,7 @@
                                 @if (_form.SchoolForm == SchoolForm.Grundskola)
                                 {
                                     <div class="row d-flex justify-content-center">
-                                        @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Grundskola))
+                                        @foreach (var s in _subjects.First(g => g.Key == SchoolForm.Grundskola))
                                         {
                                             <div class="form-check col-md-auto m-2">
                                                 <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="@s.Id">
@@ -140,7 +140,7 @@
                                         <InputTextOnInput id="program" class="form-control" @bind-Value="_form.Program" />
                                     </div>
                                     <div class="row d-flex justify-content-center">
-                                        @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Gymnasium))
+                                        @foreach (var s in _subjects.First(g => g.Key == SchoolForm.Gymnasium))
                                         {
                                             <div class="form-check col-md-auto m-2">
                                                 <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="@s.Id">
@@ -152,7 +152,7 @@
                                 else if (_form.SchoolForm == SchoolForm.Sfi)
                                 {
                                     <div class="row d-flex justify-content-center">
-                                        @foreach (var s in Subjects.First(g => g.Key == SchoolForm.Sfi))
+                                        @foreach (var s in _subjects.First(g => g.Key == SchoolForm.Sfi))
                                         {
                                             <div class="form-check col-md-auto m-2">
                                                 <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="@s.Id">
@@ -164,7 +164,7 @@
                                 else if (_form.SchoolForm == SchoolForm.AnnanVuxenutbildning)
                                 {
                                     <div class="row d-flex justify-content-center">
-                                        @foreach (var s in Subjects.First(g => g.Key == SchoolForm.AnnanVuxenutbildning))
+                                        @foreach (var s in _subjects.First(g => g.Key == SchoolForm.AnnanVuxenutbildning))
                                         {
                                             <div class="form-check col-md-auto m-2">
                                                 <input class="form-check-input" type="checkbox" @bind-value="s.IsMarked" id="@s.Id">
@@ -181,7 +181,7 @@
                             </div>
                         </div>
                     </StepPanel>
-                    <StepPanel Name="@steps[2]">
+                    <StepPanel Name="@_steps[2]">
                         <h4 class="h3">Lite om hur ni önskar mötet</h4>
                         <div class="container w-75">
                             <InputRadioGroup @bind-Value="_form.MeetingType" class="form-check">
@@ -214,7 +214,7 @@
                         <div class="container w-75">
                             <label class="form-label">Veckor</label><br />
                             <div class="row">
-                                @foreach (var w in Weeks)
+                                @foreach (var w in _weeks)
                                 {
                                     <div class="form-check col-md-auto">
                                         <input class="form-check-input" type="checkbox" @bind-value="w.IsMarked" id="@w.WeekNumber">
@@ -238,11 +238,11 @@
                             </div>
                         </div>
                     </StepPanel>
-                    <StepPanel Name="@steps[3]">
+                    <StepPanel Name="@_steps[3]">
                         <h4 class="h3">Fyll i vilka tider som passar</h4>
                         <FormScheduler Form="_form"></FormScheduler>
                     </StepPanel>
-                    <StepPanel Name="@steps[4]">
+                    <StepPanel Name="@_steps[4]">
                         <button type="submit" class="btn btn-primary">Skicka</button>
                     </StepPanel>
                 </Content>

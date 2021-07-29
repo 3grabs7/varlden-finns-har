@@ -28,8 +28,12 @@ namespace DAL.Matching
         public RegistrationOfInterest PartyB { get; set; }
 
 
-        public ICollection<RegistrationSchedule> TimeSpans { get; set; }
+        public ICollection<RegistrationSchedule> TimeSpansAvailable { get; set; }
 
+        //public ICollection<RegistrationSchedule> TimeSpansCurrentlyBooked { get; set; }
+
+        // address where meeting will take place
+        public Address AddressForMeeting { get; set; }
 
         [Range(1, 52)]
         public int StartWeek { get; set; }

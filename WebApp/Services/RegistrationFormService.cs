@@ -41,7 +41,7 @@ namespace WebApp.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task AppendAdressAsync(RegistrationOfInterest form, Adress adress)
+        public async Task AppendAdressAsync(RegistrationOfInterest form, Address adress)
         {
 
         }
