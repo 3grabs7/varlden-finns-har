@@ -12,12 +12,20 @@ namespace WebApp.Pages
     {
         private RegistrationOfInterest _form = new();
         private Address _adress = new();
-
         private IEnumerable<Municipality> _municipalities { get; set; }
         private IEnumerable<IGrouping<SchoolForm, Subject>> _subjects { get; set; }
         private IEnumerable<Week> _weeks { get; set; }
         private IEnumerable<RegistrationSchedule> _timeSpans { get; set; }
+        public IEnumerable<Subject> _selectedSubjects { get; set; }
+        public IEnumerable<Week> _selectedWeeks { get; set; }
+        private bool SubmitSuccessfull { get; set; }
+        private string SuccessMessage { get; set; }
 
+        // Step Validation
+        private bool _isStepOneValidated { get; set; } = false;
+        private bool _isStepTwoValidated { get; set; } = false;
+        private bool _isStepThreeValidated { get; set; } = false;
+        private bool _isStepFourValidated { get; set; } = false;
         private List<string> _steps = new()
         {
             "Lärare/Skola",
@@ -40,12 +48,6 @@ namespace WebApp.Pages
                 OnSelectedStepChanged(_selectedStepIndex);
             }
         }
-
-        // Step Validation
-        private bool _isStepOneValidated { get; set; } = false;
-        private bool _isStepTwoValidated { get; set; } = false;
-        private bool _isStepThreeValidated { get; set; } = false;
-        private bool _isStepFourValidated { get; set; } = false;
 
         // Hard coded validation
         // !!! TODO !!!
@@ -89,20 +91,11 @@ namespace WebApp.Pages
             return Task.CompletedTask;
         }
 
-        public IEnumerable<Subject> _selectedSubjects { get; set; }
-        public IEnumerable<Week> _selectedWeeks { get; set; }
-
-        private bool SubmitSuccessfull { get; set; }
-        private string SuccessMessage { get; set; }
-
         protected override async Task OnInitializedAsync()
         {
-            // Extension Approach
             _municipalities = await FormService.GetMunicipalitiesAsync();
             _subjects = await FormService.GetSubjectsAsync();
             _weeks = await FormService.GetWeeksAsync();
-
-            // Service Approach
             _timeSpans = await ScheduleService.LoadScheduleAsync();
         }
 
@@ -117,10 +110,8 @@ namespace WebApp.Pages
                 .AppendSubjects(_selectedSubjects)
                 .AppendWeeks(_selectedWeeks);
 
-            // Service Approach
-            await ScheduleService.CreateScheduleAsync(_timeSpans, _form);
-
             // Format before adding to database
+            // Do this with attribute magic in model later
             _form.PhoneNumber = $"0{_form.PhoneNumber}";
 
             // Submit registration
