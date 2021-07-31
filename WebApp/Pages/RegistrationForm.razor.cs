@@ -101,14 +101,13 @@ namespace WebApp.Pages
 
         public async Task SubmitForm()
         {
-            // Extension Approach
-            _selectedSubjects = _subjects.First(g => g.Key == _form.SchoolForm)
-                .Where(s => s.IsMarked);
-            _selectedWeeks = _weeks.Where(w => w.IsMarked);
             _form
                 .AppendAdress(_adress)
-                .AppendSubjects(_selectedSubjects)
-                .AppendWeeks(_selectedWeeks);
+                .AppendSubjects(_subjects
+                    .First(g => g.Key == _form.SchoolForm)
+                    .Where(s => s.IsMarked)
+                )
+                .AppendWeeks(_weeks.Where(w => w.IsMarked));
 
             // Format before adding to database
             // Do this with attribute magic in model later

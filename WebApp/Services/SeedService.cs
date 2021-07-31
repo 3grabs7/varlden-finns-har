@@ -23,46 +23,8 @@ namespace WebApp.Services
             await _context.Database.EnsureCreatedAsync();
         }
 
-        public async Task AddTeacherRegistrationForm(int count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                var form = new RegistrationOfInterest
-                {
-                    FirstName = "Lärare Lärarsson",
-                    Email = "1@2.se",
-                    PhoneNumber = "112",
-                    School = "HeltOk-Skolan",
-                    SchoolForm = SchoolForm.Grundskola,
-                    Municipality = _context.Municipalities.Find(1),
-                    Grade = 9,
-                    MeetingType = MeetingType.Digitalt
-                };
-                await _context.AddAsync(form);
-            }
-
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task AddTimeSpanToTeacherRegistrationForm(int count)
-        {
-            var form = await _context.RegistrationOfInterests.FirstOrDefaultAsync();
-            if (form == default) return;
-
-            // Insert scheduled time
-            for (int i = 0; i < count; i++)
-            {
-                await _context.AddAsync(new RegistrationSchedule
-                {
-                    Weekday = Weekday.Måndag,
-                    Time = DateTime.Parse("06/24/2021 10:30"),
-                    TeacherRegistrationForm = form,
-                });
-            }
-
-            await _context.SaveChangesAsync();
-        }
-
+        // These needs to be seeded in!!!
+        #region mandatorySeeding
         public async Task AddSubjects()
         {
             _context.Subjects.Clear();
@@ -199,5 +161,47 @@ namespace WebApp.Services
                 await _context.AddAsync(new Week { WeekNumber = i, Year = (int)year });
             await _context.SaveChangesAsync();
         }
+        #endregion
+        #region optionalSeedings
+        public async Task AddTeacherRegistrationForm(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                var form = new RegistrationOfInterest
+                {
+                    FirstName = "Lärare Lärarsson",
+                    Email = "1@2.se",
+                    PhoneNumber = "112",
+                    School = "HeltOk-Skolan",
+                    SchoolForm = SchoolForm.Grundskola,
+                    Municipality = _context.Municipalities.Find(1),
+                    Grade = 9,
+                    MeetingType = MeetingType.Digitalt
+                };
+                await _context.AddAsync(form);
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddTimeSpanToTeacherRegistrationForm(int count)
+        {
+            var form = await _context.RegistrationOfInterests.FirstOrDefaultAsync();
+            if (form == default) return;
+
+            // Insert scheduled time
+            for (int i = 0; i < count; i++)
+            {
+                await _context.AddAsync(new RegistrationSchedule
+                {
+                    Weekday = Weekday.Måndag,
+                    Time = DateTime.Parse("06/24/2021 10:30"),
+                    TeacherRegistrationForm = form,
+                });
+            }
+
+            await _context.SaveChangesAsync();
+        }
+        #endregion 
     }
 }

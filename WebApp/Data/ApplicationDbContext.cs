@@ -19,5 +19,6 @@ namespace WebApp.Data
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<MatchCard> MatchCards { get; set; }
         public DbSet<Week> Weeks { get; set; }
+        public DbSet<Address> Addresses { get; set; }
     }
 }

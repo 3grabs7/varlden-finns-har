@@ -13,8 +13,7 @@ namespace DAL.Registration
         [Display(Name = "År")]
         public int Year { get; set; }
 
-
-        public ICollection<RegistrationOfInterest> RegistrationOfInterests { get; set; }
+        public ICollection<RegistrationOfInterest> RegistrationOfInterests { get; set; } 
 
 
         [NotMapped]

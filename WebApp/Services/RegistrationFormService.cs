@@ -33,17 +33,14 @@ namespace WebApp.Services
             form.Municipality = municipality;
             form.Subjects = subjects;
 
-            var coordinates = await _geocodeService.GetCoordinatesAsync(form.SchoolAdress, form.Municipality);
-            form.SchoolAdress.Longitude = (decimal)coordinates[0];
-            form.SchoolAdress.Latitude = (decimal)coordinates[1];
+            /** TODO **/
+            // API key invalid for now
+            //var coordinates = await _geocodeService.GetCoordinatesAsync(form.SchoolAdress, form.Municipality);
+            //form.SchoolAdress.Longitude = (decimal)coordinates[0];
+            //form.SchoolAdress.Latitude = (decimal)coordinates[1];
 
             await _context.AddAsync(form);
             await _context.SaveChangesAsync();
-        }
-
-        public async Task AppendAdressAsync(RegistrationOfInterest form, Address adress)
-        {
-
         }
 
         // Get all municipalities from database
@@ -61,7 +58,6 @@ namespace WebApp.Services
 
         public async Task<IEnumerable<Week>> GetWeeksAsync()
         {
-            var year = DateTime.Now.Year;
             return await _context.Weeks.ToListAsync();
         }
     }
