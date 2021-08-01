@@ -162,6 +162,8 @@ namespace WebApp.Services
             await _context.SaveChangesAsync();
         }
         #endregion
+
+        // Optional mock data seed
         #region optionalSeedings
         public async Task AddTeacherRegistrationForm(int count)
         {

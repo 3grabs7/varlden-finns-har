@@ -8,41 +8,48 @@ namespace DAL.Registration
     public class RegistrationOfInterest : Entity
     {
         // Teacher info
+        [Required(ErrorMessage = "Detta fält måste fyllas i.")]
         [Display(Name = "Förnamn")]
-        [RegularExpression("[a-öA-Ö-]*")]
-        [MinLength(1)]
+        [RegularExpression("[a-öA-Ö-]*", ErrorMessage = "Kan endast innehålla bokstäver.")]
+        [MinLength(1, ErrorMessage = "Måste vara minst ett tecken långt.")]
         public string FirstName { get; set; }
 
 
         [Display(Name = "Efternamn")]
-        [RegularExpression("[a-öA-Ö-]*")]
-        [MinLength(1)]
+        [RegularExpression("[a-öA-Ö-]*", ErrorMessage = "Kan endast innehålla bokstäver.")]
+        [MinLength(1, ErrorMessage = "Måste vara minst ett tecken långt.")]
         public string LastName { get; set; }
 
 
+        [Required(ErrorMessage = "Detta fält måste fyllas i.")]
         [Display(Name = "Namn")]
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";
 
 
-        [EmailAddress]
+        [Required(ErrorMessage = "Detta fält måste fyllas i.")]
+        [EmailAddress(ErrorMessage = "Ange en giltig email-address.")]
         public string Email { get; set; }
 
 
-        [RegularExpression(@"\d+")]
-        [MinLength(6)]
-        [MaxLength(12)]
+        [Required(ErrorMessage = "Detta fält måste fyllas i.")]
+        [RegularExpression(@"\d+", ErrorMessage = "Telefonnummer kan endast innehålla siffror")]
+        [MinLength(6, ErrorMessage = "Telefonnummret måste vara minst 6 siffror långt.")]
+        [MaxLength(12, ErrorMessage = "Telefonnummret får max vara 12 siffror långt.")]
         [Display(Name = "Telefonnummer")]
         public string PhoneNumber { get; set; }
 
 
+        [Required(ErrorMessage = "Detta fält måste fyllas i.")]
         [Display(Name = "Skola")]
+        [RegularExpression("[a-öA-Ö-]*", ErrorMessage = "Kan endast innehålla bokstäver.")]
         public string School { get; set; } // Create tables for School later
 
 
         [NotMapped] // prop for select in form
         public int MunicipalityRefId { get; set; }
 
+        [Required(ErrorMessage = "Detta fält måste fyllas i.")]
         [Display(Name = "Kommun")]
         public Municipality Municipality { get; set; }
 
@@ -51,6 +58,7 @@ namespace DAL.Registration
         public Address SchoolAdress { get; set; }
 
 
+        [Required(ErrorMessage = "Detta fält måste fyllas i.")]
         [Display(Name = "Skolform")]
         [Column(TypeName = "nvarchar(24)")]
         public SchoolForm SchoolForm { get; set; }
@@ -61,6 +69,7 @@ namespace DAL.Registration
 
 
         // Student group info
+        [Required(ErrorMessage = "Detta fält måste fyllas i.")]
         [Display(Name = "Årskurs")]
         public int Grade { get; set; }
 
@@ -74,18 +83,14 @@ namespace DAL.Registration
 
 
         // Information about meetings
+        [Required(ErrorMessage = "Detta fält måste fyllas i.")]
         [Display(Name = "Mötestyp")]
         [Column(TypeName = "nvarchar(24)")]
         public MeetingType MeetingType { get; set; }
 
 
-
-
-
-
         [Display(Name = "Schema")]
         public ICollection<RegistrationSchedule> ScheduledTimeSpans { get; set; }
-
 
 
         [Display(Name = "Antal Veckor")]
