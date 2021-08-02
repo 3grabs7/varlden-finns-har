@@ -49,7 +49,7 @@ namespace DAL.Registration
         [NotMapped] // prop for select in form
         public int MunicipalityRefId { get; set; }
 
-        [Required(ErrorMessage = "Detta fält måste fyllas i.")]
+        //[Required(ErrorMessage = "Detta fält måste fyllas i.")]
         [Display(Name = "Kommun")]
         public Municipality Municipality { get; set; }
 

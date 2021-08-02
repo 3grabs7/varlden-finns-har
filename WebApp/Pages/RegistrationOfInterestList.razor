@@ -101,6 +101,9 @@
                         <p>@($"{m.FirstName} {m.LastName}")</p>
                         <p>@(m.Municipality?.Name ?? "Ingen info om kommun")</p>
                         <a @onclick="(() => GoToDetails(m.Id))" style="cursor:pointer;">Läs mer</a>
+                        <a @onclick="(() => GoToSideBySideComparison(_selectedRegistration.Id, m.Id))" style="cursor:pointer;">
+                            Gå Till Detaljerad Jämförelse
+                        </a>
                     </div>
                     <Divider />
                 }

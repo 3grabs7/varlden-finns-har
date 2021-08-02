@@ -35,7 +35,7 @@ namespace WebApp.Services
                 registrations.Where(r => r.SchoolForm == SchoolForm.Sfi);
 
             IEnumerable<RegistrationOfInterest> uncertainScheduleRegistrations = null;
-            if(options.MatchUncertainSchedule)
+            if (options.MatchUncertainSchedule)
             {
                 // Save uncertain schedule registrations
                 // How wide should margin for scheduled time be?
@@ -49,7 +49,7 @@ namespace WebApp.Services
             if (!options.MatchOnlyOnSchedule)
                 registrations = FilterSelectedWeeks(registrations, selectedRegistration);
 
-            if(uncertainScheduleRegistrations != null)
+            if (uncertainScheduleRegistrations != null)
                 registrations.Concat(uncertainScheduleRegistrations);
 
             return registrations;
@@ -59,18 +59,34 @@ namespace WebApp.Services
             RegistrationOfInterest selectedRegistration)
         {
             foreach (var r in registrations)
+            {
+                bool timeSpanFound = false;
                 foreach (var t in r.ScheduledTimeSpans)
-                    if (selectedRegistration.ScheduledTimeSpans.Any(ts => ts.Time == t.Time))
+                {
+                    if (!timeSpanFound && selectedRegistration.ScheduledTimeSpans.Any(ts => ts.Time == t.Time))
+                    {
                         yield return r;
+                        timeSpanFound = true;
+                    }
+                }
+            }
         }
 
         private IEnumerable<RegistrationOfInterest> FilterSelectedWeeks(IEnumerable<RegistrationOfInterest> registrations,
             RegistrationOfInterest selectedRegistration)
         {
             foreach (var r in registrations)
+            {
+                bool weekFound = false;
                 foreach (var w in r.Weeks)
-                    if (selectedRegistration.Weeks.Any(ts => ts.WeekNumber == w.WeekNumber))
+                {
+                    if (!weekFound && selectedRegistration.Weeks.Any(ts => ts.WeekNumber == w.WeekNumber))
+                    {
                         yield return r;
+                        weekFound = false;
+                    }
+                }
+            }
         }
 
     }

@@ -59,7 +59,10 @@ namespace WebApp.Pages
             NavigationManager.NavigateTo($"{nameof(RegistrationDetails)}/{id}");
         }
 
-
+        private void GoToSideBySideComparison(int id, int compareId)
+        {
+            NavigationManager.NavigateTo($"{nameof(SideBySideComparison)}/{id}-{compareId}");
+        }
 
     }
 }

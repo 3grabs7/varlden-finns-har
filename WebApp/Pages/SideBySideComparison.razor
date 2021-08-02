@@ -1,0 +1,62 @@
+﻿@page "/SideBySideComparison/{ComparisonParameter}"
+@inject IRegistrationOfInterestService RegistrationService
+
+@if (_registration is null || _registrationComparison is null)
+{
+    <h3>Loading...</h3>
+}
+else
+{
+    <div class="compmain">
+
+        <div class="compmain-col">
+            <h4>@_registration.School</h4>
+            här är match a
+            <div>
+                En div med all sjuk info
+            </div>
+            <div>
+                Lite knappar, vill vi gå vidare med match osv
+            </div>
+        </div>
+
+        <div class="compmain-col">
+            <h4>@_registrationComparison.School</h4>
+            här är match b
+            <div>
+                En div med all sjuk info
+            </div>
+            <div>
+                Lite knappar, vill vi gå vidare med match osv
+            </div>
+        </div>
+    </div>
+    <div class="matchbutton">
+        <button class="btn btn-primary">GÅ VIDARE FÖR ATT MATCHA</button>
+    </div>
+
+
+
+
+
+
+
+
+
+}
+
+
+@code {
+    [Parameter] public string ComparisonParameter { get; set; }
+    private RegistrationOfInterest _registration;
+    private RegistrationOfInterest _registrationComparison;
+
+    protected async override Task OnInitializedAsync()
+    {
+        var registrationIds = ComparisonParameter.Split('-').Select(x => Convert.ToInt32(x)).ToList();
+
+        _registration = await RegistrationService.GetAsync(registrationIds[0]);
+        _registrationComparison = await RegistrationService.GetAsync(registrationIds[1]);
+
+    }
+}
