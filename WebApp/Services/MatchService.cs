@@ -89,7 +89,18 @@ namespace WebApp.Services
             }
         }
 
+        public IEnumerable<Week> GetMatchedWeek(RegistrationOfInterest selectedRegistration,
+            RegistrationOfInterest matchedRegistration)
+        {
+            return matchedRegistration.Weeks
+                .Where(w => selectedRegistration.Weeks.Select(x => x.Id).Contains(w.Id));
+        }
+
+        public IEnumerable<RegistrationSchedule> GetMatchedTime(RegistrationOfInterest selectedRegistration,
+            RegistrationOfInterest matchedRegistration)
+        {
+            return matchedRegistration.ScheduledTimeSpans
+                .Where(ts => selectedRegistration.ScheduledTimeSpans.Select(x => x.Time).Contains(ts.Time));
+        }
     }
-
-
 }

@@ -105,6 +105,24 @@
                             Gå Till Detaljerad Jämförelse
                         </a>
                     </div>
+                    <div>
+                        @foreach (var w in MatchService.GetMatchedWeek(_selectedRegistration, m))
+                        {
+                            <p>Week @w.WeekNumber</p>
+                        }
+                    </div>
+                    <div>
+                        @foreach (var t in MatchService.GetMatchedTime(_selectedRegistration, m))
+                        {
+                            <p>Week @t.Time.ToShortTimeString()</p>
+                        }
+                    </div>
+                    <div>
+                        Veckor : @String.Join(", ", MatchService.GetMatchedWeek(_selectedRegistration, m).Select(w => w.WeekNumber))
+                    </div>
+                    <div>
+                        Tider : @String.Join(", ", MatchService.GetMatchedTime(_selectedRegistration, m).Select(t => t.Time.ToShortTimeString()))
+                    </div>
                     <Divider />
                 }
             }

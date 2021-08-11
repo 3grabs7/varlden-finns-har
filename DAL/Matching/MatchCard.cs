@@ -37,5 +37,10 @@ namespace DAL.Matching
 
         [Range(1, 52)]
         public int StartWeek { get; set; }
+
+        public OccassionCount NumberOfMeetings { get; set; }
+
+        //public ICollection<Meeting> Meetings { get; set; }
+
     }
 }
