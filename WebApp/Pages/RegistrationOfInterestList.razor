@@ -73,7 +73,12 @@
                 <p class="head">
                     Matchar mot <span>@_selectedRegistration.FullName</span> på <span>@_selectedRegistration.School</span>.
                 </p>
-
+                <div>
+                    Valda Veckor : @String.Join(", ", _selectedRegistration.Weeks.Select(w => w.WeekNumber))
+                </div>
+                <div>
+                    Valda Tider : @String.Join(", ", _selectedRegistration.ScheduledTimeSpans.Select(t => t.Time.ToShortTimeString()))
+                </div>
                 <h4>Ämnen</h4>
                 <div class="tags">
                     @foreach (var s in _selectedRegistration.Subjects)
