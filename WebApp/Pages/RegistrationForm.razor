@@ -1,4 +1,6 @@
 ﻿@page "/register"
+@inject IRegistrationFormService _formService;
+@inject IScheduleService _scheduleService;
 
 @if (!SubmitSuccessfull)
 {

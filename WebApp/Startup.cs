@@ -37,9 +37,6 @@ namespace WebApp
 
             services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-
             services.AddRazorPages()
                 .AddRazorRuntimeCompilation();
 

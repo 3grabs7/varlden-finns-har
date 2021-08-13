@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.JSInterop;
 using WebApp.Services;
 
 namespace WebApp.Extensions

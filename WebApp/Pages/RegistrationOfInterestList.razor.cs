@@ -12,18 +12,6 @@ namespace WebApp.Pages
 {
     public partial class RegistrationOfInterestList : ComponentBase
     {
-        private readonly IRegistrationOfInterestService _registrationsService;
-        private readonly IMatchService _matchService;
-        private readonly NavigationManager _navigationManager;
-        public RegistrationOfInterestList(IRegistrationOfInterestService registrationsService,
-            IMatchService matchService,
-            NavigationManager navigationManager)
-        {
-            _registrationsService = registrationsService;
-            _matchService = matchService;
-            _navigationManager = navigationManager;
-        }
-
         private IEnumerable<RegistrationOfInterest> _registrations { get; set; }
         private RegistrationOfInterest _selectedRegistration { get; set; }
         protected RegistrationOfInterest SelectedRegistration

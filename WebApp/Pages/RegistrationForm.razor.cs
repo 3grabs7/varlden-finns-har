@@ -12,19 +12,6 @@ namespace WebApp.Pages
 {
     public partial class RegistrationForm : ComponentBase
     {
-        private readonly IRegistrationFormService _formService;
-        private readonly IScheduleService _scheduleService;
-        private readonly IJSRuntime _jsRunTime;
-        public RegistrationForm(IRegistrationFormService formService,
-            IScheduleService scheduleService,
-            IJSRuntime jsRunTime)
-        {
-            _formService = formService;
-            _scheduleService = scheduleService;
-            _jsRunTime = jsRunTime;
-        }
-
-
         private RegistrationOfInterest _form = new();
         private Address _adress = new();
         private IEnumerable<Municipality> _municipalities { get; set; }

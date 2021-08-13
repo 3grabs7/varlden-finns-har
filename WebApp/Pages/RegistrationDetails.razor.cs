@@ -10,13 +10,6 @@ namespace WebApp.Pages
 {
     public partial class RegistrationDetails : ComponentBase
     {
-        private readonly IRegistrationOfInterestService _registrationService;
-        public RegistrationDetails(IRegistrationOfInterestService registrationService)
-        {
-            _registrationService = registrationService;
-        }
-
-
         [Parameter] public string Id { get; set; }
         private RegistrationOfInterest _registration { get; set; }
 

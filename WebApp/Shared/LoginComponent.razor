@@ -1,0 +1,16 @@
+﻿<AuthorizeView>
+    <Authorized>
+        <a href="Identity/Account/Manager">Hej, @context.User.Identity.Name</a>
+        <Form method="post" action="Identity/Account/LogOut">
+            <button type="submit">Logga ut</button>
+        </Form>
+    </Authorized>
+    <NotAuthorized>
+        <a>Logga in</a>
+        <a>Registrera</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+
+}
