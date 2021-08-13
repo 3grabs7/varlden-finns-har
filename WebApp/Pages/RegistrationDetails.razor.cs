@@ -16,6 +16,7 @@ namespace WebApp.Pages
             _registrationService = registrationService;
         }
 
+
         [Parameter] public string Id { get; set; }
         private RegistrationOfInterest _registration { get; set; }
 
