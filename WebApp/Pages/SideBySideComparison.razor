@@ -1,5 +1,4 @@
 ﻿@page "/SideBySideComparison/{ComparisonParameter}"
-@inject IRegistrationOfInterestService RegistrationService
 
 @if (_registration is null || _registrationComparison is null)
 {
@@ -37,26 +36,6 @@ else
 
 
 
-
-
-
-
-
-
 }
 
 
-@code {
-    [Parameter] public string ComparisonParameter { get; set; }
-    private RegistrationOfInterest _registration;
-    private RegistrationOfInterest _registrationComparison;
-
-    protected async override Task OnInitializedAsync()
-    {
-        var registrationIds = ComparisonParameter.Split('-').Select(x => Convert.ToInt32(x)).ToList();
-
-        _registration = await RegistrationService.GetAsync(registrationIds[0]);
-        _registrationComparison = await RegistrationService.GetAsync(registrationIds[1]);
-
-    }
-}

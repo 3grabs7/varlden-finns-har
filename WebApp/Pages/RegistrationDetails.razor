@@ -1,24 +1,9 @@
 ﻿@page "/RegistrationDetails/{Id}"
 
-@inject IRegistrationOfInterestService RegistrationService
-
 <h3>RegistrationDetails</h3>
 @if (_registration != null)
 {
     <p>@($"{_registration.FirstName} {_registration.LastName}")</p>
     <p>@_registration.School</p>
     <p>Registreringssida för id @Id</p>
-}
-
-@code {
-    [Parameter] public string Id { get; set; }
-    private RegistrationOfInterest _registration { get; set; }
-
-    protected async override Task OnInitializedAsync()
-    {
-        if (Int32.TryParse(Id, out int id))
-        {
-            _registration = await RegistrationService.GetAsync(id);
-        }
-    }
 }
