@@ -1,8 +1,4 @@
 ﻿@page "/registrationofinterests"
-@inject IRegistrationOfInterestService RegistrationsService
-@inject IMatchService MatchService
-@inject NavigationManager NavigationManager
-
 
 <DataGrid TItem="RegistrationOfInterest" Data="@_registrations" @bind-SelectedRow="SelectedRegistration"
           Sortable="true" Editable="true" EditMode="DataGridEditMode.Popup" Filterable="true" ShowPager="true" PageSize="14">
@@ -111,22 +107,22 @@
                         </a>
                     </div>
                     <div>
-                        @foreach (var w in MatchService.GetMatchedWeek(_selectedRegistration, m))
+                        @foreach (var w in _matchService.GetMatchedWeek(_selectedRegistration, m))
                         {
                             <p>Week @w.WeekNumber</p>
                         }
                     </div>
                     <div>
-                        @foreach (var t in MatchService.GetMatchedTime(_selectedRegistration, m))
+                        @foreach (var t in _matchService.GetMatchedTime(_selectedRegistration, m))
                         {
                             <p>Week @t.Time.ToShortTimeString()</p>
                         }
                     </div>
                     <div>
-                        Veckor : @String.Join(", ", MatchService.GetMatchedWeek(_selectedRegistration, m).Select(w => w.WeekNumber))
+                        Veckor : @String.Join(", ", _matchService.GetMatchedWeek(_selectedRegistration, m).Select(w => w.WeekNumber))
                     </div>
                     <div>
-                        Tider : @String.Join(", ", MatchService.GetMatchedTime(_selectedRegistration, m).Select(t => t.Time.ToShortTimeString()))
+                        Tider : @String.Join(", ", _matchService.GetMatchedTime(_selectedRegistration, m).Select(t => t.Time.ToShortTimeString()))
                     </div>
                     <Divider />
                 }

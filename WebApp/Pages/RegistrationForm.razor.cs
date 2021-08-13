@@ -1,15 +1,30 @@
 ﻿using DAL.Registration;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Extensions;
+using WebApp.Services;
 
 namespace WebApp.Pages
 {
     public partial class RegistrationForm : ComponentBase
     {
+        private readonly IRegistrationFormService _formService;
+        private readonly IScheduleService _scheduleService;
+        private readonly IJSRuntime _jsRunTime;
+        public RegistrationForm(IRegistrationFormService formService,
+            IScheduleService scheduleService,
+            IJSRuntime jsRunTime)
+        {
+            _formService = formService;
+            _scheduleService = scheduleService;
+            _jsRunTime = jsRunTime;
+        }
+
+
         private RegistrationOfInterest _form = new();
         private Address _adress = new();
         private IEnumerable<Municipality> _municipalities { get; set; }
@@ -93,10 +108,10 @@ namespace WebApp.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            _municipalities = await FormService.GetMunicipalitiesAsync();
-            _subjects = await FormService.GetSubjectsAsync();
-            _weeks = await FormService.GetWeeksAsync();
-            _timeSpans = await ScheduleService.LoadScheduleAsync();
+            _municipalities = await _formService.GetMunicipalitiesAsync();
+            _subjects = await _formService.GetSubjectsAsync();
+            _weeks = await _formService.GetWeeksAsync();
+            _timeSpans = await _scheduleService.LoadScheduleAsync();
         }
 
         public async Task SubmitForm()
@@ -114,7 +129,7 @@ namespace WebApp.Pages
             _form.PhoneNumber = $"0{_form.PhoneNumber}";
 
             // Submit registration
-            await FormService.CreateRegistrationFormAsync(_form);
+            await _formService.CreateRegistrationFormAsync(_form);
 
             SuccessMessage = $"Välkommen {_form.FirstName}! Tack för ditt visade intresse, vi kommer höra av oss med mer information.";
             SubmitSuccessfull = true;

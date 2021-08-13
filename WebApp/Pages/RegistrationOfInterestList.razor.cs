@@ -6,11 +6,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.Services;
 
 namespace WebApp.Pages
 {
     public partial class RegistrationOfInterestList : ComponentBase
     {
+        private readonly IRegistrationOfInterestService _registrationsService;
+        private readonly IMatchService _matchService;
+        private readonly NavigationManager _navigationManager;
+        public RegistrationOfInterestList(IRegistrationOfInterestService registrationsService,
+            IMatchService matchService,
+            NavigationManager navigationManager)
+        {
+            _registrationsService = registrationsService;
+            _matchService = matchService;
+            _navigationManager = navigationManager;
+        }
+
         private IEnumerable<RegistrationOfInterest> _registrations { get; set; }
         private RegistrationOfInterest _selectedRegistration { get; set; }
         protected RegistrationOfInterest SelectedRegistration
@@ -32,7 +45,7 @@ namespace WebApp.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            _registrations = await RegistrationsService.GetAllAsync();
+            _registrations = await _registrationsService.GetAllAsync();
             _matchOptions = new();
 
 
@@ -46,7 +59,7 @@ namespace WebApp.Pages
         private async Task Match()
         {
             _isMatchLoaded = true;
-            _matches = await MatchService.MatchRegistrationAsync(_matchOptions, _registrations, _selectedRegistration);
+            _matches = await _matchService.MatchRegistrationAsync(_matchOptions, _registrations, _selectedRegistration);
             _matchesModal.Show();
         }
 
@@ -57,12 +70,12 @@ namespace WebApp.Pages
 
         private void GoToDetails(int id)
         {
-            NavigationManager.NavigateTo($"{nameof(RegistrationDetails)}/{id}");
+            _navigationManager.NavigateTo($"{nameof(RegistrationDetails)}/{id}");
         }
 
         private void GoToSideBySideComparison(int id, int compareId)
         {
-            NavigationManager.NavigateTo($"{nameof(SideBySideComparison)}/{id}-{compareId}");
+            _navigationManager.NavigateTo($"{nameof(SideBySideComparison)}/{id}-{compareId}");
         }
 
     }
