@@ -2,6 +2,7 @@
 @inject IRegistrationOfInterestService _registrationsService;
 @inject IMatchService _matchService;
 @inject NavigationManager _navigationManager;
+@attribute [Authorize]
 
 <DataGrid TItem="RegistrationOfInterest" Data="@_registrations" @bind-SelectedRow="SelectedRegistration"
           Sortable="true" Editable="true" EditMode="DataGridEditMode.Popup" Filterable="true" ShowPager="true" PageSize="14">

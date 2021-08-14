@@ -1,6 +1,7 @@
 ﻿@page "/register"
 @inject IRegistrationFormService _formService;
 @inject IScheduleService _scheduleService;
+@attribute [Authorize]
 
 @if (!SubmitSuccessfull)
 {

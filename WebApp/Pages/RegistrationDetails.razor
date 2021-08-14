@@ -1,5 +1,6 @@
 ﻿@page "/RegistrationDetails/{Id}"
 @inject IRegistrationOfInterestService _registrationService;
+@attribute [Authorize]
 
 <h3>RegistrationDetails</h3>
 @if (_registration != null)
