@@ -1,28 +1,40 @@
 ﻿@page "/"
 @inject ISeedService _seedService
-@attribute [Authorize]
-
-<div>
-    <p>Skolans namn</p>
-    <p>Lärarens Namn</p>
-    <p>Kommun</p>
-    <a class="match-link">Läs mer</a>
-</div>
-<Divider />
 
 
-@if (loading is null)
-{<p>Database seeded and ready</p> }
-else
-{
-    <div class="@(loading == true ? "loader" : "")"></div>
-    if (loading == false)
-    {
-        <Button Clicked="@Seed" Color="Color.Primary">
-            Reset And Seed Db
-        </Button>
-    }
-}
+<AuthorizeView>
+    <Authorized>
+        <div>
+            <p>Skolans namn</p>
+            <p>Lärarens Namn</p>
+            <p>Kommun</p>
+            <a class="match-link">Läs mer</a>
+        </div>
+        <Divider />
+
+
+        @if (loading is null)
+        {<p>Database seeded and ready</p> }
+        else
+        {
+            <div class="@(loading == true ? "loader" : "")"></div>
+            if (loading == false)
+            {
+                <Button Clicked="@Seed" Color="Color.Primary">
+                    Reset And Seed Db
+                </Button>
+            }
+        }
+    </Authorized>
+
+    <NotAuthorized>
+        <h4>Logga in med adminkontot</h4>
+        <LoginComponent />
+    </NotAuthorized>
+
+</AuthorizeView>
+
+
 
 
 @code {
@@ -41,4 +53,18 @@ else
         loading = null;
     }
 
+    [CascadingParameter]
+    private Task<AuthenticationState> _authStateTask { get; set; }
+
+
+    //Get user info in any blazor component
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var authState = await _authStateTask;
+            var user = authState.User;
+        }
+    }
 }
