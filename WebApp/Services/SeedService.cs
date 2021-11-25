@@ -28,6 +28,7 @@ namespace WebApp.Services
         public async Task AddSubjects()
         {
             _context.Subjects.Clear();
+            await _context.SaveChangesAsync();
 
             List<string> elementarySubjects = new()
             {
@@ -134,6 +135,7 @@ namespace WebApp.Services
         public async Task AddMunicipality()
         {
             _context.Municipalities.Clear();
+            await _context.SaveChangesAsync();
 
             var municipalities = Utils.ParsingTools.ReadExcelFile("./Files/sveriges-kommuner.csv");
             // remove postfix - kommun
@@ -156,6 +158,8 @@ namespace WebApp.Services
         public async Task AddWeeks(int? year)
         {
             _context.Weeks.Clear();
+            await _context.SaveChangesAsync();
+
             if (year is null) year = DateTime.Now.Year;
             for (int i = 1; i <= 52; i++)
                 await _context.AddAsync(new Week { WeekNumber = i, Year = (int)year });

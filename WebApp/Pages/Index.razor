@@ -44,8 +44,11 @@
     {
         loading = true;
         await _seedService.ResetAsync();
-        await _seedService.AddTeacherRegistrationForm(10);
-        await _seedService.AddTimeSpanToTeacherRegistrationForm(10);
+
+        // For deployment, skip mock data
+        // await _seedService.AddTeacherRegistrationForm(10);
+        // await _seedService.AddTimeSpanToTeacherRegistrationForm(10);
+
         await _seedService.AddSubjects();
         await _seedService.AddMunicipality();
         await _seedService.AddWeeks(2021);
